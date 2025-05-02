@@ -9,6 +9,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import ContactSection from "@/components/ContactSection";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import TechStack from "@/components/TechStack";
+import PriceCalculator from "@/components/PriceCalculator";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
@@ -42,6 +43,7 @@ export default function Home() {
           <PortfolioSection />
           <StatsSection />
           <TestimonialSection />
+          <PriceCalculator />
           <CTASection />
           <ContactSection />
         </main>
