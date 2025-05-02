@@ -25,7 +25,9 @@ import {
   Clock, 
   Info, 
   MoreHorizontal,
-  Eye 
+  Eye,
+  Mail,
+  MessageSquare
 } from "lucide-react";
 import {
   Dialog,
@@ -56,6 +58,7 @@ export default function AdminDashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [selectedFreelancer, setSelectedFreelancer] = useState<any>(null);
+  const [selectedMessage, setSelectedMessage] = useState<any>(null);
 
   // Check auth status
   const { data: authData, isLoading: authLoading, error: authError } = useQuery({
@@ -81,6 +84,12 @@ export default function AdminDashboard() {
   // Fetch project requests
   const { data: projectRequests, isLoading: projectsLoading } = useQuery({
     queryKey: ["/api/project-requests"],
+    enabled: isLoggedIn,
+  });
+  
+  // Fetch contact messages
+  const { data: contactMessages, isLoading: messagesLoading } = useQuery({
+    queryKey: ["/api/contact-messages"],
     enabled: isLoggedIn,
   });
 
@@ -131,6 +140,32 @@ export default function AdminDashboard() {
       toast({
         title: "Error",
         description: "Failed to update freelancer application status.",
+        variant: "destructive",
+      });
+    },
+  });
+  
+  // Update contact message status mutation
+  const updateMessageStatusMutation = useMutation({
+    mutationFn: async ({ id, status }: { id: number; status: string }) => {
+      const res = await apiRequest(
+        "PATCH", 
+        `/api/contact-messages/${id}/status`, 
+        { status }
+      );
+      return await res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/contact-messages"] });
+      toast({
+        title: "Status Updated",
+        description: "Contact message status has been updated.",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update message status.",
         variant: "destructive",
       });
     },
@@ -326,6 +361,10 @@ export default function AdminDashboard() {
                 <TabsTrigger value="projects">Project Requests</TabsTrigger>
                 <TabsTrigger value="freelancers">
                   Freelancer Applications
+                </TabsTrigger>
+                <TabsTrigger value="messages">
+                  <MessageSquare className="mr-1 h-4 w-4 inline" />
+                  Contact Messages
                 </TabsTrigger>
               </TabsList>
 
@@ -554,9 +593,174 @@ export default function AdminDashboard() {
                   </CardContent>
                 </Card>
               </TabsContent>
+              
+              <TabsContent value="messages" className="mt-0">
+                <Card className="glassmorphism border border-white/10">
+                  <CardHeader>
+                    <CardTitle>Contact Messages</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {messagesLoading ? (
+                      <div className="space-y-4">
+                        {[...Array(3)].map((_, i) => (
+                          <div
+                            key={i}
+                            className="h-12 bg-white/5 animate-pulse rounded"
+                          ></div>
+                        ))}
+                      </div>
+                    ) : contactMessages &&
+                      Array.isArray(contactMessages) &&
+                      contactMessages.length > 0 ? (
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Subject</TableHead>
+                            <TableHead>Email</TableHead>
+                            <TableHead>Date</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead>Actions</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {contactMessages.map(
+                            (message: any, index: number) => (
+                              <TableRow key={index}>
+                                <TableCell className="font-medium">
+                                  {message.name}
+                                </TableCell>
+                                <TableCell>
+                                  {message.subject}
+                                </TableCell>
+                                <TableCell>{message.email}</TableCell>
+                                <TableCell>
+                                  {new Date(message.createdAt).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>
+                                  {getStatusBadge(message.status)}
+                                </TableCell>
+                                <TableCell>
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button variant="ghost" size="icon">
+                                        <MoreHorizontal className="h-4 w-4" />
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end">
+                                      <DropdownMenuItem onClick={() => setSelectedMessage(message)}>
+                                        <Eye className="h-4 w-4 mr-2" />
+                                        View Details
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updateMessageStatusMutation.mutate({ 
+                                          id: message.id, 
+                                          status: "pending" 
+                                        })}
+                                      >
+                                        <Clock className="h-4 w-4 mr-2" />
+                                        Mark as Pending
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updateMessageStatusMutation.mutate({ 
+                                          id: message.id, 
+                                          status: "in-progress" 
+                                        })}
+                                      >
+                                        <Activity className="h-4 w-4 mr-2" />
+                                        Mark In Progress
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updateMessageStatusMutation.mutate({ 
+                                          id: message.id, 
+                                          status: "completed" 
+                                        })}
+                                      >
+                                        <CheckCircle className="h-4 w-4 mr-2" />
+                                        Mark as Completed
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                </TableCell>
+                              </TableRow>
+                            )
+                          )}
+                        </TableBody>
+                      </Table>
+                    ) : (
+                      <div className="text-center py-6 text-white/50">
+                        No contact messages yet
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </TabsContent>
             </Tabs>
           </main>
 
+          {/* Contact Message Detail Modal */}
+          {selectedMessage && (
+            <Dialog open={selectedMessage !== null} onOpenChange={() => setSelectedMessage(null)}>
+              <DialogContent className="sm:max-w-2xl bg-background border border-white/10 text-white">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-semibold">
+                    Contact Message Details
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6 mt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Name</h3>
+                      <p className="font-medium">{selectedMessage.name}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Email</h3>
+                      <p className="font-medium">{selectedMessage.email}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Subject</h3>
+                      <p className="font-medium">{selectedMessage.subject}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Status</h3>
+                      <p className="font-medium">{getStatusBadge(selectedMessage.status)}</p>
+                    </div>
+                    <div className="md:col-span-2">
+                      <h3 className="text-sm text-white/60 mb-1">Date</h3>
+                      <p className="font-medium">
+                        {new Date(selectedMessage.createdAt).toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-sm text-white/60 mb-2">Message</h3>
+                    <div className="bg-muted/30 p-4 rounded">
+                      <p className="whitespace-pre-wrap">{selectedMessage.message}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-end gap-3">
+                    <Button 
+                      variant="outline"
+                      onClick={() => updateMessageStatusMutation.mutate({ 
+                        id: selectedMessage.id, 
+                        status: "completed" 
+                      })}
+                    >
+                      <CheckCircle className="mr-2 h-4 w-4" />
+                      Mark as Completed
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => setSelectedMessage(null)}
+                    >
+                      Close
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
+          
           {/* Project Detail Modal */}
           {selectedProject && (
             <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
