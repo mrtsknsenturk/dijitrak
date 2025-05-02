@@ -8,7 +8,7 @@ import Home from "@/pages/Home";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
 import ProjectDetail from "@/pages/ProjectDetail";
-import LiveChat from "@/components/LiveChat";
+import AnimatedRocket from "@/components/AnimatedRocket";
 
 function Router() {
   return (
@@ -30,7 +30,7 @@ function App() {
         <title>Quantum Edge | Digital Innovation Agency</title>
       </Helmet>
       <Router />
-      <LiveChat />
+      <AnimatedRocket />
       <Toaster />
     </QueryClientProvider>
   );
