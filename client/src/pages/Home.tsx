@@ -3,6 +3,10 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import CTASection from "@/components/CTASection";
+import PortfolioSection from "@/components/PortfolioSection";
+import StatsSection from "@/components/StatsSection";
+import TestimonialSection from "@/components/TestimonialSection";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
 
@@ -21,7 +25,11 @@ export default function Home() {
         <main>
           <HeroSection />
           <ServicesSection />
+          <PortfolioSection />
+          <StatsSection />
+          <TestimonialSection />
           <CTASection />
+          <ContactSection />
         </main>
         <Footer />
       </div>
