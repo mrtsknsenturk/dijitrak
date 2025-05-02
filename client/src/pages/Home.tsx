@@ -7,6 +7,8 @@ import PortfolioSection from "@/components/PortfolioSection";
 import StatsSection from "@/components/StatsSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import ContactSection from "@/components/ContactSection";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import TechStack from "@/components/TechStack";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
@@ -35,6 +37,8 @@ export default function Home() {
         <main>
           <HeroSection />
           <ServicesSection />
+          <ProcessTimeline />
+          <TechStack />
           <PortfolioSection />
           <StatsSection />
           <TestimonialSection />

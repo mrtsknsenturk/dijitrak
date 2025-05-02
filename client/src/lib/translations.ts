@@ -138,6 +138,74 @@ export const translations: TranslationsData = {
     // Language Switcher
     "language.en": "English",
     "language.tr": "Turkish",
+    
+    // Process Timeline
+    "process_title": "Our Development",
+    "process_title_highlight": "Process",
+    "process_subtitle": "We follow a structured approach to deliver exceptional results for every project.",
+    "process_discovery_title": "Discovery & Research",
+    "process_discovery_desc": "We begin by thoroughly understanding your business goals, target audience, and project requirements through in-depth research and analysis.",
+    "process_discovery_point1": "Stakeholder interviews to understand vision and goals",
+    "process_discovery_point2": "Market research and competitor analysis",
+    "process_discovery_point3": "User research and persona development",
+    
+    "process_planning_title": "Strategy & Planning",
+    "process_planning_desc": "Based on our research, we develop a comprehensive strategy and detailed project plan with clear milestones and deliverables.",
+    "process_planning_point1": "Project scope definition and timeline planning",
+    "process_planning_point2": "Resource allocation and team assembly",
+    "process_planning_point3": "Risk assessment and mitigation planning",
+    
+    "process_design_title": "Design & Prototyping",
+    "process_design_desc": "Our design team creates intuitive, engaging, and beautiful interfaces that align with your brand and meet user expectations.",
+    "process_design_point1": "Information architecture and user flow mapping",
+    "process_design_point2": "Wireframing and interactive prototyping",
+    "process_design_point3": "Visual design with brand alignment",
+    
+    "process_development_title": "Development & Implementation",
+    "process_development_desc": "Our developers bring designs to life using the latest technologies and best practices for optimal performance and reliability.",
+    "process_development_point1": "Frontend and backend development",
+    "process_development_point2": "Integration with third-party services and APIs",
+    "process_development_point3": "Code reviews and technical optimization",
+    
+    "process_testing_title": "Testing & Quality Assurance",
+    "process_testing_desc": "We rigorously test all aspects of your project to ensure functionality, performance, and security across all devices and platforms.",
+    "process_testing_point1": "Comprehensive functional and usability testing",
+    "process_testing_point2": "Cross-browser and cross-device compatibility testing",
+    "process_testing_point3": "Performance optimization and security audits",
+    
+    "process_launch_title": "Deployment & Launch",
+    "process_launch_desc": "We carefully manage the deployment process to ensure a smooth and successful launch with minimal disruption.",
+    "process_launch_point1": "Pre-launch checklist and final quality assurance",
+    "process_launch_point2": "Deployment to production environment",
+    "process_launch_point3": "Post-launch monitoring and immediate support",
+    
+    "process_support_title": "Maintenance & Support",
+    "process_support_desc": "Our relationship continues after launch with ongoing support, maintenance, and optimization to ensure long-term success.",
+    "process_support_point1": "Regular updates and security patching",
+    "process_support_point2": "Performance monitoring and optimization",
+    "process_support_point3": "Continuous improvement based on analytics and feedback",
+    
+    // Tech Stack 
+    "tech_title": "Our Technology",
+    "tech_title_highlight": "Stack",
+    "tech_subtitle": "We leverage cutting-edge technologies to build robust, scalable, and high-performance digital solutions.",
+    "tech_filter_all": "All Technologies",
+    "tech_filter_frontend": "Frontend",
+    "tech_filter_backend": "Backend",
+    "tech_filter_devops": "DevOps",
+    
+    "tech_react_desc": "A JavaScript library for building user interfaces with component-based architecture and virtual DOM for optimal performance.",
+    "tech_nextjs_desc": "React framework that enables server-side rendering, static site generation, and other performance optimizations.",
+    "tech_tailwind_desc": "Utility-first CSS framework for rapid UI development with highly customizable design systems.",
+    "tech_typescript_desc": "JavaScript superset that adds static types, enhancing code quality and developer productivity.",
+    
+    "tech_nodejs_desc": "JavaScript runtime built on Chrome's V8 engine for building fast, scalable server-side applications.",
+    "tech_express_desc": "Minimal and flexible Node.js web application framework that provides robust features for web and mobile applications.",
+    "tech_postgresql_desc": "Powerful, open-source object-relational database system with a strong reputation for reliability and data integrity.",
+    
+    "tech_docker_desc": "Platform for developing, shipping, and running applications in containers for consistent environments across development and production.",
+    "tech_aws_desc": "Comprehensive cloud platform offering over 200 fully featured services from data centers globally.",
+    "tech_github_desc": "CI/CD platform integrated with GitHub for automating software workflows, testing, and deployment.",
   },
   tr: {
     // Navbar
@@ -267,5 +335,73 @@ export const translations: TranslationsData = {
     // Language Switcher
     "language.en": "İngilizce",
     "language.tr": "Türkçe",
+    
+    // Process Timeline
+    "process_title": "Geliştirme",
+    "process_title_highlight": "Sürecimiz",
+    "process_subtitle": "Her proje için mükemmel sonuçlar sunmak üzere yapılandırılmış bir yaklaşım izliyoruz.",
+    "process_discovery_title": "Keşif ve Araştırma",
+    "process_discovery_desc": "İş hedeflerinizi, hedef kitlenizi ve proje gereksinimlerinizi derinlemesine araştırma ve analiz yoluyla iyice anlamakla başlıyoruz.",
+    "process_discovery_point1": "Vizyon ve hedefleri anlamak için paydaş görüşmeleri",
+    "process_discovery_point2": "Pazar araştırması ve rakip analizi",
+    "process_discovery_point3": "Kullanıcı araştırması ve persona geliştirme",
+    
+    "process_planning_title": "Strateji ve Planlama",
+    "process_planning_desc": "Araştırmamıza dayanarak, net kilometre taşları ve teslim edilebilirlerle kapsamlı bir strateji ve detaylı proje planı geliştiriyoruz.",
+    "process_planning_point1": "Proje kapsamı tanımı ve zaman planlaması",
+    "process_planning_point2": "Kaynak tahsisi ve ekip oluşturma",
+    "process_planning_point3": "Risk değerlendirmesi ve azaltma planlaması",
+    
+    "process_design_title": "Tasarım ve Prototipleme",
+    "process_design_desc": "Tasarım ekibimiz, markanızla uyumlu ve kullanıcı beklentilerini karşılayan sezgisel, çekici ve güzel arayüzler oluşturur.",
+    "process_design_point1": "Bilgi mimarisi ve kullanıcı akışı haritalama",
+    "process_design_point2": "Tel çerçeve oluşturma ve etkileşimli prototipleme",
+    "process_design_point3": "Marka uyumlu görsel tasarım",
+    
+    "process_development_title": "Geliştirme ve Uygulama",
+    "process_development_desc": "Geliştiricilerimiz, en iyi performans ve güvenilirlik için en son teknolojileri ve en iyi uygulamaları kullanarak tasarımları hayata geçiriyor.",
+    "process_development_point1": "Frontend ve backend geliştirme",
+    "process_development_point2": "Üçüncü taraf hizmetler ve API'ler ile entegrasyon",
+    "process_development_point3": "Kod incelemeleri ve teknik optimizasyon",
+    
+    "process_testing_title": "Test ve Kalite Güvencesi",
+    "process_testing_desc": "Tüm cihazlarda ve platformlarda işlevselliği, performansı ve güvenliği sağlamak için projenizin tüm yönlerini titizlikle test ediyoruz.",
+    "process_testing_point1": "Kapsamlı işlevsellik ve kullanılabilirlik testi",
+    "process_testing_point2": "Çapraz tarayıcı ve çapraz cihaz uyumluluk testi",
+    "process_testing_point3": "Performans optimizasyonu ve güvenlik denetimleri",
+    
+    "process_launch_title": "Dağıtım ve Lansman",
+    "process_launch_desc": "Minimum kesinti ile sorunsuz ve başarılı bir lansman sağlamak için dağıtım sürecini dikkatle yönetiyoruz.",
+    "process_launch_point1": "Lansman öncesi kontrol listesi ve son kalite güvencesi",
+    "process_launch_point2": "Üretim ortamına dağıtım",
+    "process_launch_point3": "Lansman sonrası izleme ve anında destek",
+    
+    "process_support_title": "Bakım ve Destek",
+    "process_support_desc": "İlişkimiz, uzun vadeli başarıyı sağlamak için devam eden destek, bakım ve optimizasyon ile lansmandan sonra da devam ediyor.",
+    "process_support_point1": "Düzenli güncellemeler ve güvenlik yamaları",
+    "process_support_point2": "Performans izleme ve optimizasyon",
+    "process_support_point3": "Analitik ve geri bildirimlere dayalı sürekli iyileştirme",
+    
+    // Tech Stack 
+    "tech_title": "Teknoloji",
+    "tech_title_highlight": "Yığınımız",
+    "tech_subtitle": "Sağlam, ölçeklenebilir ve yüksek performanslı dijital çözümler oluşturmak için en son teknolojilerden yararlanıyoruz.",
+    "tech_filter_all": "Tüm Teknolojiler",
+    "tech_filter_frontend": "Frontend",
+    "tech_filter_backend": "Backend",
+    "tech_filter_devops": "DevOps",
+    
+    "tech_react_desc": "Bileşen tabanlı mimari ve optimal performans için sanal DOM ile kullanıcı arayüzleri oluşturmak için bir JavaScript kütüphanesi.",
+    "tech_nextjs_desc": "Sunucu tarafı işleme, statik site oluşturma ve diğer performans optimizasyonlarını sağlayan React çerçevesi.",
+    "tech_tailwind_desc": "Yüksek derecede özelleştirilebilir tasarım sistemleriyle hızlı kullanıcı arayüzü geliştirme için yardımcı sınıf öncelikli CSS çerçevesi.",
+    "tech_typescript_desc": "Kod kalitesini ve geliştirici üretkenliğini artıran statik tipler ekleyen JavaScript üst kümesi.",
+    
+    "tech_nodejs_desc": "Hızlı, ölçeklenebilir sunucu tarafı uygulamaları oluşturmak için Chrome'un V8 motoru üzerine kurulmuş JavaScript çalışma zamanı.",
+    "tech_express_desc": "Web ve mobil uygulamalar için güçlü özellikler sunan minimal ve esnek Node.js web uygulama çerçevesi.",
+    "tech_postgresql_desc": "Güvenilirlik ve veri bütünlüğü konusunda güçlü bir üne sahip, güçlü, açık kaynaklı nesne-ilişkisel veritabanı sistemi.",
+    
+    "tech_docker_desc": "Geliştirme ve üretim arasında tutarlı ortamlar için uygulamaları konteynerlerde geliştirme, gönderme ve çalıştırma platformu.",
+    "tech_aws_desc": "Dünya çapında veri merkezlerinden 200'den fazla tam özellikli hizmet sunan kapsamlı bulut platformu.",
+    "tech_github_desc": "Yazılım iş akışlarını, testleri ve dağıtımı otomatikleştirmek için GitHub ile entegre CI/CD platformu.",
   }
 };
