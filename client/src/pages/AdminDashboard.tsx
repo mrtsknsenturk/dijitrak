@@ -27,7 +27,9 @@ import {
   MoreHorizontal,
   Eye,
   Mail,
-  MessageSquare
+  MessageSquare,
+  Calculator,
+  DollarSign
 } from "lucide-react";
 import {
   Dialog,
@@ -59,6 +61,7 @@ export default function AdminDashboard() {
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [selectedFreelancer, setSelectedFreelancer] = useState<any>(null);
   const [selectedMessage, setSelectedMessage] = useState<any>(null);
+  const [selectedPriceRequest, setSelectedPriceRequest] = useState<any>(null);
 
   // Check auth status
   const { data: authData, isLoading: authLoading, error: authError } = useQuery({
@@ -90,6 +93,12 @@ export default function AdminDashboard() {
   // Fetch contact messages
   const { data: contactMessages, isLoading: messagesLoading } = useQuery({
     queryKey: ["/api/contact-messages"],
+    enabled: isLoggedIn,
+  });
+  
+  // Fetch price calculator requests
+  const { data: priceCalculatorRequests, isLoading: priceRequestsLoading } = useQuery({
+    queryKey: ["/api/price-calculator-requests"],
     enabled: isLoggedIn,
   });
 
@@ -166,6 +175,32 @@ export default function AdminDashboard() {
       toast({
         title: "Error",
         description: "Failed to update message status.",
+        variant: "destructive",
+      });
+    },
+  });
+  
+  // Update price calculator request status mutation
+  const updatePriceRequestStatusMutation = useMutation({
+    mutationFn: async ({ id, status }: { id: number; status: string }) => {
+      const res = await apiRequest(
+        "PATCH", 
+        `/api/price-calculator-requests/${id}/status`, 
+        { status }
+      );
+      return await res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/price-calculator-requests"] });
+      toast({
+        title: "Status Updated",
+        description: "Price calculator request status has been updated.",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update price request status.",
         variant: "destructive",
       });
     },
@@ -365,6 +400,10 @@ export default function AdminDashboard() {
                 <TabsTrigger value="messages">
                   <MessageSquare className="mr-1 h-4 w-4 inline" />
                   Contact Messages
+                </TabsTrigger>
+                <TabsTrigger value="price-requests">
+                  <Calculator className="mr-1 h-4 w-4 inline" />
+                  Price Requests
                 </TabsTrigger>
               </TabsList>
 
