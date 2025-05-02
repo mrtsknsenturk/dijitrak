@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 225 23% 8%;
+    --foreground: 0 0% 100%;
+
+    --card: 224 26% 14%;
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 224 26% 14%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 171 91% 47%;
+    --primary-foreground: 224 71% 4%;
+    
+    --secondary: 272 96% 62%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 220 13% 18%;
+    --muted-foreground: 0 0% 70%;
+    
+    --accent: 224 71% 4%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 171 91% 47%;
+    
+    --radius: 0.5rem;
+
+    --sidebar-background: 225 23% 8%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 171 91% 47%;
+    --sidebar-primary-foreground: 224 71% 4%;
+    --sidebar-accent: 272 96% 62%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 171 91% 47%;
+
+    --chart-1: 171 91% 47%;
+    --chart-2: 272 96% 62%;
+    --chart-3: 217 91% 60%;
+    --chart-4: 262 83% 58%;
+    --chart-5: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Custom Classes */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .glassmorphism {
+    @apply bg-card/70 backdrop-blur-md border border-white/10;
+  }
+
+  .hero-gradient {
+    @apply bg-gradient-to-br from-background to-accent relative overflow-hidden;
+  }
+
+  .service-card {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .service-card:hover {
+    @apply translate-y-[-10px] scale-[1.03] shadow-lg shadow-black/20;
+  }
+
+  .service-icon {
+    @apply transition-transform duration-500 ease-out;
+  }
+
+  .service-card:hover .service-icon {
+    @apply scale-[1.15];
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .btn-primary::after {
+    content: "";
+    @apply absolute w-full h-full top-0 -left-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-all duration-500;
+  }
+
+  .btn-primary:hover::after {
+    @apply left-full;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
