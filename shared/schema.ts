@@ -134,6 +134,36 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages).pi
   message: true,
 });
 
+// Price Calculator Requests
+export const priceCalculatorRequests = pgTable("price_calculator_requests", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  company: text("company"),
+  serviceType: text("service_type").notNull(),
+  complexity: text("complexity").notNull(),
+  timeline: text("timeline").notNull(),
+  features: json("features").$type<string[]>().default([]).notNull(),
+  estimatedPrice: integer("estimated_price").notNull(),
+  notes: text("notes"),
+  status: text("status").default("new").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertPriceCalculatorRequestSchema = createInsertSchema(priceCalculatorRequests).pick({
+  name: true,
+  email: true,
+  phone: true,
+  company: true,
+  serviceType: true,
+  complexity: true,
+  timeline: true,
+  features: true,
+  estimatedPrice: true,
+  notes: true,
+});
+
 // Type definitions
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
@@ -149,3 +179,6 @@ export type PortfolioProject = typeof portfolioProjects.$inferSelect;
 
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
+
+export type InsertPriceCalculatorRequest = z.infer<typeof insertPriceCalculatorRequestSchema>;
+export type PriceCalculatorRequest = typeof priceCalculatorRequests.$inferSelect;
