@@ -29,8 +29,10 @@ import {
   Mail,
   MessageSquare,
   Calculator,
-  DollarSign
+  DollarSign,
+  Plus
 } from "lucide-react";
+import AdminPriceCalculator from "@/components/AdminPriceCalculator";
 import {
   Dialog,
   DialogContent,
@@ -404,6 +406,10 @@ export default function AdminDashboard() {
                 <TabsTrigger value="price-requests">
                   <Calculator className="mr-1 h-4 w-4 inline" />
                   Price Requests
+                </TabsTrigger>
+                <TabsTrigger value="calculator">
+                  <Plus className="mr-1 h-4 w-4 inline" />
+                  New Calculation
                 </TabsTrigger>
               </TabsList>
 
@@ -865,6 +871,51 @@ export default function AdminDashboard() {
                         No price calculator requests yet
                       </div>
                     )}
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="calculator" className="mt-0">
+                <Card className="glassmorphism border border-white/10">
+                  <CardHeader>
+                    <CardTitle>Interactive Price Calculator</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="bg-black/30 p-6 rounded-lg">
+                      <AdminPriceCalculator 
+                        standalone={false}
+                        onSubmit={(calculatedData) => {
+                          // Handle the calculation data - create a new request
+                          const createRequest = async (data: any) => {
+                            try {
+                              const res = await apiRequest("POST", "/api/price-calculator-requests", data);
+                              if (res.ok) {
+                                queryClient.invalidateQueries({ queryKey: ["/api/price-calculator-requests"] });
+                                toast({
+                                  title: "Request Created",
+                                  description: "Price calculator request has been created successfully.",
+                                });
+                              } else {
+                                toast({
+                                  title: "Error",
+                                  description: "Failed to create price calculator request.",
+                                  variant: "destructive",
+                                });
+                              }
+                            } catch (error) {
+                              toast({
+                                title: "Error",
+                                description: "Failed to create price calculator request.",
+                                variant: "destructive",
+                              });
+                              console.error("Error creating price calculator request:", error);
+                            }
+                          };
+                          
+                          createRequest(calculatedData);
+                        }}
+                      />
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
