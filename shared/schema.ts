@@ -25,6 +25,7 @@ export const freelancerApplications = pgTable("freelancer_applications", {
   specialty: text("specialty").notNull(),
   experience: text("experience").notNull(),
   portfolioUrl: text("portfolio_url"),
+  coverLetter: text("cover_letter").notNull(),
   languages: json("languages").default(['en']).notNull(),
   status: text("status").default("pending").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -36,6 +37,7 @@ export const insertFreelancerApplicationSchema = createInsertSchema(freelancerAp
   specialty: true,
   experience: true,
   portfolioUrl: true,
+  coverLetter: true,
   languages: true,
 });
 

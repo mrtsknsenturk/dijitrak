@@ -283,6 +283,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
       next(error);
     }
   });
+  
+  // Contact form submission
+  app.post("/api/contact", async (req, res, next) => {
+    try {
+      const { name, email, subject, message } = req.body;
+      
+      // Validate required fields
+      if (!name || !email || !subject || !message) {
+        return res.status(400).json({ 
+          message: "All fields are required" 
+        });
+      }
+      
+      // Email validation regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ 
+          message: "Invalid email address" 
+        });
+      }
+      
+      // Here you would typically send an email or store in database
+      // For now, we'll just simulate a successful response
+      
+      res.status(201).json({
+        success: true,
+        message: "Contact form submitted successfully"
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;
