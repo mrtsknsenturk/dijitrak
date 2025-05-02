@@ -734,6 +734,140 @@ export default function AdminDashboard() {
                   </CardContent>
                 </Card>
               </TabsContent>
+              
+              <TabsContent value="price-requests" className="mt-0">
+                <Card className="glassmorphism border border-white/10">
+                  <CardHeader>
+                    <CardTitle>
+                      <div className="flex items-center">
+                        <Calculator className="h-5 w-5 mr-2" />
+                        <span>Price Calculator Requests</span>
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {priceRequestsLoading ? (
+                      <div className="space-y-4">
+                        {[...Array(3)].map((_, i) => (
+                          <div
+                            key={i}
+                            className="h-12 bg-white/5 animate-pulse rounded"
+                          ></div>
+                        ))}
+                      </div>
+                    ) : priceCalculatorRequests &&
+                      Array.isArray(priceCalculatorRequests) && 
+                      priceCalculatorRequests.length > 0 ? (
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Service Type</TableHead>
+                            <TableHead>Timeline</TableHead>
+                            <TableHead>Price</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead>Actions</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {priceCalculatorRequests.map(
+                            (request: any, index: number) => (
+                              <TableRow key={index}>
+                                <TableCell className="font-medium">
+                                  {request.name}
+                                </TableCell>
+                                <TableCell>
+                                  {request.serviceType === "web-app"
+                                    ? "Web Application"
+                                    : request.serviceType === "mobile-app"
+                                    ? "Mobile App"
+                                    : request.serviceType === "e-commerce"
+                                    ? "E-commerce"
+                                    : request.serviceType === "branding"
+                                    ? "Branding"
+                                    : request.serviceType === "seo"
+                                    ? "SEO Optimization"
+                                    : request.serviceType === "marketing"
+                                    ? "Digital Marketing"
+                                    : request.serviceType === "content"
+                                    ? "Content Creation"
+                                    : request.serviceType === "ui-ux"
+                                    ? "UI/UX Design"
+                                    : request.serviceType}
+                                </TableCell>
+                                <TableCell>
+                                  {request.timeline === "standard"
+                                    ? "Standard (2-3 months)"
+                                    : request.timeline === "accelerated"
+                                    ? "Accelerated (1-2 months)"
+                                    : request.timeline === "rush"
+                                    ? "Rush (2-4 weeks)"
+                                    : request.timeline}
+                                </TableCell>
+                                <TableCell>
+                                  <div className="flex items-center">
+                                    <DollarSign className="h-4 w-4 mr-1 text-green-400" />
+                                    {request.estimatedPrice.toLocaleString()}
+                                  </div>
+                                </TableCell>
+                                <TableCell>
+                                  {getStatusBadge(request.status)}
+                                </TableCell>
+                                <TableCell>
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button variant="ghost" size="icon">
+                                        <MoreHorizontal className="h-4 w-4" />
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end">
+                                      <DropdownMenuItem onClick={() => setSelectedPriceRequest(request)}>
+                                        <Eye className="h-4 w-4 mr-2" />
+                                        View Details
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updatePriceRequestStatusMutation.mutate({ 
+                                          id: request.id, 
+                                          status: "contacted" 
+                                        })}
+                                      >
+                                        <Mail className="h-4 w-4 mr-2" />
+                                        Mark as Contacted
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updatePriceRequestStatusMutation.mutate({ 
+                                          id: request.id, 
+                                          status: "converted" 
+                                        })}
+                                      >
+                                        <CheckCircle className="h-4 w-4 mr-2" />
+                                        Mark as Converted
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updatePriceRequestStatusMutation.mutate({ 
+                                          id: request.id, 
+                                          status: "rejected" 
+                                        })}
+                                      >
+                                        <XCircle className="h-4 w-4 mr-2" />
+                                        Mark as Rejected
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                </TableCell>
+                              </TableRow>
+                            )
+                          )}
+                        </TableBody>
+                      </Table>
+                    ) : (
+                      <div className="text-center py-6 text-white/50">
+                        No price calculator requests yet
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </TabsContent>
             </Tabs>
           </main>
 
@@ -993,6 +1127,167 @@ export default function AdminDashboard() {
                       </Button>
                     </div>
                     <Button variant="destructive" onClick={() => setSelectedFreelancer(null)}>
+                      Close
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
+          
+          {/* Price Calculator Request Detail Modal */}
+          {selectedPriceRequest && (
+            <Dialog open={selectedPriceRequest !== null} onOpenChange={() => setSelectedPriceRequest(null)}>
+              <DialogContent className="sm:max-w-2xl bg-background border border-white/10 text-white">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-semibold">
+                    <div className="flex items-center">
+                      <Calculator className="h-5 w-5 mr-2" />
+                      <span>Price Calculator Request Details</span>
+                    </div>
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6 mt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Client Name</h3>
+                      <p className="font-medium">{selectedPriceRequest.name}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Email</h3>
+                      <p className="font-medium">{selectedPriceRequest.email}</p>
+                    </div>
+                    {selectedPriceRequest.phone && (
+                      <div>
+                        <h3 className="text-sm text-white/60 mb-1">Phone</h3>
+                        <p className="font-medium">{selectedPriceRequest.phone}</p>
+                      </div>
+                    )}
+                    {selectedPriceRequest.company && (
+                      <div>
+                        <h3 className="text-sm text-white/60 mb-1">Company</h3>
+                        <p className="font-medium">{selectedPriceRequest.company}</p>
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Service Type</h3>
+                      <p className="font-medium">
+                        {selectedPriceRequest.serviceType === "web-app"
+                          ? "Web Application"
+                          : selectedPriceRequest.serviceType === "mobile-app"
+                          ? "Mobile App"
+                          : selectedPriceRequest.serviceType === "e-commerce"
+                          ? "E-commerce"
+                          : selectedPriceRequest.serviceType === "branding"
+                          ? "Branding"
+                          : selectedPriceRequest.serviceType === "seo"
+                          ? "SEO Optimization"
+                          : selectedPriceRequest.serviceType === "marketing"
+                          ? "Digital Marketing"
+                          : selectedPriceRequest.serviceType === "content"
+                          ? "Content Creation"
+                          : selectedPriceRequest.serviceType === "ui-ux"
+                          ? "UI/UX Design"
+                          : selectedPriceRequest.serviceType}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Complexity</h3>
+                      <p className="font-medium">
+                        {selectedPriceRequest.complexity === "basic"
+                          ? "Basic"
+                          : selectedPriceRequest.complexity === "standard"
+                          ? "Standard"
+                          : selectedPriceRequest.complexity === "advanced"
+                          ? "Advanced"
+                          : selectedPriceRequest.complexity === "complex"
+                          ? "Complex"
+                          : selectedPriceRequest.complexity}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Timeline</h3>
+                      <p className="font-medium">
+                        {selectedPriceRequest.timeline === "standard"
+                          ? "Standard (2-3 months)"
+                          : selectedPriceRequest.timeline === "accelerated"
+                          ? "Accelerated (1-2 months)"
+                          : selectedPriceRequest.timeline === "rush"
+                          ? "Rush (2-4 weeks)"
+                          : selectedPriceRequest.timeline}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Status</h3>
+                      <p className="font-medium">{getStatusBadge(selectedPriceRequest.status)}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Estimated Price</h3>
+                      <p className="font-medium text-green-400">
+                        ${selectedPriceRequest.estimatedPrice.toLocaleString()}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Date</h3>
+                      <p className="font-medium">
+                        {new Date(selectedPriceRequest.createdAt).toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {selectedPriceRequest.features && Object.keys(selectedPriceRequest.features).length > 0 && (
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-2">Selected Features</h3>
+                      <div className="bg-muted/30 p-4 rounded">
+                        <ul className="space-y-2">
+                          {Object.entries(selectedPriceRequest.features).map(([feature, isSelected]) => (
+                            isSelected && (
+                              <li key={feature} className="flex items-center">
+                                <CheckCircle className="h-4 w-4 mr-2 text-green-400" />
+                                <span>
+                                  {feature.split('_').map(word => 
+                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                  ).join(' ')}
+                                </span>
+                              </li>
+                            )
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {selectedPriceRequest.notes && (
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-2">Additional Notes</h3>
+                      <div className="bg-muted/30 p-4 rounded">
+                        <p className="whitespace-pre-wrap">{selectedPriceRequest.notes}</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="flex justify-end gap-3">
+                    <Button 
+                      variant="outline"
+                      onClick={() => updatePriceRequestStatusMutation.mutate({ 
+                        id: selectedPriceRequest.id, 
+                        status: "contacted" 
+                      })}
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      Mark as Contacted
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      onClick={() => updatePriceRequestStatusMutation.mutate({ 
+                        id: selectedPriceRequest.id, 
+                        status: "converted" 
+                      })}
+                    >
+                      <CheckCircle className="mr-2 h-4 w-4" />
+                      Mark as Converted
+                    </Button>
+                    <Button variant="destructive" onClick={() => setSelectedPriceRequest(null)}>
                       Close
                     </Button>
                   </div>
