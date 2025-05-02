@@ -1,6 +1,4 @@
 import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { Helmet } from "react-helmet";
 import NotFound from "@/pages/not-found";
@@ -24,7 +22,7 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
         <title>Quantum Edge | Digital Innovation Agency</title>
@@ -32,7 +30,7 @@ function App() {
       <Router />
       <AnimatedRocket />
       <Toaster />
-    </QueryClientProvider>
+    </>
   );
 }
 
