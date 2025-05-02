@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { 
   Select,
   SelectContent,
@@ -28,10 +29,11 @@ export default function FreelancerModal({ isOpen, onClose }: FreelancerModalProp
     specialty: "",
     experience: "",
     portfolioUrl: "",
+    coverLetter: "",
     languages: ["en"]
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData(prev => ({ ...prev, [id]: value }));
   };
@@ -205,6 +207,19 @@ export default function FreelancerModal({ isOpen, onClose }: FreelancerModalProp
                 />
               </div>
               
+              <div>
+                <Label htmlFor="coverLetter" className="text-white/70 text-sm font-medium mb-1">Cover Letter</Label>
+                <Textarea
+                  id="coverLetter"
+                  value={formData.coverLetter}
+                  onChange={handleChange}
+                  rows={4}
+                  className="bg-muted border border-white/10 text-white focus:border-primary"
+                  placeholder="Tell us why you want to join our freelancer network..."
+                  required
+                />
+              </div>
+
               <div>
                 <Label className="text-white/70 text-sm font-medium mb-2 block">Languages you speak</Label>
                 <div className="flex flex-wrap gap-2 mt-2">
