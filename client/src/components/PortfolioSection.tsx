@@ -1,67 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FadeIn, FadeInStagger, FadeInItem } from "@/components/ui/motion";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-
-interface PortfolioItem {
-  title: string;
-  category: string;
-  image: string;
-  description: string;
-}
+import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import { PortfolioProject } from "@shared/schema";
 
 export default function PortfolioSection() {
   const [activeFilter, setActiveFilter] = useState("all");
   
-  const portfolioItems: PortfolioItem[] = [
-    {
-      title: "E-commerce Redesign",
-      category: "web-design",
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGVjb21tZXJjZXxlbnwwfHwwfHx8MA%3D%3D",
-      description: "Comprehensive redesign of an e-commerce platform with improved UX and conversion optimization."
-    },
-    {
-      title: "Banking Mobile App",
-      category: "mobile-app",
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFua2luZyUyMGFwcHxlbnwwfHwwfHx8MA%3D%3D",
-      description: "User-friendly mobile banking application with secure authentication and real-time transactions."
-    },
-    {
-      title: "Tech Conference Branding",
-      category: "branding",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVjaCUyMGNvbmZlcmVuY2V8ZW58MHx8MHx8fDA%3D",
-      description: "Complete branding package for a major tech conference including logo, marketing materials, and digital assets."
-    },
-    {
-      title: "Healthcare Dashboard",
-      category: "web-design",
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGVhbHRoY2FyZSUyMGRhc2hib2FyZHxlbnwwfHwwfHx8MA%3D",
-      description: "Interactive healthcare analytics dashboard for medical professionals with data visualization."
-    },
-    {
-      title: "Restaurant Ordering System",
-      category: "mobile-app",
-      image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cmVzdGF1cmFudCUyMGFwcHxlbnwwfHwwfHx8MA%3D",
-      description: "Mobile application for restaurant ordering with real-time kitchen updates and payment processing."
-    },
-    {
-      title: "Fashion Brand Identity",
-      category: "branding",
-      image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbiUyMGJyYW5kaW5nfGVufDB8fDB8fHww",
-      description: "Complete brand identity design for an emerging fashion label with lookbook and marketing strategy."
-    },
-  ];
+  const { data: portfolioProjects, isLoading, error } = useQuery<PortfolioProject[]>({
+    queryKey: ["/api/portfolio-projects"],
+    queryFn: async () => {
+      const response = await fetch("/api/portfolio-projects");
+      if (!response.ok) {
+        throw new Error("Failed to fetch portfolio projects");
+      }
+      return response.json();
+    }
+  });
   
   const filters = [
     { name: "All", value: "all" },
-    { name: "Web Design", value: "web-design" },
-    { name: "Mobile Apps", value: "mobile-app" },
-    { name: "Branding", value: "branding" },
+    { name: "Web App", value: "web-app" },
+    { name: "Mobile App", value: "mobile-app" },
+    { name: "Healthcare", value: "healthcare" }
   ];
   
-  const filteredItems = activeFilter === "all" 
-    ? portfolioItems 
-    : portfolioItems.filter(item => item.category === activeFilter);
+  const filteredProjects = portfolioProjects 
+    ? (activeFilter === "all" 
+        ? portfolioProjects 
+        : portfolioProjects.filter(project => project.category === activeFilter))
+    : [];
 
   return (
     <section id="portfolio" className="py-24 bg-background relative">
@@ -97,48 +67,72 @@ export default function PortfolioSection() {
           ))}
         </div>
         
-        <FadeInStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredItems.map((item, index) => (
-            <PortfolioCard key={index} item={item} />
-          ))}
-        </FadeInStagger>
+        {isLoading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : error ? (
+          <div className="text-center text-white/70 py-8">
+            <p>Failed to load portfolio projects. Please try again later.</p>
+          </div>
+        ) : (
+          <FadeInStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project) => (
+              <PortfolioCard key={project.id} project={project} />
+            ))}
+          </FadeInStagger>
+        )}
       </div>
     </section>
   );
 }
 
-function PortfolioCard({ item }: { item: PortfolioItem }) {
+function PortfolioCard({ project }: { project: PortfolioProject }) {
+  // Find main image or use first image
+  const mainImage = project.images.find(img => img.isMain)?.url || 
+                   (project.images.length > 0 ? project.images[0].url : '');
+  
   return (
     <FadeInItem>
-      <motion.div 
-        className="glassmorphism rounded-xl overflow-hidden group cursor-pointer"
-        whileHover={{ y: -10, scale: 1.02 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="h-56 overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
-          
-          <motion.img 
-            src={item.image} 
-            alt={item.title}
-            className="w-full h-full object-cover transition-transform duration-700"
-            whileHover={{ scale: 1.1 }}
-          />
-          
-          <div className="absolute bottom-0 left-0 right-0 p-4 z-20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-            <p className="text-sm text-white/90 line-clamp-2">{item.description}</p>
+      <Link href={`/project/${project.slug}`}>
+        <motion.div 
+          className="glassmorphism rounded-xl overflow-hidden group cursor-pointer"
+          whileHover={{ y: -10, scale: 1.02 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="h-56 overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+            
+            {mainImage && (
+              <motion.img 
+                src={mainImage} 
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-700"
+                whileHover={{ scale: 1.1 }}
+              />
+            )}
+            
+            <div className="absolute bottom-0 left-0 right-0 p-4 z-20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p className="text-sm text-white/90 line-clamp-2">{project.description}</p>
+            </div>
           </div>
-        </div>
-        
-        <div className="p-6">
-          <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-          <span className="text-sm text-white/50 uppercase tracking-wider">
-            {item.category === "web-design" && "Web Design"}
-            {item.category === "mobile-app" && "Mobile App"}
-            {item.category === "branding" && "Branding"}
-          </span>
-        </div>
-      </motion.div>
+          
+          <div className="p-6">
+            <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {project.tags.slice(0, 3).map((tag, index) => (
+                <span
+                  key={index}
+                  className="text-xs px-2 py-1 rounded-full"
+                  style={{ backgroundColor: tag.color || '#3B82F6', color: 'white' }}
+                >
+                  {tag.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </Link>
     </FadeInItem>
   );
 }
