@@ -3,14 +3,18 @@ import {
   users,
   freelancerApplications,
   projectRequests,
+  portfolioProjects,
   insertUserSchema,
   insertFreelancerApplicationSchema,
   insertProjectRequestSchema,
+  insertPortfolioProjectSchema,
   User,
   FreelancerApplication,
   ProjectRequest,
+  PortfolioProject,
   InsertFreelancerApplication,
-  InsertProjectRequest
+  InsertProjectRequest,
+  InsertPortfolioProject
 } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
@@ -90,5 +94,26 @@ export const storage = {
       .where(eq(projectRequests.id, id))
       .returning();
     return updated;
+  },
+  
+  // Portfolio project operations
+  async getAllPortfolioProjects(): Promise<PortfolioProject[]> {
+    return db.select().from(portfolioProjects).orderBy(portfolioProjects.createdAt);
+  },
+  
+  async getPortfolioProjectBySlug(slug: string): Promise<PortfolioProject | undefined> {
+    const result = await db.select().from(portfolioProjects).where(eq(portfolioProjects.slug, slug));
+    return result[0];
+  },
+  
+  async getPortfolioProjectById(id: number): Promise<PortfolioProject | undefined> {
+    const result = await db.select().from(portfolioProjects).where(eq(portfolioProjects.id, id));
+    return result[0];
+  },
+  
+  async createPortfolioProject(data: InsertPortfolioProject): Promise<PortfolioProject> {
+    const validated = insertPortfolioProjectSchema.parse(data);
+    const [project] = await db.insert(portfolioProjects).values(validated).returning();
+    return project;
   }
 };

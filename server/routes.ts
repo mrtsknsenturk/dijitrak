@@ -258,6 +258,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
       next(error);
     }
   });
+  
+  // Portfolio Projects API Routes
+  app.get("/api/portfolio-projects", async (req, res, next) => {
+    try {
+      const projects = await storage.getAllPortfolioProjects();
+      res.json(projects);
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  app.get("/api/portfolio-projects/:slug", async (req, res, next) => {
+    try {
+      const { slug } = req.params;
+      const project = await storage.getPortfolioProjectBySlug(slug);
+      
+      if (!project) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+      
+      res.json(project);
+    } catch (error) {
+      next(error);
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;
