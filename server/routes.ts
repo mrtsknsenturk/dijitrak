@@ -315,6 +315,112 @@ export async function registerRoutes(app: Express): Promise<Server> {
       next(error);
     }
   });
+  
+  // Freelancer application submission
+  app.post("/api/freelancer-applications", async (req, res, next) => {
+    try {
+      const { name, email, specialty, experience, portfolioUrl, coverLetter, languages } = req.body;
+      
+      // Validate required fields
+      if (!name || !email || !specialty || !experience || !coverLetter) {
+        return res.status(400).json({ 
+          message: "Missing required fields" 
+        });
+      }
+      
+      // Email validation regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ 
+          message: "Invalid email address" 
+        });
+      }
+      
+      // Validate numeric fields
+      if (isNaN(Number(experience)) || Number(experience) < 0) {
+        return res.status(400).json({ 
+          message: "Experience must be a positive number" 
+        });
+      }
+      
+      // Validate portfolio URL if provided
+      if (portfolioUrl && !portfolioUrl.match(/^https?:\/\/.+/)) {
+        return res.status(400).json({ 
+          message: "Portfolio URL must be a valid URL starting with http:// or https://" 
+        });
+      }
+      
+      // Save the application to the database
+      const application = await storage.createFreelancerApplication({
+        name,
+        email,
+        specialty,
+        experience,
+        portfolioUrl,
+        coverLetter,
+        languages: Array.isArray(languages) ? languages : ['en']
+      });
+      
+      res.status(201).json({
+        success: true,
+        message: "Application submitted successfully",
+        data: application
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  // Project request submission
+  app.post("/api/project-requests", async (req, res, next) => {
+    try {
+      const { 
+        projectName, 
+        projectType, 
+        timeline, 
+        budget, 
+        description, 
+        clientName, 
+        clientEmail, 
+        phone 
+      } = req.body;
+      
+      // Validate required fields
+      if (!projectName || !projectType || !timeline || !budget || !description || !clientName || !clientEmail) {
+        return res.status(400).json({ 
+          message: "Missing required fields" 
+        });
+      }
+      
+      // Email validation regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(clientEmail)) {
+        return res.status(400).json({ 
+          message: "Invalid email address" 
+        });
+      }
+      
+      // Save the project request to the database
+      const projectRequest = await storage.createProjectRequest({
+        projectName,
+        projectType,
+        timeline,
+        budget,
+        description,
+        clientName,
+        clientEmail,
+        phone
+      });
+      
+      res.status(201).json({
+        success: true,
+        message: "Project request submitted successfully",
+        data: projectRequest
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;
