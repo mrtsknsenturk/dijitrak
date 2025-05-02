@@ -35,6 +35,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       store: new PostgresStore({
         pool,
         tableName: "session",
+        createTableIfMissing: true // Otomatik olarak tablo oluşturacak
       }),
       secret: process.env.SESSION_SECRET || "quantum-edge-secret",
       resave: false,
