@@ -1,6 +1,7 @@
 import { db } from "./index";
 import * as schema from "@shared/schema";
 import bcrypt from "bcryptjs";
+import { eq, sql } from "drizzle-orm";
 
 async function seed() {
   try {
@@ -26,10 +27,10 @@ async function seed() {
 
     // Seed some sample freelancer applications
     const existingApplicationsCount = await db
-      .select({ count: db.fn.count(schema.freelancerApplications.id).as("value") })
+      .select({ count: sql<number>`count(*)` })
       .from(schema.freelancerApplications);
 
-    if (Number(existingApplicationsCount[0].count.value) === 0) {
+    if (existingApplicationsCount[0].count === 0) {
       await db.insert(schema.freelancerApplications).values([
         {
           name: "John Smith",
@@ -66,10 +67,10 @@ async function seed() {
 
     // Seed some sample project requests
     const existingRequestsCount = await db
-      .select({ count: db.fn.count(schema.projectRequests.id).as("value") })
+      .select({ count: sql<number>`count(*)` })
       .from(schema.projectRequests);
 
-    if (Number(existingRequestsCount[0].count.value) === 0) {
+    if (existingRequestsCount[0].count === 0) {
       await db.insert(schema.projectRequests).values([
         {
           projectName: "E-commerce Platform",

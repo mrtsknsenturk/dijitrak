@@ -123,7 +123,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(application);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Validation failed", errors: fromZodError(error) });
+        const formattedError = fromZodError(error);
+        return res.status(400).json({ 
+          message: "Validation failed", 
+          errors: formattedError.details 
+        });
       }
       next(error);
     }
@@ -186,7 +190,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(request);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Validation failed", errors: fromZodError(error) });
+        const formattedError = fromZodError(error);
+        return res.status(400).json({ 
+          message: "Validation failed", 
+          errors: formattedError.details 
+        });
       }
       next(error);
     }
