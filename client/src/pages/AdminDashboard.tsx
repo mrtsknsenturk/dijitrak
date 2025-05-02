@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import {
   Table,
   TableBody,
@@ -15,24 +15,62 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { LogOut, Users, FileText, Activity } from "lucide-react";
+import { 
+  LogOut, 
+  Users, 
+  FileText, 
+  Activity, 
+  CheckCircle, 
+  XCircle, 
+  Clock, 
+  Info, 
+  MoreHorizontal,
+  Eye 
+} from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedFreelancer, setSelectedFreelancer] = useState<any>(null);
 
   // Check auth status
-  const { data: authData, isLoading: authLoading } = useQuery({
+  const { data: authData, isLoading: authLoading, error: authError } = useQuery({
     queryKey: ["/api/auth/check"],
-    onError: () => {
+  });
+  
+  // Handle auth response
+  useEffect(() => {
+    if (authError) {
       setIsLoggedIn(false);
       setLocation("/admin/login");
-    },
-    onSuccess: () => {
+    } else if (authData) {
       setIsLoggedIn(true);
-    },
-  });
+    }
+  }, [authData, authError, setLocation]);
 
   // Fetch freelancer applications
   const { data: freelancerApplications, isLoading: freelancersLoading } = useQuery({
@@ -45,6 +83,75 @@ export default function AdminDashboard() {
     queryKey: ["/api/project-requests"],
     enabled: isLoggedIn,
   });
+
+  // Update project status mutation
+  const updateProjectStatusMutation = useMutation({
+    mutationFn: async ({ id, status }: { id: number; status: string }) => {
+      const res = await apiRequest(
+        "PATCH", 
+        `/api/project-requests/${id}/status`, 
+        { status }
+      );
+      return await res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/project-requests"] });
+      toast({
+        title: "Status Updated",
+        description: "Project request status has been updated.",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update project status.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Update freelancer application status mutation
+  const updateFreelancerStatusMutation = useMutation({
+    mutationFn: async ({ id, status }: { id: number; status: string }) => {
+      const res = await apiRequest(
+        "PATCH", 
+        `/api/freelancer-applications/${id}/status`, 
+        { status }
+      );
+      return await res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/freelancer-applications"] });
+      toast({
+        title: "Status Updated",
+        description: "Freelancer application status has been updated.",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update freelancer application status.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case "pending":
+        return <Badge variant="outline" className="bg-yellow-500/20 text-yellow-500 border-yellow-500/20">Pending</Badge>;
+      case "approved":
+        return <Badge variant="outline" className="bg-green-500/20 text-green-500 border-green-500/20">Approved</Badge>;
+      case "rejected":
+        return <Badge variant="outline" className="bg-red-500/20 text-red-500 border-red-500/20">Rejected</Badge>;
+      case "in-progress":
+        return <Badge variant="outline" className="bg-blue-500/20 text-blue-500 border-blue-500/20">In Progress</Badge>;
+      case "completed":
+        return <Badge variant="outline" className="bg-purple-500/20 text-purple-500 border-purple-500/20">Completed</Badge>;
+      default:
+        return <Badge variant="outline" className="bg-primary/20 text-primary border-primary/20">New</Badge>;
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -237,7 +344,7 @@ export default function AdminDashboard() {
                           ></div>
                         ))}
                       </div>
-                    ) : projectRequests && projectRequests.length > 0 ? (
+                    ) : projectRequests && Array.isArray(projectRequests) && projectRequests.length > 0 ? (
                       <Table>
                         <TableHeader>
                           <TableRow>
@@ -246,6 +353,7 @@ export default function AdminDashboard() {
                             <TableHead>Budget</TableHead>
                             <TableHead>Client</TableHead>
                             <TableHead>Status</TableHead>
+                            <TableHead>Actions</TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -274,9 +382,58 @@ export default function AdminDashboard() {
                               </TableCell>
                               <TableCell>{project.clientName}</TableCell>
                               <TableCell>
-                                <span className="px-2 py-1 rounded-full text-xs bg-primary/20 text-primary">
-                                  New
-                                </span>
+                                {getStatusBadge(project.status)}
+                              </TableCell>
+                              <TableCell>
+                                <DropdownMenu>
+                                  <DropdownMenuTrigger asChild>
+                                    <Button variant="ghost" size="icon">
+                                      <MoreHorizontal className="h-4 w-4" />
+                                    </Button>
+                                  </DropdownMenuTrigger>
+                                  <DropdownMenuContent align="end">
+                                    <DropdownMenuItem onClick={() => setSelectedProject(project)}>
+                                      <Eye className="h-4 w-4 mr-2" />
+                                      View Details
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem 
+                                      onClick={() => updateProjectStatusMutation.mutate({ 
+                                        id: project.id, 
+                                        status: "approved" 
+                                      })}
+                                    >
+                                      <CheckCircle className="h-4 w-4 mr-2" />
+                                      Approve
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem 
+                                      onClick={() => updateProjectStatusMutation.mutate({ 
+                                        id: project.id, 
+                                        status: "rejected" 
+                                      })}
+                                    >
+                                      <XCircle className="h-4 w-4 mr-2" />
+                                      Reject
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem 
+                                      onClick={() => updateProjectStatusMutation.mutate({ 
+                                        id: project.id, 
+                                        status: "in-progress" 
+                                      })}
+                                    >
+                                      <Clock className="h-4 w-4 mr-2" />
+                                      Mark In Progress
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem 
+                                      onClick={() => updateProjectStatusMutation.mutate({ 
+                                        id: project.id, 
+                                        status: "completed" 
+                                      })}
+                                    >
+                                      <CheckCircle className="h-4 w-4 mr-2" />
+                                      Mark Completed
+                                    </DropdownMenuItem>
+                                  </DropdownMenuContent>
+                                </DropdownMenu>
                               </TableCell>
                             </TableRow>
                           ))}
@@ -316,6 +473,7 @@ export default function AdminDashboard() {
                             <TableHead>Experience</TableHead>
                             <TableHead>Email</TableHead>
                             <TableHead>Status</TableHead>
+                            <TableHead>Actions</TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -339,9 +497,49 @@ export default function AdminDashboard() {
                                 </TableCell>
                                 <TableCell>{freelancer.email}</TableCell>
                                 <TableCell>
-                                  <span className="px-2 py-1 rounded-full text-xs bg-secondary/20 text-secondary">
-                                    Pending
-                                  </span>
+                                  {getStatusBadge(freelancer.status)}
+                                </TableCell>
+                                <TableCell>
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button variant="ghost" size="icon">
+                                        <MoreHorizontal className="h-4 w-4" />
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end">
+                                      <DropdownMenuItem onClick={() => setSelectedFreelancer(freelancer)}>
+                                        <Eye className="h-4 w-4 mr-2" />
+                                        View Details
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updateFreelancerStatusMutation.mutate({ 
+                                          id: freelancer.id, 
+                                          status: "approved" 
+                                        })}
+                                      >
+                                        <CheckCircle className="h-4 w-4 mr-2" />
+                                        Approve
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updateFreelancerStatusMutation.mutate({ 
+                                          id: freelancer.id, 
+                                          status: "rejected" 
+                                        })}
+                                      >
+                                        <XCircle className="h-4 w-4 mr-2" />
+                                        Reject
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        onClick={() => updateFreelancerStatusMutation.mutate({ 
+                                          id: freelancer.id, 
+                                          status: "in-progress" 
+                                        })}
+                                      >
+                                        <Clock className="h-4 w-4 mr-2" />
+                                        Mark In Progress
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
                                 </TableCell>
                               </TableRow>
                             )
@@ -358,6 +556,207 @@ export default function AdminDashboard() {
               </TabsContent>
             </Tabs>
           </main>
+
+          {/* Project Detail Modal */}
+          {selectedProject && (
+            <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
+              <DialogContent className="sm:max-w-2xl bg-background border border-white/10 text-white">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-semibold">
+                    Project Request Details
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6 mt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Project Name</h3>
+                      <p className="font-medium">{selectedProject.projectName}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Project Type</h3>
+                      <p className="font-medium">
+                        {selectedProject.projectType === "web-app"
+                          ? "Web Application"
+                          : selectedProject.projectType === "mobile-app"
+                          ? "Mobile App"
+                          : selectedProject.projectType === "e-commerce"
+                          ? "E-commerce"
+                          : selectedProject.projectType}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Budget</h3>
+                      <p className="font-medium">
+                        {selectedProject.budget === "small"
+                          ? "$1K-$5K"
+                          : selectedProject.budget === "medium"
+                          ? "$5K-$15K"
+                          : selectedProject.budget === "large"
+                          ? "$15K-$50K"
+                          : "$50K+"}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Timeline</h3>
+                      <p className="font-medium">
+                        {selectedProject.timeline === "less-than-1-month"
+                          ? "Less than 1 month"
+                          : selectedProject.timeline === "1-3-months"
+                          ? "1-3 months"
+                          : selectedProject.timeline === "3-6-months"
+                          ? "3-6 months"
+                          : "6+ months"}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Client Name</h3>
+                      <p className="font-medium">{selectedProject.clientName}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Client Email</h3>
+                      <p className="font-medium">{selectedProject.clientEmail}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Status</h3>
+                      <p className="font-medium">{getStatusBadge(selectedProject.status)}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Submitted On</h3>
+                      <p className="font-medium">
+                        {new Date(selectedProject.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm text-white/60 mb-1">Project Description</h3>
+                    <p className="text-sm leading-relaxed">{selectedProject.projectDescription}</p>
+                  </div>
+
+                  <div className="flex justify-between pt-4 border-t border-white/10">
+                    <div className="space-x-2">
+                      <Button 
+                        variant="outline" 
+                        onClick={() => updateProjectStatusMutation.mutate({
+                          id: selectedProject.id,
+                          status: "approved"
+                        })}
+                      >
+                        <CheckCircle className="h-4 w-4 mr-2" />
+                        Approve
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => updateProjectStatusMutation.mutate({
+                          id: selectedProject.id,
+                          status: "rejected"
+                        })}
+                      >
+                        <XCircle className="h-4 w-4 mr-2" />
+                        Reject
+                      </Button>
+                    </div>
+                    <Button variant="destructive" onClick={() => setSelectedProject(null)}>
+                      Close
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
+
+          {/* Freelancer Detail Modal */}
+          {selectedFreelancer && (
+            <Dialog open={selectedFreelancer !== null} onOpenChange={() => setSelectedFreelancer(null)}>
+              <DialogContent className="sm:max-w-2xl bg-background border border-white/10 text-white">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-semibold">
+                    Freelancer Application Details
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6 mt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Name</h3>
+                      <p className="font-medium">{selectedFreelancer.name}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Specialty</h3>
+                      <p className="font-medium">
+                        {selectedFreelancer.specialty === "web-dev"
+                          ? "Web Development"
+                          : selectedFreelancer.specialty === "mobile-dev"
+                          ? "Mobile Development"
+                          : selectedFreelancer.specialty === "ui-ux"
+                          ? "UI/UX Design"
+                          : selectedFreelancer.specialty}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Experience</h3>
+                      <p className="font-medium">{selectedFreelancer.experience} years</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Email</h3>
+                      <p className="font-medium">{selectedFreelancer.email}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Status</h3>
+                      <p className="font-medium">{getStatusBadge(selectedFreelancer.status)}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-white/60 mb-1">Submitted On</h3>
+                      <p className="font-medium">
+                        {new Date(selectedFreelancer.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm text-white/60 mb-1">Portfolio URL</h3>
+                    <p className="text-sm leading-relaxed break-all">
+                      <a href={selectedFreelancer.portfolioUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                        {selectedFreelancer.portfolioUrl}
+                      </a>
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm text-white/60 mb-1">Cover Letter</h3>
+                    <p className="text-sm leading-relaxed">{selectedFreelancer.coverLetter}</p>
+                  </div>
+
+                  <div className="flex justify-between pt-4 border-t border-white/10">
+                    <div className="space-x-2">
+                      <Button 
+                        variant="outline" 
+                        onClick={() => updateFreelancerStatusMutation.mutate({
+                          id: selectedFreelancer.id,
+                          status: "approved"
+                        })}
+                      >
+                        <CheckCircle className="h-4 w-4 mr-2" />
+                        Approve
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => updateFreelancerStatusMutation.mutate({
+                          id: selectedFreelancer.id,
+                          status: "rejected"
+                        })}
+                      >
+                        <XCircle className="h-4 w-4 mr-2" />
+                        Reject
+                      </Button>
+                    </div>
+                    <Button variant="destructive" onClick={() => setSelectedFreelancer(null)}>
+                      Close
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
         </motion.div>
       </div>
     </div>
