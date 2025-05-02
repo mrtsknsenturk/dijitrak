@@ -5,20 +5,24 @@ import {
   projectRequests,
   portfolioProjects,
   contactMessages,
+  priceCalculatorRequests,
   insertUserSchema,
   insertFreelancerApplicationSchema,
   insertProjectRequestSchema,
   insertPortfolioProjectSchema,
   insertContactMessageSchema,
+  insertPriceCalculatorRequestSchema,
   User,
   FreelancerApplication,
   ProjectRequest,
   PortfolioProject,
   ContactMessage,
+  PriceCalculatorRequest,
   InsertFreelancerApplication,
   InsertProjectRequest,
   InsertPortfolioProject,
-  InsertContactMessage
+  InsertContactMessage,
+  InsertPriceCalculatorRequest
 } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
@@ -141,6 +145,30 @@ export const storage = {
     const [updated] = await db.update(contactMessages)
       .set({ status })
       .where(eq(contactMessages.id, id))
+      .returning();
+    return updated;
+  },
+  
+  // Price Calculator Request operations
+  async createPriceCalculatorRequest(data: InsertPriceCalculatorRequest): Promise<PriceCalculatorRequest> {
+    const validated = insertPriceCalculatorRequestSchema.parse(data);
+    const [request] = await db.insert(priceCalculatorRequests).values(validated).returning();
+    return request;
+  },
+  
+  async getAllPriceCalculatorRequests(): Promise<PriceCalculatorRequest[]> {
+    return db.select().from(priceCalculatorRequests).orderBy(priceCalculatorRequests.createdAt);
+  },
+  
+  async getPriceCalculatorRequestById(id: number): Promise<PriceCalculatorRequest | undefined> {
+    const result = await db.select().from(priceCalculatorRequests).where(eq(priceCalculatorRequests.id, id));
+    return result[0];
+  },
+  
+  async updatePriceCalculatorRequestStatus(id: number, status: string): Promise<PriceCalculatorRequest | undefined> {
+    const [updated] = await db.update(priceCalculatorRequests)
+      .set({ status })
+      .where(eq(priceCalculatorRequests.id, id))
       .returning();
     return updated;
   }

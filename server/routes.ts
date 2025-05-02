@@ -486,6 +486,77 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Price Calculator Request API Routes
+  app.post("/api/price-calculator-requests", async (req, res, next) => {
+    try {
+      const request = await storage.createPriceCalculatorRequest(req.body);
+      res.status(201).json({
+        success: true,
+        message: "Price calculator request submitted successfully",
+        data: request
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const formattedError = fromZodError(error);
+        return res.status(400).json({ 
+          message: "Validation failed", 
+          errors: formattedError.details 
+        });
+      }
+      next(error);
+    }
+  });
+
+  app.get("/api/price-calculator-requests", ensureAuthenticated, ensureAdmin, async (req, res, next) => {
+    try {
+      const requests = await storage.getAllPriceCalculatorRequests();
+      res.json(requests);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  app.get("/api/price-calculator-requests/:id", ensureAuthenticated, ensureAdmin, async (req, res, next) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid ID" });
+      }
+      
+      const request = await storage.getPriceCalculatorRequestById(id);
+      if (!request) {
+        return res.status(404).json({ message: "Price calculator request not found" });
+      }
+      
+      res.json(request);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  app.patch("/api/price-calculator-requests/:id/status", ensureAuthenticated, ensureAdmin, async (req, res, next) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid ID" });
+      }
+      
+      const { status } = req.body;
+      if (!status) {
+        return res.status(400).json({ message: "Status is required" });
+      }
+      
+      const request = await storage.updatePriceCalculatorRequestStatus(id, status);
+      if (!request) {
+        return res.status(404).json({ message: "Price calculator request not found" });
+      }
+      
+      res.json(request);
+    } catch (error) {
+      next(error);
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
