@@ -1235,29 +1235,42 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   
-                  {selectedPriceRequest.features && Object.keys(selectedPriceRequest.features).length > 0 && (
-                    <div>
-                      <h3 className="text-sm text-white/60 mb-2">Selected Features</h3>
-                      <div className="bg-muted/30 p-4 rounded">
-                        <ul className="space-y-2">
-                          {Object.entries(selectedPriceRequest.features).map(([feature, isSelected]) => (
-                            isSelected && (
-                              <li key={feature} className="flex items-center">
-                                <CheckCircle className="h-4 w-4 mr-2 text-green-400" />
-                                <span>
-                                  {feature.split('_').map(word => 
-                                    word.charAt(0).toUpperCase() + word.slice(1)
-                                  ).join(' ')}
-                                </span>
-                              </li>
-                            )
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
+                  {(() => {
+                    // Type-safe wrapper for features rendering
+                    if (selectedPriceRequest.features && 
+                        typeof selectedPriceRequest.features === 'object' && 
+                        Object.keys(selectedPriceRequest.features).length > 0) {
+                      
+                      const featuresList = Object.entries(selectedPriceRequest.features)
+                        .filter(([_, isSelected]) => isSelected === true)
+                        .map(([feature, _]) => (
+                          <li key={feature} className="flex items-center">
+                            <CheckCircle className="h-4 w-4 mr-2 text-green-400" />
+                            <span>
+                              {String(feature).split('_').map(word => 
+                                word.charAt(0).toUpperCase() + word.slice(1)
+                              ).join(' ')}
+                            </span>
+                          </li>
+                        ));
+                      
+                      if (featuresList.length > 0) {
+                        return (
+                          <div>
+                            <h3 className="text-sm text-white/60 mb-2">Selected Features</h3>
+                            <div className="bg-muted/30 p-4 rounded">
+                              <ul className="space-y-2">
+                                {featuresList}
+                              </ul>
+                            </div>
+                          </div>
+                        );
+                      }
+                    }
+                    return null;
+                  })()}
                   
-                  {selectedPriceRequest.notes && (
+                  {selectedPriceRequest.notes && selectedPriceRequest.notes.trim() !== '' && (
                     <div>
                       <h3 className="text-sm text-white/60 mb-2">Additional Notes</h3>
                       <div className="bg-muted/30 p-4 rounded">
