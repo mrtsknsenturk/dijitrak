@@ -11,6 +11,11 @@ export type TranslationsData = {
 // Translation data structure
 export const translations: TranslationsData = {
   en: {
+    // Live Chat
+    "chat.title": "Live Chat Support",
+    "chat.typing": "Type your message...",
+    "chat.closed": "Chat closed",
+    "chat.closed.desc": "You can reopen the chat anytime.",
     // Navbar
     "nav.home": "Home",
     "nav.services": "Services",
@@ -206,8 +211,42 @@ export const translations: TranslationsData = {
     "tech_docker_desc": "Platform for developing, shipping, and running applications in containers for consistent environments across development and production.",
     "tech_aws_desc": "Comprehensive cloud platform offering over 200 fully featured services from data centers globally.",
     "tech_github_desc": "CI/CD platform integrated with GitHub for automating software workflows, testing, and deployment.",
+    
+    // Price Calculator
+    "price_calculator.title": "Interactive Pricing Calculator",
+    "price_calculator.subtitle": "Estimate the cost of your project based on your specific needs and requirements. Adjust the parameters below to get a custom quote.",
+    "price_calculator.project_type": "Project Type",
+    "price_calculator.project_type_desc": "Select the type of project you need",
+    "price_calculator.website": "Website",
+    "price_calculator.mobile_app": "Mobile App",
+    "price_calculator.design": "Design",
+    "price_calculator.complexity": "Project Complexity",
+    "price_calculator.complexity_desc": "Adjust the complexity based on your project requirements",
+    "price_calculator.basic": "Basic",
+    "price_calculator.complex": "Complex",
+    "price_calculator.timeframe": "Time Frame",
+    "price_calculator.timeframe_desc": "Select your preferred delivery timeline",
+    "price_calculator.additional": "Additional Features",
+    "price_calculator.additional_desc": "Select any additional features you need",
+    "price_calculator.custom_requirements": "Custom requirements (optional)",
+    "price_calculator.custom_requirements_placeholder": "Describe any custom features you need",
+    "price_calculator.estimate": "Project Estimate",
+    "price_calculator.estimate_desc": "Summary of your estimated project cost",
+    "price_calculator.selected": "Selected Service",
+    "price_calculator.estimated_total": "Estimated Total",
+    "price_calculator.disclaimer": "This is an estimate based on the information provided. Final pricing may vary based on detailed requirements.",
+    "price_calculator.request_quote": "Request Detailed Quote",
+    "price_calculator.free_consultation": "No commitment, free consultation",
+    "price_calculator.select_service": "Select a service to begin",
+    "price_calculator.select_service_desc": "Choose from our service options to see pricing details",
   },
   tr: {
+    // Live Chat
+    "chat.title": "Canlı Destek",
+    "chat.typing": "Mesajınızı yazın...",
+    "chat.closed": "Sohbet kapatıldı",
+    "chat.closed.desc": "Sohbeti istediğiniz zaman yeniden açabilirsiniz.",
+    
     // Navbar
     "nav.home": "Ana Sayfa",
     "nav.services": "Hizmetler",
