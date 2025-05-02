@@ -304,13 +304,77 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
-      // Here you would typically send an email or store in database
-      // For now, we'll just simulate a successful response
+      // Store the contact message in the database
+      const contactMessage = await storage.createContactMessage({
+        name,
+        email,
+        subject,
+        message
+      });
       
       res.status(201).json({
         success: true,
-        message: "Contact form submitted successfully"
+        message: "Contact form submitted successfully",
+        data: contactMessage
       });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const formattedError = fromZodError(error);
+        return res.status(400).json({ 
+          message: "Validation failed", 
+          errors: formattedError.details 
+        });
+      }
+      next(error);
+    }
+  });
+  
+  // Admin contact messages API
+  app.get("/api/contact-messages", ensureAuthenticated, ensureAdmin, async (req, res, next) => {
+    try {
+      const messages = await storage.getAllContactMessages();
+      res.json(messages);
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  app.get("/api/contact-messages/:id", ensureAuthenticated, ensureAdmin, async (req, res, next) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid ID" });
+      }
+      
+      const message = await storage.getContactMessageById(id);
+      if (!message) {
+        return res.status(404).json({ message: "Contact message not found" });
+      }
+      
+      res.json(message);
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  app.patch("/api/contact-messages/:id/status", ensureAuthenticated, ensureAdmin, async (req, res, next) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid ID" });
+      }
+      
+      const { status } = req.body;
+      if (!status || typeof status !== "string") {
+        return res.status(400).json({ message: "Status is required" });
+      }
+      
+      const message = await storage.updateContactMessageStatus(id, status);
+      if (!message) {
+        return res.status(404).json({ message: "Contact message not found" });
+      }
+      
+      res.json(message);
     } catch (error) {
       next(error);
     }

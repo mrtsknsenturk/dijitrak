@@ -4,17 +4,21 @@ import {
   freelancerApplications,
   projectRequests,
   portfolioProjects,
+  contactMessages,
   insertUserSchema,
   insertFreelancerApplicationSchema,
   insertProjectRequestSchema,
   insertPortfolioProjectSchema,
+  insertContactMessageSchema,
   User,
   FreelancerApplication,
   ProjectRequest,
   PortfolioProject,
+  ContactMessage,
   InsertFreelancerApplication,
   InsertProjectRequest,
-  InsertPortfolioProject
+  InsertPortfolioProject,
+  InsertContactMessage
 } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
@@ -115,5 +119,29 @@ export const storage = {
     const validated = insertPortfolioProjectSchema.parse(data);
     const [project] = await db.insert(portfolioProjects).values(validated).returning();
     return project;
+  },
+  
+  // Contact message operations
+  async createContactMessage(data: InsertContactMessage): Promise<ContactMessage> {
+    const validated = insertContactMessageSchema.parse(data);
+    const [message] = await db.insert(contactMessages).values(validated).returning();
+    return message;
+  },
+  
+  async getAllContactMessages(): Promise<ContactMessage[]> {
+    return db.select().from(contactMessages).orderBy(contactMessages.createdAt);
+  },
+  
+  async getContactMessageById(id: number): Promise<ContactMessage | undefined> {
+    const result = await db.select().from(contactMessages).where(eq(contactMessages.id, id));
+    return result[0];
+  },
+  
+  async updateContactMessageStatus(id: number, status: string): Promise<ContactMessage | undefined> {
+    const [updated] = await db.update(contactMessages)
+      .set({ status })
+      .where(eq(contactMessages.id, id))
+      .returning();
+    return updated;
   }
 };
