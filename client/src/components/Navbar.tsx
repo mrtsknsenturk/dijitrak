@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Navbar() {
+  const { t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
@@ -40,11 +42,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Contact", href: "#contact" },
+    { name: t("nav.home"), href: "#home" },
+    { name: t("nav.services"), href: "#services" },
+    { name: t("nav.portfolio"), href: "#portfolio" },
+    { name: t("nav.testimonials"), href: "#testimonials" },
+    { name: t("nav.contact"), href: "#contact" },
   ];
 
   const scrollToSection = (id: string) => {
@@ -104,7 +106,7 @@ export default function Navbar() {
             onClick={() => scrollToSection("contact")}
             className="btn-primary bg-muted hover:bg-muted/80 py-2 px-6 rounded-full text-sm font-medium shadow-lg transition-all duration-300"
           >
-            Get in Touch
+            {t("nav.getInTouch")}
           </Button>
 
           {/* Mobile Navigation */}
