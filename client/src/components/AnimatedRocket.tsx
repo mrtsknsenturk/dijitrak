@@ -1,35 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function AnimatedRocket() {
   const [isVisible, setIsVisible] = useState(false);
-  const { scrollY } = useScroll();
+  const [scrollPosition, setScrollPosition] = useState(0);
   
-  // Roket'in yol hareketini hesaplamak için
-  const y = useTransform(
-    scrollY,
-    [0, 1000, 2000, 3000, 4000, 5000],
-    ["100vh", "80vh", "60vh", "40vh", "20vh", "0vh"]
-  );
-  
-  // Roket'in açısını hesaplamak için
-  const rotate = useTransform(
-    scrollY,
-    [0, 1000, 2000, 3000, 4000, 5000],
-    [0, -5, 0, 5, 0, -5]
-  );
-  
-  // Ateş/füze efektini hesaplamak için
-  const fireHeight = useTransform(
-    scrollY,
-    [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000],
-    [10, 15, 10, 20, 15, 25, 15, 20, 10, 15, 25]
-  );
-  
-  // Roket'in sayfadaki görünürlüğünü kontrol etmek için
+  // Scroll değerini izleme ve transformları hesaplama
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      const position = window.scrollY;
+      setScrollPosition(position);
+      
+      if (position > 200) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -39,13 +21,31 @@ export default function AnimatedRocket() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
+  // Konumu hesaplama
+  const getPosition = () => {
+    // Ekranın yüksekliğine göre yüzde hesaplama
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = Math.min(scrollPosition / maxScroll, 1);
+    
+    // Ekranın yüksekliğine göre y pozisyonu hesaplama
+    const topPosition = 100 - (scrollPercent * 80); // 100vh'den başlayıp 20vh'ye kadar hareket
+    
+    // Roket dönüşünü hesaplama
+    const rotationAngle = Math.sin(scrollPosition / 500) * 5; // -5 ile 5 derece arası salınım
+    
+    return {
+      top: `${topPosition}vh`,
+      rotate: rotationAngle
+    };
+  };
 
   return (
     <>
       {isVisible && (
         <motion.div
           className="fixed right-10 pointer-events-none z-20"
-          style={{ y, rotate }}
+          style={getPosition()}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -87,7 +87,15 @@ export default function AnimatedRocket() {
               <motion.path
                 d="M20 90C20 90 25 110 30 120C35 110 40 90 40 90H20Z"
                 fill="url(#gradient-fire)"
-                style={{ height: fireHeight }}
+                animate={{ 
+                  height: [10, 15, 10, 20, 15, 10],
+                  scale: [1, 1.1, 1, 1.15, 1, 1.1]
+                }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 2, 
+                  ease: "easeInOut" 
+                }}
               />
               
               {/* Gradients */}
