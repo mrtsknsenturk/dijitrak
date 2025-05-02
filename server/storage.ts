@@ -22,6 +22,11 @@ export const storage = {
     return result[0];
   },
   
+  async getUser(id: number): Promise<User | undefined> {
+    const result = await db.select().from(users).where(eq(users.id, id));
+    return result[0];
+  },
+  
   async createUser(data: { username: string, password: string, isAdmin?: boolean }): Promise<User> {
     // Hash the password before storing
     const hashedPassword = await bcrypt.hash(data.password, 10);

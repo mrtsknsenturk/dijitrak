@@ -77,8 +77,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   passport.deserializeUser(async (id: number, done) => {
     try {
-      // This is a simplified version; in a real app, you'd want to fetch the user from the database
-      const user = { id, username: "admin", isAdmin: true };
+      const user = await storage.getUser(id);
+      if (!user) {
+        return done(null, false);
+      }
       done(null, user);
     } catch (err) {
       done(err);
@@ -98,7 +100,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (err) {
           return next(err);
         }
-        return res.json({ message: "Logged in successfully" });
+        // Return user data without sensitive information
+        const safeUser = {
+          id: user.id,
+          username: user.username,
+          isAdmin: user.isAdmin
+        };
+        return res.json(safeUser);
       });
     })(req, res, next);
   });
