@@ -585,7 +585,7 @@ export default function AdminDashboard() {
               <TabsContent value="projects" className="mt-0">
                 <Card className="glassmorphism border border-white/10">
                   <CardHeader>
-                    <CardTitle>Recent Project Requests</CardTitle>
+                    <CardTitle>{t("admin.projects.title")}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     {projectsLoading ? (
@@ -704,7 +704,7 @@ export default function AdminDashboard() {
               <TabsContent value="freelancers" className="mt-0">
                 <Card className="glassmorphism border border-white/10">
                   <CardHeader>
-                    <CardTitle>Recent Freelancer Applications</CardTitle>
+                    <CardTitle>{t("admin.freelancers.title")}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     {freelancersLoading ? (
@@ -811,7 +811,7 @@ export default function AdminDashboard() {
               <TabsContent value="messages" className="mt-0">
                 <Card className="glassmorphism border border-white/10">
                   <CardHeader>
-                    <CardTitle>Contact Messages</CardTitle>
+                    <CardTitle>{t("admin.messages.title")}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     {messagesLoading ? (
@@ -916,7 +916,7 @@ export default function AdminDashboard() {
                     <CardTitle>
                       <div className="flex items-center">
                         <Calculator className="h-5 w-5 mr-2" />
-                        <span>Price Calculator Requests</span>
+                        <span>{t("admin.price_requests.title")}</span>
                       </div>
                     </CardTitle>
                   </CardHeader>
@@ -1047,7 +1047,7 @@ export default function AdminDashboard() {
               <TabsContent value="calculator" className="mt-0">
                 <Card className="glassmorphism border border-white/10">
                   <CardHeader>
-                    <CardTitle>Interactive Price Calculator</CardTitle>
+                    <CardTitle>{t("admin.calculator.title")}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="bg-black/30 p-6 rounded-lg">

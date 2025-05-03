@@ -10,11 +10,17 @@ export type LanguageContextType = {
   availableLocales: string[];
 };
 
-// Create context
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+// Create context with default values to avoid undefined checks
+const defaultContextValue: LanguageContextType = {
+  locale: "en",
+  setLocale: () => {},
+  t: (key) => key,
+  translations,
+  availableLocales: Object.keys(translations)
+};
 
-// Available locales
-const availableLocales = Object.keys(translations);
+// Create context with the default value
+const LanguageContext = createContext<LanguageContextType>(defaultContextValue);
 
 // Language Provider component
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
@@ -23,7 +29,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (typeof window === "undefined") return "en";
     
     const savedLocale = localStorage.getItem("preferredLanguage");
-    return savedLocale && availableLocales.includes(savedLocale) ? savedLocale : "en";
+    return savedLocale && Object.keys(translations).includes(savedLocale) ? savedLocale : "en";
   });
 
   // Update localStorage when locale changes
@@ -40,24 +46,16 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Context value
-  const value = {
+  const value: LanguageContextType = {
     locale,
     setLocale,
     t,
     translations,
-    availableLocales,
+    availableLocales: Object.keys(translations),
   };
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
 // Hook to use the language context
-export function useLanguage() {
-  const context = useContext(LanguageContext);
-  
-  if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
-  
-  return context;
-}
+export const useLanguage = () => useContext(LanguageContext);
