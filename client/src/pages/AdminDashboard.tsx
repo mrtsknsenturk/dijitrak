@@ -225,7 +225,7 @@ export default function AdminDashboard() {
       case "rejected":
         return <Badge variant="outline" className="bg-red-500/20 text-red-500 border-red-500/20">{t("admin.status.rejected")}</Badge>;
       case "in-progress":
-        return <Badge variant="outline" className="bg-blue-500/20 text-blue-500 border-blue-500/20">{t("admin.status.in_progress")}</Badge>;
+        return <Badge variant="outline" className="bg-blue-500/20 text-blue-500 border-blue-500/20">{t("admin.status.in-progress")}</Badge>;
       case "completed":
         return <Badge variant="outline" className="bg-purple-500/20 text-purple-500 border-purple-500/20">{t("admin.status.completed")}</Badge>;
       default:
@@ -431,10 +431,10 @@ export default function AdminDashboard() {
                     <CardHeader>
                       <CardTitle className="text-lg flex items-center">
                         <BarChart4 className="mr-2 h-5 w-5 text-primary" />
-                        Proje Talepleri (Aylık)
+                        {t("admin.analytics.monthly.requests")}
                       </CardTitle>
                       <CardDescription>
-                        Son 6 aydaki proje talepleri
+                        {t("admin.analytics.last_6_months")}
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pl-2">
@@ -483,10 +483,10 @@ export default function AdminDashboard() {
                     <CardHeader>
                       <CardTitle className="text-lg flex items-center">
                         <PieChart className="mr-2 h-5 w-5 text-primary" />
-                        Hizmet Dağılımı
+                        {t("admin.analytics.requests.by.type")}
                       </CardTitle>
                       <CardDescription>
-                        Talep edilen hizmetlerin dağılımı
+                        {t("admin.analytics.service_distribution")}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
