@@ -144,6 +144,7 @@ export const translations: TranslationsData = {
     "language.en": "English",
     "language.tr": "Turkish",
     "language.bg": "Bulgarian",
+    "language.select": "Select language",
     
     // Process Timeline
     "process_title": "Our Development",
@@ -404,6 +405,7 @@ export const translations: TranslationsData = {
     "language.en": "İngilizce",
     "language.tr": "Türkçe",
     "language.bg": "Bulgarca",
+    "language.select": "Dil seçin",
     
     // Process Timeline
     "process_title": "Geliştirme",
@@ -602,6 +604,7 @@ export const translations: TranslationsData = {
     "language.en": "Английски",
     "language.tr": "Турски",
     "language.bg": "Български",
+    "language.select": "Изберете език",
     
     // Process Timeline
     "process_title": "Нашият процес на",
