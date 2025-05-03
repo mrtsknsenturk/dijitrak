@@ -10,6 +10,8 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle2, Shield, Clock, Cpu, BrainCircuit, LineChart, Database, Code, PaintBucket, Globe } from "lucide-react";
 import { MotionDiv, FadeIn, FadeInStagger } from "@/components/ui/motion";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 interface PricingOption {
   id: string;
@@ -338,6 +340,7 @@ function Wrench(props: React.SVGProps<SVGSVGElement>) {
 
 export default function PriceCalculator() {
   const { locale, t } = useLanguage();
+  const { toast } = useToast();
   const [selectedTab, setSelectedTab] = useState("web");
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [timeFrame, setTimeFrame] = useState("standard");
@@ -346,6 +349,18 @@ export default function PriceCalculator() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [priceBreakdown, setPriceBreakdown] = useState<any>({});
   const [customFeatures, setCustomFeatures] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Form for user contact information
+  const [contactInfo, setContactInfo] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: ""
+  });
+  
+  // Modal for collecting contact information
+  const [showContactForm, setShowContactForm] = useState(false);
 
   // Get options based on selected tab
   const getOptions = () => {
@@ -424,9 +439,209 @@ export default function PriceCalculator() {
       maximumFractionDigits: 0,
     }).format(price);
   };
+  
+  // Handle contact information input changes
+  const handleContactInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setContactInfo(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  
+  // Handle form submission
+  const handleSubmitRequest = async () => {
+    if (!selectedOption) {
+      toast({
+        title: locale === "en" ? "Please select a service" : "Lütfen bir hizmet seçin",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Show contact form modal if not already shown
+    if (!showContactForm) {
+      setShowContactForm(true);
+      return;
+    }
+    
+    // Validate contact form
+    if (!contactInfo.name || !contactInfo.email) {
+      toast({
+        title: locale === "en" ? "Please fill required fields" : "Lütfen gerekli alanları doldurun",
+        description: locale === "en" ? "Name and email are required" : "İsim ve e-posta gereklidir",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(contactInfo.email)) {
+      toast({
+        title: locale === "en" ? "Invalid email" : "Geçersiz e-posta",
+        description: locale === "en" ? "Please enter a valid email address" : "Lütfen geçerli bir e-posta adresi girin",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Prepare the data
+      const options = getOptions();
+      const selectedService = options.find(opt => opt.id === selectedOption);
+      const selectedTimeFrameObj = timeFrames.find(tf => tf.id === timeFrame);
+      
+      const requestData = {
+        serviceType: selectedTab,
+        serviceName: selectedService?.title || "",
+        complexity: complexity[0],
+        timeFrame: selectedTimeFrameObj?.title || "",
+        features: selectedFeatures.map(f => {
+          const feature = additionalFeatures.find(af => af.id === f);
+          return feature?.title || "";
+        }),
+        customFeatures,
+        estimatedPrice: totalPrice,
+        clientName: contactInfo.name,
+        clientEmail: contactInfo.email,
+        clientPhone: contactInfo.phone,
+        clientCompany: contactInfo.company,
+        status: "new"
+      };
+      
+      // Send the request
+      await apiRequest("POST", "/api/price-calculator-requests", requestData);
+      
+      // Show success message
+      toast({
+        title: locale === "en" ? "Request submitted successfully" : "Talep başarıyla gönderildi",
+        description: locale === "en" 
+          ? "We'll get back to you shortly with a detailed quote" 
+          : "Detaylı bir fiyat teklifiyle kısa süre içinde size dönüş yapacağız",
+      });
+      
+      // Reset the form
+      setShowContactForm(false);
+      setContactInfo({
+        name: "",
+        email: "",
+        phone: "",
+        company: ""
+      });
+      
+    } catch (error) {
+      toast({
+        title: locale === "en" ? "Submission failed" : "Gönderim başarısız",
+        description: locale === "en" 
+          ? "An error occurred while submitting your request. Please try again." 
+          : "Talebiniz gönderilirken bir hata oluştu. Lütfen tekrar deneyin.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="container mx-auto py-16 px-4 sm:px-6">
+      {/* Contact Form Modal */}
+      {showContactForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div 
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm"
+            onClick={() => setShowContactForm(false)}
+          ></div>
+          <div className="relative glassmorphism z-50 p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+            <button 
+              className="absolute top-4 right-4 text-white/50 hover:text-white"
+              onClick={() => setShowContactForm(false)}
+            >
+              <X className="h-5 w-5" />
+            </button>
+            
+            <h3 className="text-xl font-bold mb-4">
+              {locale === "en" ? "Contact Information" : "İletişim Bilgileri"}
+            </h3>
+            
+            <p className="text-sm text-muted-foreground mb-6">
+              {locale === "en" 
+                ? "Please provide your contact details to receive a detailed quote." 
+                : "Detaylı teklif almak için lütfen iletişim bilgilerinizi sağlayın."}
+            </p>
+            
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="name" className="text-sm font-medium mb-1 block">
+                  {locale === "en" ? "Name" : "İsim"} <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="name"
+                  name="name"
+                  value={contactInfo.name}
+                  onChange={handleContactInfoChange}
+                  className="bg-muted border border-white/10 text-white focus:border-secondary"
+                  required
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="email" className="text-sm font-medium mb-1 block">
+                  {locale === "en" ? "Email" : "E-posta"} <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={contactInfo.email}
+                  onChange={handleContactInfoChange}
+                  className="bg-muted border border-white/10 text-white focus:border-secondary"
+                  required
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="phone" className="text-sm font-medium mb-1 block">
+                  {locale === "en" ? "Phone (Optional)" : "Telefon (İsteğe Bağlı)"}
+                </Label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  value={contactInfo.phone}
+                  onChange={handleContactInfoChange}
+                  className="bg-muted border border-white/10 text-white focus:border-secondary"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="company" className="text-sm font-medium mb-1 block">
+                  {locale === "en" ? "Company (Optional)" : "Şirket (İsteğe Bağlı)"}
+                </Label>
+                <Input
+                  id="company"
+                  name="company"
+                  value={contactInfo.company}
+                  onChange={handleContactInfoChange}
+                  className="bg-muted border border-white/10 text-white focus:border-secondary"
+                />
+              </div>
+              
+              <Button 
+                className="w-full mt-2" 
+                onClick={handleSubmitRequest}
+                disabled={isSubmitting}
+              >
+                {isSubmitting 
+                  ? (locale === "en" ? "Submitting..." : "Gönderiliyor...") 
+                  : (locale === "en" ? "Submit Request" : "Talebi Gönder")}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           {locale === "en" ? "Interactive " : "İnteraktif "}
@@ -719,8 +934,15 @@ export default function PriceCalculator() {
                     </div>
 
                     <div className="space-y-4 pt-4">
-                      <Button className="w-full" size="lg">
-                        {locale === "en" ? "Request Detailed Quote" : "Detaylı Teklif İste"}
+                      <Button 
+                        className="w-full" 
+                        size="lg"
+                        onClick={handleSubmitRequest}
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting
+                          ? (locale === "en" ? "Submitting..." : "Gönderiliyor...")
+                          : (locale === "en" ? "Request Detailed Quote" : "Detaylı Teklif İste")}
                       </Button>
                       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="size-4" />
