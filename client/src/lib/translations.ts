@@ -255,6 +255,7 @@ export const translations: TranslationsData = {
     
     // Admin Dashboard
     "admin.dashboard.title": "Dashboard",
+    "admin.dashboard.header": "Dashboard",
     "admin.dashboard.loading": "Loading dashboard...",
     "admin.dashboard.overview": "Overview",
     "admin.dashboard.applications": "Applications",
@@ -264,9 +265,39 @@ export const translations: TranslationsData = {
     "admin.dashboard.analytics": "Analytics",
     "admin.dashboard.logout": "Logout",
     "admin.dashboard.logout.success": "Logged Out",
-    "admin.dashboard.logout.success.description": "You have been successfully logged out.",
+    "admin.dashboard.logout.description": "You have been successfully logged out.",
     "admin.dashboard.logout.failed": "Error",
-    "admin.dashboard.logout.failed.description": "Failed to log out. Please try again.",
+    "admin.dashboard.logout.failed_description": "Failed to log out. Please try again.",
+    
+    // Admin Dashboard Cards
+    "admin.dashboard.cards.total_projects": "Total Projects",
+    "admin.dashboard.cards.project_growth": "+12% from last month",
+    "admin.dashboard.cards.freelancer_applications": "Freelancer Applications",
+    "admin.dashboard.cards.freelancer_growth": "+5% from last month",
+    "admin.dashboard.cards.conversion_rate": "Conversion Rate",
+    "admin.dashboard.cards.conversion_growth": "+8% from last month",
+    
+    // Admin Tabs
+    "admin.tabs.analytics": "Analytics",
+    "admin.tabs.project_requests": "Project Requests",
+    "admin.tabs.freelancer_applications": "Freelancer Applications",
+    "admin.tabs.contact_messages": "Contact Messages",
+    "admin.tabs.price_requests": "Price Requests",
+    "admin.tabs.new_calculation": "New Calculation",
+    
+    // Admin User
+    "admin.user.admin": "Admin",
+    
+    // Admin Nav
+    "admin.nav.projects": "Project Requests",
+    "admin.nav.freelancers": "Freelancers",
+    "admin.nav.analytics": "Analytics",
+    "admin.nav.logout": "Log Out",
+    
+    // Admin Price Requests Status
+    "admin.price_requests.status.update.success": "Status Updated",
+    "admin.price_requests.status.update.description": "Price calculator request status has been updated.",
+    "admin.price_requests.status.update.failed": "Failed to update price request status.",
     
     // Admin Status Labels
     "admin.status.pending": "Pending",
@@ -345,6 +376,7 @@ export const translations: TranslationsData = {
     "admin.messages.message": "Message",
     "admin.messages.status.update.success": "Status Updated",
     "admin.messages.status.update.description": "Message status has been updated successfully.",
+    "admin.messages.status.update.failed": "Failed to update message status.",
     
     // Admin Price Calculator
     "admin.pricing.title": "Price Calculator Requests",
@@ -701,6 +733,7 @@ export const translations: TranslationsData = {
     "admin.messages.message": "Mesaj",
     "admin.messages.status.update.success": "Durum Güncellendi",
     "admin.messages.status.update.description": "Mesaj durumu başarıyla güncellendi.",
+    "admin.messages.status.update.failed": "Mesaj durumu güncellenemedi.",
     
     // Admin Price Calculator
     "admin.pricing.title": "Fiyat Hesaplayıcı Talepleri",
