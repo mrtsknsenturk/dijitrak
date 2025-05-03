@@ -219,17 +219,17 @@ export default function AdminDashboard() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "pending":
-        return <Badge variant="outline" className="bg-yellow-500/20 text-yellow-500 border-yellow-500/20">Pending</Badge>;
+        return <Badge variant="outline" className="bg-yellow-500/20 text-yellow-500 border-yellow-500/20">{t("admin.status.pending")}</Badge>;
       case "approved":
-        return <Badge variant="outline" className="bg-green-500/20 text-green-500 border-green-500/20">Approved</Badge>;
+        return <Badge variant="outline" className="bg-green-500/20 text-green-500 border-green-500/20">{t("admin.status.approved")}</Badge>;
       case "rejected":
-        return <Badge variant="outline" className="bg-red-500/20 text-red-500 border-red-500/20">Rejected</Badge>;
+        return <Badge variant="outline" className="bg-red-500/20 text-red-500 border-red-500/20">{t("admin.status.rejected")}</Badge>;
       case "in-progress":
-        return <Badge variant="outline" className="bg-blue-500/20 text-blue-500 border-blue-500/20">In Progress</Badge>;
+        return <Badge variant="outline" className="bg-blue-500/20 text-blue-500 border-blue-500/20">{t("admin.status.in_progress")}</Badge>;
       case "completed":
-        return <Badge variant="outline" className="bg-purple-500/20 text-purple-500 border-purple-500/20">Completed</Badge>;
+        return <Badge variant="outline" className="bg-purple-500/20 text-purple-500 border-purple-500/20">{t("admin.status.completed")}</Badge>;
       default:
-        return <Badge variant="outline" className="bg-primary/20 text-primary border-primary/20">New</Badge>;
+        return <Badge variant="outline" className="bg-primary/20 text-primary border-primary/20">{t("admin.status.new")}</Badge>;
     }
   };
 
@@ -280,7 +280,7 @@ export default function AdminDashboard() {
               <span className="gradient-text">Quantum</span>
               <span className="text-white">Edge</span>
             </div>
-            <p className="text-white/50 text-sm mt-1">Admin Dashboard</p>
+            <p className="text-white/50 text-sm mt-1">{t("admin.dashboard.title")}</p>
           </div>
 
           <nav className="space-y-2">
@@ -289,21 +289,21 @@ export default function AdminDashboard() {
               className="w-full justify-start text-white/70 hover:text-white hover:bg-white/5"
             >
               <FileText className="mr-2 h-5 w-5" />
-              Project Requests
+              {t("admin.nav.projects")}
             </Button>
             <Button
               variant="ghost"
               className="w-full justify-start text-white/70 hover:text-white hover:bg-white/5"
             >
               <Users className="mr-2 h-5 w-5" />
-              Freelancers
+              {t("admin.nav.freelancers")}
             </Button>
             <Button
               variant="ghost"
               className="w-full justify-start text-white/70 hover:text-white hover:bg-white/5"
             >
               <Activity className="mr-2 h-5 w-5" />
-              Analytics
+              {t("admin.nav.analytics")}
             </Button>
           </nav>
 
@@ -314,7 +314,7 @@ export default function AdminDashboard() {
               onClick={handleLogout}
             >
               <LogOut className="mr-2 h-5 w-5" />
-              Log Out
+              {t("admin.nav.logout")}
             </Button>
           </div>
         </motion.div>
@@ -327,13 +327,13 @@ export default function AdminDashboard() {
           className="flex-1 overflow-auto"
         >
           <header className="bg-muted border-b border-white/5 p-4 flex justify-between items-center sticky top-0 z-10">
-            <h1 className="text-xl font-bold">Dashboard</h1>
+            <h1 className="text-xl font-bold">{t("admin.dashboard.header")}</h1>
             <div className="flex items-center gap-4">
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                 <span className="text-sm font-bold text-background">A</span>
               </div>
               <span className="text-sm text-white/70 hidden md:inline">
-                Admin
+                {t("admin.user.admin")}
               </span>
               <Button
                 variant="ghost"
@@ -351,7 +351,7 @@ export default function AdminDashboard() {
               <Card className="glassmorphism border border-white/10">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-white/70">
-                    Total Projects
+                    {t("admin.dashboard.cards.total_projects")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -363,14 +363,14 @@ export default function AdminDashboard() {
                     )}
                   </div>
                   <p className="text-xs text-white/50 mt-1">
-                    +12% from last month
+                    {t("admin.dashboard.cards.project_growth")}
                   </p>
                 </CardContent>
               </Card>
               <Card className="glassmorphism border border-white/10">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-white/70">
-                    Freelancer Applications
+                    {t("admin.dashboard.cards.freelancer_applications")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -382,20 +382,20 @@ export default function AdminDashboard() {
                     )}
                   </div>
                   <p className="text-xs text-white/50 mt-1">
-                    +5% from last month
+                    {t("admin.dashboard.cards.freelancer_growth")}
                   </p>
                 </CardContent>
               </Card>
               <Card className="glassmorphism border border-white/10">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-white/70">
-                    Conversion Rate
+                    {t("admin.dashboard.cards.conversion_rate")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">64%</div>
                   <p className="text-xs text-white/50 mt-1">
-                    +8% from last month
+                    {t("admin.dashboard.cards.conversion_growth")}
                   </p>
                 </CardContent>
               </Card>
@@ -405,23 +405,23 @@ export default function AdminDashboard() {
               <TabsList className="glassmorphism border border-white/10 mb-6">
                 <TabsTrigger value="analytics">
                   <Activity className="mr-1 h-4 w-4 inline" />
-                  Analytics
+                  {t("admin.tabs.analytics")}
                 </TabsTrigger>
-                <TabsTrigger value="projects">Project Requests</TabsTrigger>
+                <TabsTrigger value="projects">{t("admin.tabs.project_requests")}</TabsTrigger>
                 <TabsTrigger value="freelancers">
-                  Freelancer Applications
+                  {t("admin.tabs.freelancer_applications")}
                 </TabsTrigger>
                 <TabsTrigger value="messages">
                   <MessageSquare className="mr-1 h-4 w-4 inline" />
-                  Contact Messages
+                  {t("admin.tabs.contact_messages")}
                 </TabsTrigger>
                 <TabsTrigger value="price-requests">
                   <Calculator className="mr-1 h-4 w-4 inline" />
-                  Price Requests
+                  {t("admin.tabs.price_requests")}
                 </TabsTrigger>
                 <TabsTrigger value="calculator">
                   <Plus className="mr-1 h-4 w-4 inline" />
-                  New Calculation
+                  {t("admin.tabs.new_calculation")}
                 </TabsTrigger>
               </TabsList>
 
