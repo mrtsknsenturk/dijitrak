@@ -565,14 +565,14 @@ export default function AdminDashboard() {
                               dataKey="leads" 
                               stroke="#8884d8" 
                               fill="rgba(136, 132, 216, 0.2)"
-                              name="Gelen Talepler"
+                              name={t("admin.analytics.type.projects")}
                             />
                             <Area 
                               type="monotone" 
                               dataKey="conversions" 
                               stroke="#82ca9d" 
                               fill="rgba(130, 202, 157, 0.2)"
-                              name="Dönüşümler"  
+                              name={t("admin.analytics.conversion_rates")}
                             />
                           </AreaChart>
                         </ResponsiveContainer>

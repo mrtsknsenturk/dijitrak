@@ -1135,15 +1135,6 @@ export const translations: TranslationsData = {
     "admin.price_requests.status.update.failed": "Неуспешно актуализиране на статуса на ценовата заявка.",
     
     // Admin Analytics
-    "admin.analytics.type.freelancers": "Фрилансъри",
-    "admin.analytics.type.projects": "Проекти",
-    "admin.analytics.type.messages": "Съобщения",
-    "admin.analytics.type.quotes": "Оферти",
-    "admin.analytics.period.daily": "Дневно",
-    "admin.analytics.period.weekly": "Седмично",
-    "admin.analytics.period.monthly": "Месечно",
-    "admin.analytics.period.quarterly": "Тримесечно",
-    "admin.analytics.period.yearly": "Годишно",
 
     // Price Calculator
     "price_calculator.title": "Интерактивен калкулатор на цени",
@@ -1183,6 +1174,15 @@ export const translations: TranslationsData = {
     "admin.analytics.monthly.requests": "Месечни заявки",
     "admin.analytics.last_6_months": "Заявки през последните 6 месеца",
     "admin.analytics.revenue.projections": "Прогнози за приходите",
-    "admin.analytics.settings": "Настройки на аналитиката"
+    "admin.analytics.settings": "Настройки на аналитиката",
+    "admin.analytics.type.freelancers": "Фрилансъри",
+    "admin.analytics.type.projects": "Проекти",
+    "admin.analytics.type.messages": "Съобщения",
+    "admin.analytics.type.quotes": "Оферти",
+    "admin.analytics.period.daily": "Дневно",
+    "admin.analytics.period.weekly": "Седмично",
+    "admin.analytics.period.monthly": "Месечно",
+    "admin.analytics.period.quarterly": "Тримесечно",
+    "admin.analytics.period.yearly": "Годишно"
   }
 };
