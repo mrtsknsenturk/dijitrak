@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { BarChart as ReBarChart, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Bar, PieChart as RPieChart, Pie, Cell } from "recharts";
 import {
   Table,
   TableBody,
@@ -30,7 +31,12 @@ import {
   MessageSquare,
   Calculator,
   DollarSign,
-  Plus
+  Plus,
+  BarChart4,
+  PieChart,
+  TrendingUp,
+  ArrowUpRight,
+  ChevronUp
 } from "lucide-react";
 import AdminPriceCalculator from "@/components/AdminPriceCalculator";
 import {
@@ -81,25 +87,25 @@ export default function AdminDashboard() {
   }, [authData, authError, setLocation]);
 
   // Fetch freelancer applications
-  const { data: freelancerApplications, isLoading: freelancersLoading } = useQuery({
+  const { data: freelancerApplications = [], isLoading: freelancersLoading } = useQuery<any[]>({
     queryKey: ["/api/freelancer-applications"],
     enabled: isLoggedIn,
   });
 
   // Fetch project requests
-  const { data: projectRequests, isLoading: projectsLoading } = useQuery({
+  const { data: projectRequests = [], isLoading: projectsLoading } = useQuery<any[]>({
     queryKey: ["/api/project-requests"],
     enabled: isLoggedIn,
   });
   
   // Fetch contact messages
-  const { data: contactMessages, isLoading: messagesLoading } = useQuery({
+  const { data: contactMessages = [], isLoading: messagesLoading } = useQuery<any[]>({
     queryKey: ["/api/contact-messages"],
     enabled: isLoggedIn,
   });
   
   // Fetch price calculator requests
-  const { data: priceCalculatorRequests, isLoading: priceRequestsLoading } = useQuery({
+  const { data: priceCalculatorRequests = [], isLoading: priceRequestsLoading } = useQuery<any[]>({
     queryKey: ["/api/price-calculator-requests"],
     enabled: isLoggedIn,
   });
@@ -393,8 +399,12 @@ export default function AdminDashboard() {
               </Card>
             </div>
 
-            <Tabs defaultValue="projects" className="w-full">
+            <Tabs defaultValue="analytics" className="w-full">
               <TabsList className="glassmorphism border border-white/10 mb-6">
+                <TabsTrigger value="analytics">
+                  <Activity className="mr-1 h-4 w-4 inline" />
+                  Analytics
+                </TabsTrigger>
                 <TabsTrigger value="projects">Project Requests</TabsTrigger>
                 <TabsTrigger value="freelancers">
                   Freelancer Applications
@@ -413,6 +423,163 @@ export default function AdminDashboard() {
                 </TabsTrigger>
               </TabsList>
 
+              <TabsContent value="analytics" className="mt-0">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <Card className="glassmorphism border border-white/10">
+                    <CardHeader>
+                      <CardTitle className="text-lg flex items-center">
+                        <BarChart4 className="mr-2 h-5 w-5 text-primary" />
+                        Proje Talepleri (Aylık)
+                      </CardTitle>
+                      <CardDescription>
+                        Son 6 aydaki proje talepleri
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pl-2">
+                      <div className="h-[300px] w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <ReBarChart
+                            data={[
+                              { name: 'Oca', value: 12 },
+                              { name: 'Şub', value: 19 },
+                              { name: 'Mar', value: 15 },
+                              { name: 'Nis', value: 25 },
+                              { name: 'May', value: 32 },
+                              { name: 'Haz', value: 27 },
+                            ]}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+                            <XAxis dataKey="name" stroke="#888" />
+                            <YAxis stroke="#888" />
+                            <Tooltip 
+                              contentStyle={{ 
+                                backgroundColor: 'rgba(15, 15, 15, 0.9)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                borderRadius: '8px'
+                              }}
+                            />
+                            <Bar dataKey="value" fill="#8884d8" radius={[4, 4, 0, 0]}>
+                              {[
+                                { name: 'Oca', value: 12 },
+                                { name: 'Şub', value: 19 },
+                                { name: 'Mar', value: 15 },
+                                { name: 'Nis', value: 25 },
+                                { name: 'May', value: 32 },
+                                { name: 'Haz', value: 27 },
+                              ].map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={`rgba(136, 132, 216, ${0.5 + index * 0.1})`} />
+                              ))}
+                            </Bar>
+                          </ReBarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="glassmorphism border border-white/10">
+                    <CardHeader>
+                      <CardTitle className="text-lg flex items-center">
+                        <PieChart className="mr-2 h-5 w-5 text-primary" />
+                        Hizmet Dağılımı
+                      </CardTitle>
+                      <CardDescription>
+                        Talep edilen hizmetlerin dağılımı
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="h-[300px] w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <RPieChart>
+                            <Pie
+                              data={[
+                                { name: 'Web Geliştirme', value: 45 },
+                                { name: 'Mobil Uygulama', value: 30 },
+                                { name: 'UI/UX Tasarım', value: 15 },
+                                { name: 'E-ticaret', value: 10 },
+                              ]}
+                              cx="50%"
+                              cy="50%"
+                              innerRadius={70}
+                              outerRadius={100}
+                              paddingAngle={5}
+                              dataKey="value"
+                            >
+                              <Cell fill="#8884d8" />
+                              <Cell fill="#82ca9d" />
+                              <Cell fill="#ffc658" />
+                              <Cell fill="#ff8042" />
+                            </Pie>
+                            <Tooltip 
+                              contentStyle={{ 
+                                backgroundColor: 'rgba(15, 15, 15, 0.9)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                borderRadius: '8px'
+                              }}
+                            />
+                          </RPieChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="glassmorphism border border-white/10 md:col-span-2">
+                    <CardHeader>
+                      <CardTitle className="text-lg flex items-center">
+                        <TrendingUp className="mr-2 h-5 w-5 text-primary" />
+                        Dönüşüm Oranları
+                      </CardTitle>
+                      <CardDescription>
+                        Proje taleplerinden tamamlanan projelere dönüşüm oranları
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pl-2">
+                      <div className="h-[300px] w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart
+                            data={[
+                              { name: 'Oca', leads: 40, conversions: 24 },
+                              { name: 'Şub', leads: 45, conversions: 28 },
+                              { name: 'Mar', leads: 35, conversions: 25 },
+                              { name: 'Nis', leads: 50, conversions: 35 },
+                              { name: 'May', leads: 60, conversions: 40 },
+                              { name: 'Haz', leads: 75, conversions: 53 },
+                            ]}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+                            <XAxis dataKey="name" stroke="#888" />
+                            <YAxis stroke="#888" />
+                            <Tooltip 
+                              contentStyle={{ 
+                                backgroundColor: 'rgba(15, 15, 15, 0.9)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                borderRadius: '8px'
+                              }}
+                            />
+                            <Legend />
+                            <Area 
+                              type="monotone" 
+                              dataKey="leads" 
+                              stroke="#8884d8" 
+                              fill="rgba(136, 132, 216, 0.2)"
+                              name="Gelen Talepler"
+                            />
+                            <Area 
+                              type="monotone" 
+                              dataKey="conversions" 
+                              stroke="#82ca9d" 
+                              fill="rgba(130, 202, 157, 0.2)"
+                              name="Dönüşümler"  
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+              
               <TabsContent value="projects" className="mt-0">
                 <Card className="glassmorphism border border-white/10">
                   <CardHeader>

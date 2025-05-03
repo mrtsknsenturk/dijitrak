@@ -7,6 +7,7 @@ import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
 import ProjectDetail from "@/pages/ProjectDetail";
 import AnimatedRocket from "@/components/AnimatedRocket";
+import LiveChat from "@/components/LiveChat";
 
 function Router() {
   return (
@@ -29,6 +30,7 @@ function App() {
       </Helmet>
       <Router />
       <AnimatedRocket />
+      <LiveChat />
       <Toaster />
     </>
   );
