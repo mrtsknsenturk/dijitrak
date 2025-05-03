@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle2, Shield, Clock, Cpu, BrainCircuit, LineChart, Database, Code, PaintBucket, Globe } from "lucide-react";
+import { CheckCircle2, Shield, Clock, Cpu, BrainCircuit, LineChart, Database, Code, PaintBucket, Globe, X } from "lucide-react";
 import { MotionDiv, FadeIn, FadeInStagger } from "@/components/ui/motion";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
