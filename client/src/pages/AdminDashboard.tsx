@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useLanguage } from "@/lib/LanguageContext";
 import { BarChart as ReBarChart, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Bar, PieChart as RPieChart, Pie, Cell } from "recharts";
 import {
   Table,
@@ -65,6 +66,7 @@ import { Badge } from "@/components/ui/badge";
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [selectedFreelancer, setSelectedFreelancer] = useState<any>(null);
@@ -123,14 +125,14 @@ export default function AdminDashboard() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/project-requests"] });
       toast({
-        title: "Status Updated",
-        description: "Project request status has been updated.",
+        title: t("admin.projects.status.update.success"),
+        description: t("admin.projects.status.update.description"),
       });
     },
     onError: () => {
       toast({
-        title: "Error",
-        description: "Failed to update project status.",
+        title: t("admin.dashboard.logout.failed"),
+        description: t("admin.projects.status.update.description"),
         variant: "destructive",
       });
     },
@@ -149,14 +151,14 @@ export default function AdminDashboard() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/freelancer-applications"] });
       toast({
-        title: "Status Updated",
-        description: "Freelancer application status has been updated.",
+        title: t("admin.freelancers.status.update.success"),
+        description: t("admin.freelancers.status.update.description"),
       });
     },
     onError: () => {
       toast({
-        title: "Error",
-        description: "Failed to update freelancer application status.",
+        title: t("admin.dashboard.logout.failed"),
+        description: t("admin.freelancers.status.update.description"),
         variant: "destructive",
       });
     },
@@ -175,14 +177,14 @@ export default function AdminDashboard() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/contact-messages"] });
       toast({
-        title: "Status Updated",
-        description: "Contact message status has been updated.",
+        title: t("admin.messages.status.update.success"),
+        description: t("admin.messages.status.update.description"),
       });
     },
     onError: () => {
       toast({
-        title: "Error",
-        description: "Failed to update message status.",
+        title: t("admin.dashboard.logout.failed"),
+        description: t("admin.messages.status.update.failed"),
         variant: "destructive",
       });
     },
@@ -201,14 +203,14 @@ export default function AdminDashboard() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/price-calculator-requests"] });
       toast({
-        title: "Status Updated",
-        description: "Price calculator request status has been updated.",
+        title: t("admin.price_requests.status.update.success"),
+        description: t("admin.price_requests.status.update.description"),
       });
     },
     onError: () => {
       toast({
-        title: "Error",
-        description: "Failed to update price request status.",
+        title: t("admin.dashboard.logout.failed"),
+        description: t("admin.price_requests.status.update.failed"),
         variant: "destructive",
       });
     },
@@ -235,14 +237,14 @@ export default function AdminDashboard() {
     try {
       await apiRequest("POST", "/api/auth/logout", {});
       toast({
-        title: "Logged Out",
-        description: "You have been successfully logged out.",
+        title: t("admin.dashboard.logout.success"),
+        description: t("admin.dashboard.logout.description"),
       });
       setLocation("/admin/login");
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to log out. Please try again.",
+        title: t("admin.dashboard.logout.failed"),
+        description: t("admin.dashboard.logout.failed_description"),
         variant: "destructive",
       });
     }
@@ -253,7 +255,7 @@ export default function AdminDashboard() {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <div className="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin mx-auto mb-4"></div>
-          <p className="text-white/70">Loading dashboard...</p>
+          <p className="text-white/70">{t("admin.dashboard.loading")}</p>
         </div>
       </div>
     );
