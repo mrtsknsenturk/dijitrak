@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { apiRequest } from "@/lib/queryClient";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -14,6 +15,7 @@ export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,14 +24,14 @@ export default function AdminLogin() {
     try {
       await apiRequest("POST", "/api/auth/login", { username, password });
       toast({
-        title: "Login Successful",
-        description: "Welcome to the admin dashboard.",
+        title: t("admin.login.success"),
+        description: t("admin.login.success.description"),
       });
       setLocation("/admin/dashboard");
     } catch (error) {
       toast({
-        title: "Login Failed",
-        description: "Invalid username or password. Please try again.",
+        title: t("admin.login.failed"),
+        description: t("admin.login.failed.description"),
         variant: "destructive",
       });
     } finally {
@@ -85,19 +87,19 @@ export default function AdminLogin() {
                 <span className="text-white">Edge</span>
               </div>
             </div>
-            <CardTitle className="text-2xl text-center font-bold">Admin Login</CardTitle>
+            <CardTitle className="text-2xl text-center font-bold">{t("admin.login.title")}</CardTitle>
             <CardDescription className="text-center text-white/70">
-              Enter your credentials to access the dashboard
+              {t("admin.login.description")}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <form onSubmit={handleLogin}>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="username" className="text-white/70">Username</Label>
+                  <Label htmlFor="username" className="text-white/70">{t("admin.login.username")}</Label>
                   <Input
                     id="username"
-                    placeholder="Username"
+                    placeholder={t("admin.login.username")}
                     required
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -105,11 +107,11 @@ export default function AdminLogin() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-white/70">Password</Label>
+                  <Label htmlFor="password" className="text-white/70">{t("admin.login.password")}</Label>
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Password"
+                    placeholder={t("admin.login.password")}
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -121,7 +123,7 @@ export default function AdminLogin() {
                   className="w-full btn-primary bg-gradient-to-r from-primary to-secondary"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Logging in..." : "Login"}
+                  {isLoading ? t("admin.login.button") + "..." : t("admin.login.button")}
                 </Button>
               </div>
             </form>
