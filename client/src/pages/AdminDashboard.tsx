@@ -529,10 +529,10 @@ export default function AdminDashboard() {
                     <CardHeader>
                       <CardTitle className="text-lg flex items-center">
                         <TrendingUp className="mr-2 h-5 w-5 text-primary" />
-                        Dönüşüm Oranları
+                        {t("admin.analytics.conversion_rates")}
                       </CardTitle>
                       <CardDescription>
-                        Proje taleplerinden tamamlanan projelere dönüşüm oranları
+                        {t("admin.analytics.conversion_description")}
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pl-2">

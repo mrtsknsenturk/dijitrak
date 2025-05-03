@@ -1179,6 +1179,28 @@ export const translations: TranslationsData = {
     "price_calculator.request_quote": "Заявете детайлна оферта",
     "price_calculator.free_consultation": "Без ангажимент, безплатна консултация",
     "price_calculator.select_service": "Изберете услуга, за да започнете",
-    "price_calculator.select_service_desc": "Изберете от нашите опции за услуги, за да видите ценовите детайли"
+    "price_calculator.select_service_desc": "Изберете от нашите опции за услуги, за да видите ценовите детайли",
+
+    // Admin Analytics
+    "admin.analytics.title": "Аналитика",
+    "admin.analytics.subtitle": "Преглед на бизнес показателите и метриките",
+    "admin.analytics.requests.by.type": "Заявки по тип",
+    "admin.analytics.service_distribution": "Разпределение на заявените услуги",
+    "admin.analytics.conversion_rates": "Проценти на конверсия",
+    "admin.analytics.conversion_description": "Проценти на конверсия от заявки за проекти към завършени проекти",
+    "admin.analytics.requests.by.status": "Заявки по статус",
+    "admin.analytics.monthly.requests": "Месечни заявки",
+    "admin.analytics.last_6_months": "Заявки през последните 6 месеца",
+    "admin.analytics.revenue.projections": "Прогнози за приходите",
+    "admin.analytics.settings": "Настройки на аналитиката",
+    "admin.analytics.type.freelancers": "Фрилансъри",
+    "admin.analytics.type.projects": "Проекти",
+    "admin.analytics.type.messages": "Съобщения",
+    "admin.analytics.type.quotes": "Оферти",
+    "admin.analytics.period.daily": "Дневно",
+    "admin.analytics.period.weekly": "Седмично",
+    "admin.analytics.period.monthly": "Месечно",
+    "admin.analytics.period.quarterly": "Тримесечно",
+    "admin.analytics.period.yearly": "Годишно"
   }
 };
