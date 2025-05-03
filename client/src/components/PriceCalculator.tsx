@@ -494,22 +494,21 @@ export default function PriceCalculator() {
       const selectedService = options.find(opt => opt.id === selectedOption);
       const selectedTimeFrameObj = timeFrames.find(tf => tf.id === timeFrame);
       
+      // Prepare data in format matching schema
       const requestData = {
+        name: contactInfo.name,
+        email: contactInfo.email,
+        phone: contactInfo.phone || undefined,
+        company: contactInfo.company || undefined,
         serviceType: selectedTab,
-        serviceName: selectedService?.title || "",
-        complexity: complexity[0],
-        timeFrame: selectedTimeFrameObj?.title || "",
+        complexity: complexity[0].toString(), // Convert to string as schema expects string
+        timeline: selectedTimeFrameObj?.title || "",
         features: selectedFeatures.map(f => {
           const feature = additionalFeatures.find(af => af.id === f);
           return feature?.title || "";
         }),
-        customFeatures,
         estimatedPrice: totalPrice,
-        clientName: contactInfo.name,
-        clientEmail: contactInfo.email,
-        clientPhone: contactInfo.phone,
-        clientCompany: contactInfo.company,
-        status: "new"
+        notes: customFeatures || undefined,
       };
       
       // Send the request
