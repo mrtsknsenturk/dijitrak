@@ -143,6 +143,7 @@ export const translations: TranslationsData = {
     // Language Switcher
     "language.en": "English",
     "language.tr": "Turkish",
+    "language.bg": "Bulgarian",
     
     // Process Timeline
     "process_title": "Our Development",
@@ -402,6 +403,7 @@ export const translations: TranslationsData = {
     // Language Switcher
     "language.en": "İngilizce",
     "language.tr": "Türkçe",
+    "language.bg": "Bulgarca",
     
     // Process Timeline
     "process_title": "Geliştirme",
@@ -470,5 +472,231 @@ export const translations: TranslationsData = {
     "tech_docker_desc": "Geliştirme ve üretim arasında tutarlı ortamlar için uygulamaları konteynerlerde geliştirme, gönderme ve çalıştırma platformu.",
     "tech_aws_desc": "Dünya çapında veri merkezlerinden 200'den fazla tam özellikli hizmet sunan kapsamlı bulut platformu.",
     "tech_github_desc": "Yazılım iş akışlarını, testleri ve dağıtımı otomatikleştirmek için GitHub ile entegre CI/CD platformu.",
+  },
+  bg: {
+    // Navbar
+    "nav.home": "Начало",
+    "nav.services": "Услуги",
+    "nav.portfolio": "Портфолио",
+    "nav.testimonials": "Отзиви",
+    "nav.contact": "Контакт",
+    "nav.getInTouch": "Свържете се",
+    
+    // Hero Section
+    "hero.title": "Дигитални решения за бъдещето на вашия бизнес",
+    "hero.subtitle": "Проектираме и разработваме иновативни дигитални изживявания, които помагат на бизнеса да расте, ангажира и трансформира.",
+    "hero.cta": "Разгледайте услугите",
+    "hero.stats.clients": "Доволни клиенти",
+    "hero.stats.projects": "Завършени проекти",
+    "hero.stats.experience": "Години опит",
+    
+    // Services Section
+    "services.title": "Нашите услуги",
+    "services.subtitle": "Предлагаме широка гама от дигитални услуги, които помагат на вашия бизнес да процъфтява в дигиталния свят.",
+    "services.webDev.title": "Уеб разработка",
+    "services.webDev.description": "Персонализирана разработка на уебсайтове с отзивчив дизайн, оптимизирана производителност и безпроблемно потребителско изживяване.",
+    "services.mobileDev.title": "Мобилни приложения",
+    "services.mobileDev.description": "Нативни и кросплатформени мобилни приложения, които осигуряват изключително потребителско изживяване на всички устройства.",
+    "services.uxDesign.title": "UX/UI Дизайн",
+    "services.uxDesign.description": "Ориентирани към потребителя дизайн решения, които подобряват идентичността на марката, използваемостта и ангажираността на потребителите.",
+    "services.branding.title": "Брандинг",
+    "services.branding.description": "Стратегия за бранда, визуална идентичност и маркетингови материали, които комуникират ценностите и мисията на вашия бранд.",
+    "services.digitalMarketing.title": "Дигитален маркетинг",
+    "services.digitalMarketing.description": "Ориентирани към резултати дигитални маркетингови стратегии, които увеличават видимостта, трафика и конверсиите.",
+    "services.ecommerce.title": "Електронна търговия",
+    "services.ecommerce.description": "Персонализирани решения за електронна търговия със сигурни платежни шлюзове, управление на инвентара и плавно преживяване при плащане.",
+    "services.seo.title": "SEO оптимизация",
+    "services.seo.description": "Стратегии за оптимизация на търсачките, които подобряват видимостта на вашия уебсайт и класирането му в органичното търсене.",
+    "services.contentCreation.title": "Създаване на съдържание",
+    "services.contentCreation.description": "Висококачествено съдържание за уебсайтове, блогове, социални медии и маркетингови кампании.",
+    "services.cloudServices.title": "Облачни услуги",
+    "services.cloudServices.description": "Облачна архитектура, миграция и управленски услуги за мащабируема и сигурна инфраструктура.",
+    
+    // Portfolio Section
+    "portfolio.title": "Нашето портфолио",
+    "portfolio.subtitle": "Разгледайте нашата най-скорошна работа и вижте как помогнахме на бизнеса да постигне дигиталните си цели.",
+    "portfolio.filter.all": "Всички",
+    "portfolio.filter.webDesign": "Уеб дизайн",
+    "portfolio.filter.mobileApps": "Мобилни приложения",
+    "portfolio.filter.branding": "Брандинг",
+    "portfolio.viewProject": "Вижте проекта",
+    
+    // Stats Section
+    "stats.title": "Нашите числа",
+    "stats.subtitle": "Гордеем се с нашите постижения и въздействието, което сме оказали на бизнеса по целия свят.",
+    "stats.clients": "Доволни клиенти",
+    "stats.projects": "Завършени проекти",
+    "stats.team": "Членове на екипа",
+    "stats.satisfaction": "Удовлетвореност на клиентите",
+    
+    // Testimonial Section
+    "testimonials.title": "Какво казват нашите клиенти",
+    "testimonials.subtitle": "Не приемайте само нашата дума - чуйте от някои от нашите доволни клиенти за техния опит с нас.",
+    
+    // CTA Section
+    "cta.title": "Готови ли сте да трансформирате бизнеса си?",
+    "cta.subtitle": "Нека работим заедно, за да осъществим вашата визия. Започнете, като ни разкажете за вашия проект.",
+    "cta.button.freelancer": "Присъединете се като фрилансър",
+    "cta.button.project": "Започнете проект",
+    
+    // Contact Section
+    "contact.title": "Свържете се с нас",
+    "contact.subtitle": "Имате проект в ума си или искате да научите повече за нашите услуги? Свържете се с нас директно, като използвате формуляра по-долу.",
+    "contact.location.title": "Нашето местоположение",
+    "contact.email.title": "Имейл",
+    "contact.phone.title": "Обадете ни се",
+    "contact.hours.title": "Работно време",
+    "contact.hours.weekdays": "Понеделник - Петък:",
+    "contact.hours.saturday": "Събота:",
+    "contact.hours.sunday": "Неделя:",
+    "contact.form.title": "Изпратете ни съобщение",
+    "contact.form.name": "Вашето име",
+    "contact.form.email": "Вашият имейл",
+    "contact.form.subject": "Тема",
+    "contact.form.message": "Вашето съобщение",
+    "contact.form.button.send": "Изпратете съобщение",
+    "contact.form.button.sending": "Изпращане...",
+    "contact.form.button.sent": "Съобщението е изпратено!",
+    
+    // Footer
+    "footer.rights": "Всички права запазени",
+    "footer.privacy": "Политика за поверителност",
+    "footer.terms": "Условия за ползване",
+    
+    // Project Modal
+    "project.form.title": "Започнете вашия проект",
+    "project.form.subtitle": "Разкажете ни за вашия проект и ние ще се свържем с вас в рамките на 24 часа.",
+    "project.form.name": "Вашето име",
+    "project.form.email": "Вашият имейл",
+    "project.form.phone": "Телефонен номер",
+    "project.form.company": "Име на компанията (по избор)",
+    "project.form.budget": "Очакван бюджет",
+    "project.form.type": "Тип проект",
+    "project.form.description": "Описание на проекта",
+    "project.form.button.submit": "Изпратете проекта",
+    "project.form.button.submitting": "Изпращане...",
+    "project.form.success": "Вашата заявка за проект беше изпратена успешно!",
+    
+    // Freelancer Modal
+    "freelancer.form.title": "Присъединете се към нашата мрежа от фрилансъри",
+    "freelancer.form.subtitle": "Попълнете формуляра по-долу, за да кандидатствате като фрилансър.",
+    "freelancer.form.name": "Вашето пълно име",
+    "freelancer.form.email": "Имейл адрес",
+    "freelancer.form.phone": "Телефонен номер",
+    "freelancer.form.skills": "Умения и експертиза",
+    "freelancer.form.experience": "Години опит",
+    "freelancer.form.portfolio": "URL на портфолио",
+    "freelancer.form.rate": "Почасова ставка (USD)",
+    "freelancer.form.availability": "Наличност",
+    "freelancer.form.button.submit": "Изпратете кандидатура",
+    "freelancer.form.button.submitting": "Изпращане...",
+    "freelancer.form.success": "Вашата кандидатура беше изпратена успешно!",
+    
+    // Search
+    "search.placeholder": "Търсене на проекти...",
+    "search.button": "Търсене",
+    "search.results": "Резултати от търсенето",
+    "search.noResults": "Не са намерени резултати за",
+    
+    // Language Switcher
+    "language.en": "Английски",
+    "language.tr": "Турски",
+    "language.bg": "Български",
+    
+    // Process Timeline
+    "process_title": "Нашият процес на",
+    "process_title_highlight": "разработка",
+    "process_subtitle": "Следваме структуриран подход, за да постигнем изключителни резултати за всеки проект.",
+    "process_discovery_title": "Откриване и изследване",
+    "process_discovery_desc": "Започваме с цялостно разбиране на бизнес целите ви, целевата аудитория и изискванията на проекта чрез задълбочено изследване и анализ.",
+    "process_discovery_point1": "Интервюта със заинтересовани страни за разбиране на визията и целите",
+    "process_discovery_point2": "Пазарно проучване и анализ на конкуренцията",
+    "process_discovery_point3": "Изследване на потребителите и разработване на персони",
+    
+    "process_planning_title": "Стратегия и планиране",
+    "process_planning_desc": "На базата на нашето изследване, разработваме цялостна стратегия и подробен проектен план с ясни етапи и изисквания.",
+    "process_planning_point1": "Дефиниране на обхвата на проекта и планиране на времевата рамка",
+    "process_planning_point2": "Разпределение на ресурсите и сформиране на екип",
+    "process_planning_point3": "Оценка и планиране на намаляване на риска",
+    
+    "process_design_title": "Дизайн и прототипиране",
+    "process_design_desc": "Нашият дизайнерски екип създава интуитивни, ангажиращи и красиви интерфейси, които са в съответствие с вашия бранд и отговарят на очакванията на потребителите.",
+    "process_design_point1": "Информационна архитектура и картографиране на потребителския поток",
+    "process_design_point2": "Wireframing и интерактивно прототипиране",
+    "process_design_point3": "Визуален дизайн с подравняване към бранда",
+    
+    "process_development_title": "Разработка и внедряване",
+    "process_development_desc": "Нашите разработчици съживяват дизайните, използвайки най-новите технологии и най-добрите практики за оптимална производителност и надеждност.",
+    "process_development_point1": "Frontend и backend разработка",
+    "process_development_point2": "Интеграция с услуги и API на трети страни",
+    "process_development_point3": "Прегледи на кода и техническа оптимизация",
+    
+    "process_testing_title": "Тестване и осигуряване на качеството",
+    "process_testing_desc": "Ние строго тестваме всички аспекти на вашия проект, за да гарантираме функционалност, производителност и сигурност на всички устройства и платформи.",
+    "process_testing_point1": "Цялостно функционално и тестване на използваемостта",
+    "process_testing_point2": "Тестване на съвместимост с различни браузъри и устройства",
+    "process_testing_point3": "Оптимизация на производителността и проверки на сигурността",
+    
+    "process_launch_title": "Внедряване и пускане",
+    "process_launch_desc": "Ние внимателно управляваме процеса на внедряване, за да осигурим гладко и успешно пускане с минимални прекъсвания.",
+    "process_launch_point1": "Предпусков контролен списък и финално осигуряване на качеството",
+    "process_launch_point2": "Внедряване в производствена среда",
+    "process_launch_point3": "Наблюдение след пускането и незабавна поддръжка",
+    
+    "process_support_title": "Поддръжка и обслужване",
+    "process_support_desc": "Нашите взаимоотношения продължават и след пускането с текуща поддръжка, обслужване и оптимизация, за да осигурим дългосрочен успех.",
+    "process_support_point1": "Редовни актуализации и патчове за сигурност",
+    "process_support_point2": "Наблюдение и оптимизация на производителността",
+    "process_support_point3": "Непрекъснато подобрение на базата на анализи и обратна връзка",
+    
+    // Tech Stack 
+    "tech_title": "Нашата технологична",
+    "tech_title_highlight": "обстановка",
+    "tech_subtitle": "Използваме авангардни технологии за изграждане на надеждни, мащабируеми и високопроизводителни дигитални решения.",
+    "tech_filter_all": "Всички технологии",
+    "tech_filter_frontend": "Frontend",
+    "tech_filter_backend": "Backend",
+    "tech_filter_devops": "DevOps",
+    
+    "tech_react_desc": "JavaScript библиотека за изграждане на потребителски интерфейси с компонентна архитектура и виртуален DOM за оптимална производителност.",
+    "tech_nextjs_desc": "React framework, който позволява рендериране от страна на сървъра, генериране на статични сайтове и други оптимизации на производителността.",
+    "tech_tailwind_desc": "CSS framework с приоритет на полезността за бързо развитие на потребителския интерфейс с високо персонализируеми дизайн системи.",
+    "tech_typescript_desc": "JavaScript надмножество, което добавя статични типове, подобрявайки качеството на кода и продуктивността на разработчиците.",
+    
+    "tech_nodejs_desc": "JavaScript среда за изпълнение, изградена върху V8 двигателя на Chrome за изграждане на бързи, мащабируеми приложения от страна на сървъра.",
+    "tech_express_desc": "Минимална и гъвкава Node.js уеб приложна рамка, която предоставя надеждни функции за уеб и мобилни приложения.",
+    "tech_postgresql_desc": "Мощна система за обектно-релационни бази данни с отворен код с добра репутация за надеждност и цялост на данните.",
+    
+    "tech_docker_desc": "Платформа за разработка, доставка и изпълнение на приложения в контейнери за постоянни среди в разработката и производството.",
+    "tech_aws_desc": "Всеобхватна облачна платформа, предлагаща над 200 напълно функционални услуги от центрове за данни по целия свят.",
+    "tech_github_desc": "CI/CD платформа, интегрирана с GitHub за автоматизиране на софтуерни работни потоци, тестване и внедряване.",
+
+    // Price Calculator
+    "price_calculator.title": "Интерактивен калкулатор на цени",
+    "price_calculator.subtitle": "Пресметнете стойността на вашия проект въз основа на специфичните ви нужди и изисквания. Променете параметрите по-долу, за да получите персонализирана оферта.",
+    "price_calculator.project_type": "Тип проект",
+    "price_calculator.project_type_desc": "Изберете типа проект, от който имате нужда",
+    "price_calculator.website": "Уебсайт",
+    "price_calculator.mobile_app": "Мобилно приложение",
+    "price_calculator.design": "Дизайн",
+    "price_calculator.complexity": "Сложност на проекта",
+    "price_calculator.complexity_desc": "Регулирайте сложността според изискванията на вашия проект",
+    "price_calculator.basic": "Основен",
+    "price_calculator.complex": "Сложен",
+    "price_calculator.timeframe": "Времева рамка",
+    "price_calculator.timeframe_desc": "Изберете предпочитания от вас срок за доставка",
+    "price_calculator.additional": "Допълнителни функции",
+    "price_calculator.additional_desc": "Изберете всички допълнителни функции, от които се нуждаете",
+    "price_calculator.custom_requirements": "Персонализирани изисквания (по избор)",
+    "price_calculator.custom_requirements_placeholder": "Опишете всички персонализирани функции, от които се нуждаете",
+    "price_calculator.estimate": "Оценка на проекта",
+    "price_calculator.estimate_desc": "Обобщение на прогнозните разходи за вашия проект",
+    "price_calculator.selected": "Избрана услуга",
+    "price_calculator.estimated_total": "Приблизителна обща сума",
+    "price_calculator.disclaimer": "Това е приблизителна стойност, базирана на предоставената информация. Крайната цена може да варира в зависимост от подробните изисквания.",
+    "price_calculator.request_quote": "Заявете детайлна оферта",
+    "price_calculator.free_consultation": "Без ангажимент, безплатна консултация",
+    "price_calculator.select_service": "Изберете услуга, за да започнете",
+    "price_calculator.select_service_desc": "Изберете от нашите опции за услуги, за да видите ценовите детайли"
   }
 };
