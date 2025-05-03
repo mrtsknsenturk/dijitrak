@@ -1100,6 +1100,7 @@ export const translations: TranslationsData = {
     "admin.messages.message": "Съобщение",
     "admin.messages.status.update.success": "Статусът е актуализиран",
     "admin.messages.status.update.description": "Статусът на съобщението е успешно актуализиран.",
+    "admin.messages.status.update.failed": "Неуспешно актуализиране на статуса на съобщението.",
     
     // Admin Price Calculator
     "admin.pricing.title": "Заявки от калкулатора на цени",
@@ -1123,6 +1124,7 @@ export const translations: TranslationsData = {
     "admin.pricing.requirements": "Персонализирани изисквания",
     "admin.pricing.status.update.success": "Статусът е актуализиран",
     "admin.pricing.status.update.description": "Статусът на заявката за оферта е успешно актуализиран.",
+    "admin.price_requests.status.update.failed": "Неуспешно актуализиране на статуса на ценовата заявка.",
     
     // Admin Analytics
     "admin.analytics.title": "Аналитика",

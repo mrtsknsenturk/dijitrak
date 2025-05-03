@@ -17,7 +17,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const availableLocales = Object.keys(translations);
 
 // Language Provider component
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
   // Try to get the stored locale from localStorage, default to 'en'
   const [locale, setLocale] = useState<string>(() => {
     if (typeof window === "undefined") return "en";
@@ -49,10 +49,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
-};
+}
 
 // Hook to use the language context
-export const useLanguage = (): LanguageContextType => {
+export function useLanguage() {
   const context = useContext(LanguageContext);
   
   if (context === undefined) {
@@ -60,4 +60,4 @@ export const useLanguage = (): LanguageContextType => {
   }
   
   return context;
-};
+}
