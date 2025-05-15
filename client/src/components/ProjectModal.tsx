@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {useLanguage} from "@/lib/LanguageContext.tsx";
 import {
   Select,
   SelectContent,
@@ -89,6 +90,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
     hidden: { opacity: 0, scale: 0.95, y: 20 },
     visible: { opacity: 1, scale: 1, y: 0 },
   };
+  const { t } = useLanguage(); // çeviri hook'u
 
   return (
     <AnimatePresence>
@@ -138,10 +140,10 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                     </svg>
                   </div>
                   <h3 className="text-2xl font-bold mb-2">
-                    Start Your Project
+                    {t("project-title")}
                   </h3>
                   <p className="text-white/70">
-                    Tell us about your project requirements
+                    {t("project-description")}
                   </p>
                 </div>
 
@@ -170,14 +172,14 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         htmlFor="projectName"
                         className="text-white/70 text-sm font-medium mb-1"
                       >
-                        Project Name
+                        {t("project-field-name")}
                       </Label>
                       <Input
                         id="projectName"
                         value={formData.projectName}
                         onChange={handleChange}
                         className="bg-muted border border-white/10 text-white focus:border-secondary"
-                        placeholder="My Awesome Project"
+
                         required
                       />
                     </div>
@@ -187,7 +189,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         htmlFor="projectType"
                         className="text-white/70 text-sm font-medium mb-1"
                       >
-                        Project Type
+                        {t("project-field-type")}
                       </Label>
                       <Select
                         value={formData.projectType}
@@ -196,20 +198,20 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         }
                       >
                         <SelectTrigger className="bg-muted border border-white/10 text-white focus:border-secondary">
-                          <SelectValue placeholder="Select project type" />
+                          <SelectValue placeholder={t("project-placeholder-type")} />
                         </SelectTrigger>
                         <SelectContent className="glassmorphism border border-white/10">
-                          <SelectItem value="web-app">Web Application</SelectItem>
+                          <SelectItem value="web-app">{t("project-type-webApp")}</SelectItem>
                           <SelectItem value="mobile-app">
-                            Mobile Application
+                            {t("project-type-mobileApp")}
                           </SelectItem>
                           <SelectItem value="e-commerce">
-                            E-commerce Website
+                            {t("project-type-ecommerce")}
                           </SelectItem>
                           <SelectItem value="branding">
-                            Branding & Identity
+                            {t("project-type-branding")}
                           </SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="other">{t("project-type-other")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -219,7 +221,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         htmlFor="timeline"
                         className="text-white/70 text-sm font-medium mb-1"
                       >
-                        Timeline
+                        {t("project-field-timeline")}
                       </Label>
                       <Select
                         value={formData.timeline}
@@ -228,7 +230,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         }
                       >
                         <SelectTrigger className="bg-muted border border-white/10 text-white focus:border-secondary">
-                          <SelectValue placeholder="Select timeline" />
+                          <SelectValue placeholder={t("project-placeholder-timeline")} />
                         </SelectTrigger>
                         <SelectContent className="glassmorphism border border-white/10">
                           <SelectItem value="urgent">

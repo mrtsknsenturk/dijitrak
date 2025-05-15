@@ -3,8 +3,10 @@ import { motion } from "framer-motion";
 import { FadeIn, FloatingAnimation } from "@/components/ui/motion";
 import { Button } from "@/components/ui/button";
 import { applyParallaxEffect } from "@/lib/utils";
+import {useLanguage} from "@/lib/LanguageContext.tsx";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const avatars = [
@@ -77,46 +79,48 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <FadeIn>
             <div className="inline-block py-1 px-3 rounded-full bg-muted text-xs font-mono text-primary mb-6">
-              Digital Innovation Agency
+              {t("landing-page-title-badge")}
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              We build <span className="gradient-text">digital experiences</span> that transform businesses
-            </h1>
+            <h1
+                className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+                dangerouslySetInnerHTML={{__html: t("landing-title")}}
+            />
             <p className="text-white/70 text-lg mb-8 max-w-lg">
-              Our team of experts creates cutting-edge digital solutions that help businesses stay ahead in today's rapidly evolving digital landscape.
+              {t("landing-sub-title")}
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button 
-                onClick={() => scrollToElement('contact')}
-                className="btn-primary bg-gradient-to-r from-primary to-secondary py-6 px-8 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              <Button
+                  onClick={() => scrollToElement('contact')}
+                  className="btn-primary bg-gradient-to-r from-primary to-secondary py-6 px-8 rounded-full text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                Start Your Project
+                {t("landing-title-btn1")}
               </Button>
-              <Button 
-                onClick={() => scrollToElement('work')}
-                variant="outline" 
-                className="py-6 px-8 rounded-full border border-white/20 text-white font-medium hover:bg-muted transition-all duration-300"
+              <Button
+                  onClick={() => scrollToElement('work')}
+                  variant="outline"
+                  className="py-6 px-8 rounded-full border border-white/20 text-white font-medium hover:bg-muted transition-all duration-300"
               >
-                Explore Our Work
+                {t("landing-title-btn2")}
               </Button>
             </div>
             <div className="mt-12 flex items-center space-x-6">
               <div className="flex -space-x-4">
                 {avatars.map((avatar, index) => (
-                  <img 
-                    key={index}
-                    src={avatar}
-                    alt="Client" 
-                    className="w-10 h-10 rounded-full border-2 border-background"
-                  />
+                    <img
+                        key={index}
+                        src={avatar}
+                        alt="Client"
+                        className="w-10 h-10 rounded-full border-2 border-background"
+                    />
                 ))}
               </div>
               <div>
-                <p className="text-white/70 text-sm">Trusted by <span className="text-white font-semibold">200+</span> clients worldwide</p>
+                <p className="text-white/70 text-sm"> {t("client-trusted-1")} <span
+                    className="text-white font-semibold">200+</span>  {t("client-trusted-2")}</p>
               </div>
             </div>
           </FadeIn>
-          
+
           <div className="lg:flex justify-end hidden">
             <FloatingAnimation>
               <div className="relative">
@@ -132,12 +136,10 @@ export default function HeroSection() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Digital Transformation</h3>
-                    <p className="text-white/70 text-sm mb-6">Elevate your business with our innovative digital solutions.</p>
+                    <h3 className="text-xl font-bold mb-2">{t("landing-hero-card-title")}</h3>
+                    <p className="text-white/70 text-sm mb-6">{t("landing-hero-card-desc")}</p>
                     <div className="inline-flex items-center justify-center space-x-1">
-                      <span className="w-2 h-2 rounded-full bg-primary"></span>
-                      <span className="w-2 h-2 rounded-full bg-white/30"></span>
-                      <span className="w-2 h-2 rounded-full bg-white/30"></span>
+
                     </div>
                   </div>
                 </div>

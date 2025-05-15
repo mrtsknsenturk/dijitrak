@@ -17,39 +17,39 @@ import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Home() {
   const { locale, t } = useLanguage();
-  
+
   return (
-    <>
-      <Helmet>
-        <title>Quantum Edge | {locale === "en" ? "Digital Innovation Agency" : "Dijital İnovasyon Ajansı"}</title>
-        <meta 
-          name="description" 
-          content={locale === "en" 
-            ? "We build digital experiences that transform businesses. Our team of experts creates cutting-edge digital solutions that help businesses stay ahead." 
-            : "İşletmeleri dönüştüren dijital deneyimler oluşturuyoruz. Uzman ekibimiz, işletmelerin öne çıkmasına yardımcı olan yenilikçi dijital çözümler yaratır."} 
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-        <html lang={locale} />
-      </Helmet>
-      <div className="min-h-screen bg-background text-white flex flex-col">
-        <Navbar />
-        <main>
-          <HeroSection />
-          <ServicesSection />
-          <ProcessTimeline />
-          <TechStack />
-          <PortfolioSection />
-          <StatsSection />
-          <TestimonialSection />
-          <PriceCalculator />
-          <CTASection />
-          <ContactSection />
-        </main>
-        <LanguageSwitcher />
-        <Footer />
-      </div>
-    </>
+      <>
+        <Helmet>
+          <title>DijiTrak | {locale === "en" ? "Digital Innovation Agency" : "Dijital İnovasyon Ajansı"}</title>
+          <meta
+              name="description"
+              content={locale === "en"
+                  ? "We build digital experiences that transform businesses. Our team of experts creates cutting-edge digital solutions that help businesses stay ahead."
+                  : "İşletmeleri dönüştüren dijital deneyimler oluşturuyoruz. Uzman ekibimiz, işletmelerin öne çıkmasına yardımcı olan yenilikçi dijital çözümler yaratır."}
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+          <html lang={locale} />
+        </Helmet>
+        <div className="min-h-screen bg-background text-white flex flex-col">
+          <Navbar />
+          <main>
+            <HeroSection />
+            <ServicesSection />
+            <ProcessTimeline />
+            <TechStack />
+            {/* <PortfolioSection /> */}
+            <StatsSection />
+            {/* <TestimonialSection /> */}
+            <PriceCalculator />
+            <CTASection />
+            <ContactSection />
+          </main>
+          <LanguageSwitcher />
+          <Footer />
+        </div>
+      </>
   );
 }

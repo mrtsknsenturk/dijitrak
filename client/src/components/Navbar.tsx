@@ -74,8 +74,8 @@ export default function Navbar() {
           <div className="flex items-center space-x-4">
             <Link href="/">
               <div className="text-2xl font-bold cursor-pointer">
-                <span className="gradient-text">Quantum</span>
-                <span>Edge</span>
+                <span className="gradient-text">Diji</span>
+                <span>Trak.net</span>
               </div>
             </Link>
           </div>
