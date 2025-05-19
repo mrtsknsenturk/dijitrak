@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { MailIcon, MapPin, Phone, Send, Check } from "lucide-react";
-
+import {useLanguage} from "@/lib/LanguageContext.tsx";
 export default function ContactSection() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,8 +44,8 @@ export default function ContactSection() {
       setIsSuccess(true);
       
       toast({
-        title: "Message Sent!",
-        description: "We've received your message and will get back to you soon.",
+        title: t("contact-toast-success-title"),
+        description: t("contact-toast-success-description"),
       });
       
       // Reset form after 2 seconds
@@ -61,14 +61,14 @@ export default function ContactSection() {
     } catch (error) {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message",
+        description: error instanceof Error ? error.message : t("contact-toast-error-title"),
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
+  const { t } = useLanguage(); // çeviri hook'u
   return (
     <section id="contact" className="py-24 bg-background relative">
       <div className="absolute inset-0 overflow-hidden">
@@ -82,7 +82,7 @@ export default function ContactSection() {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-white/70">
-            Have a project in mind or want to learn more about our services? Reach out to us directly using the form below.
+            {t("contact-description")}
           </p>
         </FadeIn>
         
@@ -94,11 +94,9 @@ export default function ContactSection() {
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-1">Our Location</h3>
+                  <h3 className="text-lg font-semibold mb-1">{t("contact-location-title")}</h3>
                   <p className="text-white/70">
-                    123 Innovation Street<br />
-                    Tech District, San Francisco<br />
-                    CA 94103, USA
+                    {t("contact-location-description")}
                   </p>
                 </div>
               </div>
@@ -108,10 +106,9 @@ export default function ContactSection() {
                   <MailIcon className="h-5 w-5 text-secondary" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-1">Email Us</h3>
+                  <h3 className="text-lg font-semibold mb-1">{t("contact-email-title")}</h3>
                   <p className="text-white/70">
-                    info@quantumedge.io<br />
-                    support@quantumedge.io
+                    {t("contact-email-description")}
                   </p>
                 </div>
               </div>
@@ -121,10 +118,9 @@ export default function ContactSection() {
                   <Phone className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-1">Call Us</h3>
+                  <h3 className="text-lg font-semibold mb-1">{t("contact-phone-title")}</h3>
                   <p className="text-white/70">
-                    +1 (555) 123-4567<br />
-                    +1 (555) 987-6543
+                    {t("contact-phone-description")}
                   </p>
                 </div>
               </div>
@@ -132,50 +128,47 @@ export default function ContactSection() {
             
             <div className="glassmorphism rounded-xl p-6 border border-white/10 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary"></div>
-              <h3 className="text-xl font-bold mb-4">Working Hours</h3>
+              <h3 className="text-xl font-bold mb-4">{t("contact-hours-title")}</h3>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-white/70">Monday - Friday:</span>
-                  <span className="font-medium">9:00 AM - 6:00 PM</span>
+                  <span className="text-white/70">{t("contact-hours-weekdays")}</span>
+                  <span className="font-medium">{t("contact-hours-weekdays-hours")}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-white/70">Saturday:</span>
-                  <span className="font-medium">10:00 AM - 4:00 PM</span>
+                  <span className="text-white/70">{t("contact-hours-saturday")}</span>
+                  <span className="font-medium">{t("contact-hours-saturday-hours")}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-white/70">Sunday:</span>
-                  <span className="font-medium">Closed</span>
-                </div>
+
               </div>
             </div>
           </div>
           
           <div className="lg:col-span-3">
             <div className="glassmorphism rounded-xl p-8 border border-white/10">
-              <h3 className="text-xl font-bold mb-6">Send Us a Message</h3>
+              <h3 className="text-xl font-bold mb-6">{t("contact-form-title")}</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <Label htmlFor="name" className="text-white/70 mb-2 block">Your Name</Label>
+                    <Label htmlFor="name" className="text-white/70 mb-2 block">{t("contact-form-field-name")}</Label>
                     <Input
                       id="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="John Doe"
+                      placeholder={t("contact-form-placeholder-name")}
                       required
                       className="bg-muted border border-white/10 text-white focus:border-primary"
                     />
                   </div>
                   
                   <div>
-                    <Label htmlFor="email" className="text-white/70 mb-2 block">Your Email</Label>
+                    <Label htmlFor="email" className="text-white/70 mb-2 block">{t("contact-form-field-email")}</Label>
                     <Input
                       id="email"
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="john@example.com"
+                      placeholder={t("contact-form-placeholder-email")}
                       required
                       className="bg-muted border border-white/10 text-white focus:border-primary"
                     />
@@ -183,24 +176,24 @@ export default function ContactSection() {
                 </div>
                 
                 <div>
-                  <Label htmlFor="subject" className="text-white/70 mb-2 block">Subject</Label>
+                  <Label htmlFor="subject" className="text-white/70 mb-2 block">{t("contact-form-field-subject")}</Label>
                   <Input
                     id="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="How can we help you?"
+                    placeholder={t("contact-form-placeholder-subject")}
                     required
                     className="bg-muted border border-white/10 text-white focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="message" className="text-white/70 mb-2 block">Your Message</Label>
+                  <Label htmlFor="message" className="text-white/70 mb-2 block">{t("contact-form-field-message")}</Label>
                   <Textarea
                     id="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell us about your project..."
+                    placeholder={t("contact-form-placeholder-message")}
                     rows={5}
                     required
                     className="bg-muted border border-white/10 text-white focus:border-primary"
@@ -222,17 +215,17 @@ export default function ContactSection() {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Sending...
+                      {t("contact-form-submitting")}
                     </span>
                   ) : isSuccess ? (
                     <span className="flex items-center justify-center">
                       <Check className="h-5 w-5 mr-2" />
-                      Message Sent!
+                      {t("contact-form-success")}
                     </span>
                   ) : (
                     <span className="flex items-center justify-center">
                       <Send className="h-5 w-5 mr-2" />
-                      Send Message
+                      {t("contact-form-submit")}
                     </span>
                   )}
                 </Button>

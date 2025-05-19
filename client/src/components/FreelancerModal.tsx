@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {useLanguage} from "@/lib/LanguageContext.tsx";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -62,15 +63,15 @@ export default function FreelancerModal({ isOpen, onClose }: FreelancerModalProp
       await apiRequest("POST", "/api/freelancer-applications", formData);
 
       toast({
-        title: "Application Submitted!",
-        description: "We'll review your application and get back to you soon.",
+        title: t("freelancer-success-title"),
+        description: t("freelancer-success-description"),
       });
 
       onClose();
     } catch (error) {
       toast({
-        title: "Submission Failed",
-        description: "There was an error submitting your application. Please try again.",
+        title: t("freelancer-error-title"),
+        description: t("freelancer-error-description"),
         variant: "destructive",
       });
     } finally {
@@ -96,7 +97,7 @@ export default function FreelancerModal({ isOpen, onClose }: FreelancerModalProp
     { code: "de", flag: "🇩🇪", name: "German" },
     { code: "it", flag: "🇮🇹", name: "Italian" }
   ];
-
+  const { t } = useLanguage()
   return (
       <AnimatePresence>
         {isOpen && (
@@ -131,57 +132,57 @@ export default function FreelancerModal({ isOpen, onClose }: FreelancerModalProp
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">Join Our Freelancer Network</h3>
-                  <p className="text-white/70">Tell us about your skills and experience</p>
+                  <h3 className="text-2xl font-bold mb-2">{t("freelancer-title")}</h3>
+                  <p className="text-white/70">{t("freelancer-description")}</p>
                 </div>
 
                 <form className="space-y-4" onSubmit={handleSubmit}>
                   <div>
-                    <Label htmlFor="name" className="text-white/70 text-sm font-medium mb-1">Full Name</Label>
+                    <Label htmlFor="name" className="text-white/70 text-sm font-medium mb-1">{t("freelancer-field-name")}</Label>
                     <Input
                         id="name"
                         value={formData.name}
                         onChange={handleChange}
                         className="bg-muted border border-white/10 text-white focus:border-primary"
-                        placeholder="John Doe"
+                        placeholder={t("freelancer-placeholder-name")}
                         required
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="email" className="text-white/70 text-sm font-medium mb-1">Email Address</Label>
+                    <Label htmlFor="email" className="text-white/70 text-sm font-medium mb-1">{t("freelancer-field-email")}</Label>
                     <Input
                         type="email"
                         id="email"
                         value={formData.email}
                         onChange={handleChange}
                         className="bg-muted border border-white/10 text-white focus:border-primary"
-                        placeholder="john@example.com"
+                        placeholder={t("freelancer-placeholder-email")}
                         required
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="specialty" className="text-white/70 text-sm font-medium mb-1">Specialty</Label>
+                    <Label htmlFor="specialty" className="text-white/70 text-sm font-medium mb-1">{t("freelancer-field-specialty")}</Label>
                     <Select
                         onValueChange={handleSelectChange}
                         value={formData.specialty}
                     >
                       <SelectTrigger className="bg-muted border border-white/10 text-white focus:border-primary">
-                        <SelectValue placeholder="Select your specialty" />
+                        <SelectValue placeholder={t("freelancer-placeholder-specialty")} />
                       </SelectTrigger>
                       <SelectContent className="glassmorphism border border-white/10">
-                        <SelectItem value="web-dev">Web Development</SelectItem>
-                        <SelectItem value="mobile-dev">Mobile Development</SelectItem>
-                        <SelectItem value="ui-ux">UI/UX Design</SelectItem>
-                        <SelectItem value="digital-marketing">Digital Marketing</SelectItem>
-                        <SelectItem value="content-creation">Content Creation</SelectItem>
+                        <SelectItem value="web-dev">{t("freelancer-specialty-web-dev")}</SelectItem>
+                        <SelectItem value="mobile-dev">{t("freelancer-specialty-mobile-dev")}</SelectItem>
+                        <SelectItem value="ui-ux">{t("freelancer-specialty-ui-ux")}</SelectItem>
+                        <SelectItem value="digital-marketing">{t("freelancer-specialty-digital-marketing")}</SelectItem>
+                        <SelectItem value="content-creation">{t("freelancer-specialty-content-creation")}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
-                    <Label htmlFor="experience" className="text-white/70 text-sm font-medium mb-1">Years of Experience</Label>
+                    <Label htmlFor="experience" className="text-white/70 text-sm font-medium mb-1">{t("freelancer-field-experience")}</Label>
                     <Input
                         type="number"
                         id="experience"
@@ -196,32 +197,32 @@ export default function FreelancerModal({ isOpen, onClose }: FreelancerModalProp
                   </div>
 
                   <div>
-                    <Label htmlFor="portfolioUrl" className="text-white/70 text-sm font-medium mb-1">Portfolio URL</Label>
+                    <Label htmlFor="portfolioUrl" className="text-white/70 text-sm font-medium mb-1">{t("freelancer-field-portfolioUrl")}</Label>
                     <Input
                         type="url"
                         id="portfolioUrl"
                         value={formData.portfolioUrl}
                         onChange={handleChange}
                         className="bg-muted border border-white/10 text-white focus:border-primary"
-                        placeholder="https://your-portfolio.com"
+                        placeholder={t("freelancer-placeholder-portfolioUrl")}
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="coverLetter" className="text-white/70 text-sm font-medium mb-1">Cover Letter</Label>
+                    <Label htmlFor="coverLetter" className="text-white/70 text-sm font-medium mb-1">{t("freelancer-field-coverLetter")}</Label>
                     <Textarea
                         id="coverLetter"
                         value={formData.coverLetter}
                         onChange={handleChange}
                         rows={4}
                         className="bg-muted border border-white/10 text-white focus:border-primary"
-                        placeholder="Tell us why you want to join our freelancer network..."
+                        placeholder={t("freelancer-placeholder-coverLetter")}
                         required
                     />
                   </div>
 
                   <div>
-                    <Label className="text-white/70 text-sm font-medium mb-2 block">Languages you speak</Label>
+                    <Label className="text-white/70 text-sm font-medium mb-2 block">{t("freelancer-field-languages")}</Label>
                     <div className="flex flex-wrap gap-2 mt-2">
                       {languages.map((lang) => (
                           <button
@@ -246,7 +247,7 @@ export default function FreelancerModal({ isOpen, onClose }: FreelancerModalProp
                       disabled={isSubmitting}
                       className="w-full btn-primary bg-gradient-to-r from-primary to-secondary py-3 px-4 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg"
                   >
-                    {isSubmitting ? "Submitting..." : "Submit Application"}
+                    {isSubmitting ? t("freelancer-button-submitting") : t("freelancer-button-submit")}
                   </Button>
                 </form>
               </motion.div>

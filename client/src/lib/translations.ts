@@ -13,6 +13,92 @@ export type TranslationsData = {
 export const translations: TranslationsData = {
   en: {
 
+    //contact area
+
+    "contact-title": "Get In Touch",
+    "contact-description": "Have a project in mind or want to learn more about our services? Reach out to us directly using the form below.",
+
+    "contact-location-title": "Our Location",
+    "contact-location-description": "123 Innovation Street\nTech District, San Francisco\nCA 94103, USA",
+
+    "contact-email-title": "Email Us",
+    "contact-email-description": "info@quantumedge.io\nsupport@quantumedge.io",
+
+    "contact-phone-title": "Call Us",
+    "contact-phone-description": "+1 (555) 123-4567\n+1 (555) 987-6543",
+
+    "contact-hours-title": "Working Hours",
+    "contact-hours-weekdays": "Monday - Friday:",
+    "contact-hours-saturday": "Saturday:",
+    "contact-hours-sunday": "Sunday:",
+    "contact-hours-weekdays-hours": "9:00 AM - 6:00 PM",
+    "contact-hours-saturday-hours": "10:00 AM - 4:00 PM",
+    "contact-hours-sunday-hours": "Closed",
+
+    "contact-form-title": "Send Us a Message",
+    "contact-form-field-name": "Your Name",
+    "contact-form-field-email": "Your Email",
+    "contact-form-field-subject": "Subject",
+    "contact-form-field-message": "Your Message",
+
+    "contact-form-placeholder-name": "John Doe",
+    "contact-form-placeholder-email": "john@example.com",
+    "contact-form-placeholder-subject": "How can we help you?",
+    "contact-form-placeholder-message": "Tell us about your project...",
+
+    "contact-form-submit": "Send Message",
+    "contact-form-submitting": "Sending...",
+    "contact-form-success": "Message Sent!",
+
+    "contact-toast-success-title": "Message Sent!",
+    "contact-toast-success-description": "We've received your message and will get back to you soon.",
+    "contact-toast-error-title": "Error",
+    "contact-toast-error-description": "Failed to send message",
+
+
+  //freelancer request
+
+    "freelancer-title": "Join Our Freelancer Network",
+    "freelancer-description": "Tell us about your skills and experience",
+
+    "freelancer-field-name": "Full Name",
+    "freelancer-field-email": "Email Address",
+    "freelancer-field-specialty": "Specialty",
+    "freelancer-field-experience": "Years of Experience",
+    "freelancer-field-portfolioUrl": "Portfolio URL",
+    "freelancer-field-coverLetter": "Cover Letter",
+    "freelancer-field-languages": "Languages you speak",
+
+    "freelancer-placeholder-name": "John Doe",
+    "freelancer-placeholder-email": "john@example.com",
+    "freelancer-placeholder-specialty": "Select your specialty",
+    "freelancer-placeholder-experience": "3",
+    "freelancer-placeholder-portfolioUrl": "https://your-portfolio.com",
+    "freelancer-placeholder-coverLetter": "Tell us why you want to join our freelancer network...",
+
+    "freelancer-specialty-web-dev": "Web Development",
+    "freelancer-specialty-mobile-dev": "Mobile Development",
+    "freelancer-specialty-ui-ux": "UI/UX Design",
+    "freelancer-specialty-digital-marketing": "Digital Marketing",
+    "freelancer-specialty-content-creation": "Content Creation",
+
+    "freelancer-button-submit": "Submit Application",
+    "freelancer-button-submitting": "Submitting...",
+
+    "freelancer-success-title": "Application Submitted!",
+    "freelancer-success-description": "We'll review your application and get back to you soon.",
+
+    "freelancer-error-title": "Submission Failed",
+    "freelancer-error-description": "There was an error submitting your application. Please try again.",
+
+
+      "en": "English",
+      "es": "Spanish",
+      "fr": "French",
+      "de": "German",
+      "it": "Italian",
+
+
 
 
     //project request
@@ -30,10 +116,20 @@ export const translations: TranslationsData = {
     "project-field-client-email": "Email Address",
     "project-field-phone": "Phone Number",
 
+    "project-urgent": "Urgent (1-2 weeks)",
+    "project-standard": "Standard (1-2 months)",
+    "project-flexible": "Flexible (3+ months)",
+
+    "project-budge-eco":"₺5.000 - ₺10.000",
+    "project-budge-standard":"₺10.000 - ₺20.000" ,
+    "project-budge-professional":"₺20.000 - ₺35.000",
+    "project-budge-premium":"₺35.000 - ₺60.000",
+    "project-budge-enterprise":"₺60.000 - ₺100.000",
+
     "project-placeholder-name": "e.g. E-commerce app",
     "project-placeholder-type": "Select project type",
     "project-placeholder-timeline": "e.g. 2-3 months",
-    "project-placeholder-budget": "e.g. $5,000",
+    "project-placeholder-budget": "e.g. ₺5,000",
     "project-placeholder-description": "Give us some context...",
     "project-placeholder-client-name": "John Doe",
     "project-placeholder-client-email": "john@example.com",
@@ -544,9 +640,102 @@ export const translations: TranslationsData = {
   },
   tr: {
 
+    //contact area
+
+    "contact-title": "İletişime Geçin",
+    "contact-description": "Bir projeniz mi var ya da hizmetlerimiz hakkında daha fazla mı bilgi almak istiyorsunuz? Aşağıdaki formu kullanarak bize ulaşın.",
+
+    "contact-location-title": "Adresimiz",
+    "contact-location-description": "123 İnovasyon Caddesi\nTeknoloji Bölgesi, San Francisco\nCA 94103, ABD",
+
+    "contact-email-title": "Bize E-posta Gönderin",
+    "contact-email-description": "info@quantumedge.io\nsupport@quantumedge.io",
+
+    "contact-phone-title": "Bizi Arayın",
+    "contact-phone-description": "+1 (555) 123-4567\n+1 (555) 987-6543",
+
+    "contact-hours-title": "Çalışma Saatleri",
+    "contact-hours-weekdays": "Pazartesi - Cuma:",
+    "contact-hours-saturday": "Cumartesi:",
+    "contact-hours-sunday": "Pazar:",
+    "contact-hours-weekdays-hours": "09:00 - 18:00",
+    "contact-hours-saturday-hours": "10:00 - 16:00",
+    "contact-hours-sunday-hours": "Kapalı",
+
+    "contact-form-title": "Bize Mesaj Gönderin",
+    "contact-form-field-name": "Adınız",
+    "contact-form-field-email": "E-posta Adresiniz",
+    "contact-form-field-subject": "Konu",
+    "contact-form-field-message": "Mesajınız",
+
+    "contact-form-placeholder-name": "Örn. Ahmet Yılmaz",
+    "contact-form-placeholder-email": "ahmet@ornek.com",
+    "contact-form-placeholder-subject": "Size nasıl yardımcı olabiliriz?",
+    "contact-form-placeholder-message": "Projenizden bahsedin...",
+
+    "contact-form-submit": "Mesaj Gönder",
+    "contact-form-submitting": "Gönderiliyor...",
+    "contact-form-success": "Mesaj Gönderildi!",
+
+    "contact-toast-success-title": "Mesaj Gönderildi!",
+    "contact-toast-success-description": "Mesajınızı aldık, en kısa sürede sizinle iletişime geçeceğiz.",
+    "contact-toast-error-title": "Hata",
+    "contact-toast-error-description": "Mesaj gönderilemedi",
+
+  //freelancer request
+
+    "freelancer-title": "Serbest Çalışan Ağına Katıl",
+    "freelancer-description": "Becerilerinizi ve deneyiminizi bizimle paylaşın",
+
+    "freelancer-field-name": "Ad Soyad",
+    "freelancer-field-email": "E-posta Adresi",
+    "freelancer-field-specialty": "Uzmanlık Alanı",
+    "freelancer-field-experience": "Deneyim Yılı",
+    "freelancer-field-portfolioUrl": "Portfolyo URL'si",
+    "freelancer-field-coverLetter": "Ön Yazı",
+    "freelancer-field-languages": "Konuştuğunuz Diller",
+
+    "freelancer-placeholder-name": "Örn. Ahmet Yılmaz",
+    "freelancer-placeholder-email": "ahmet@ornek.com",
+    "freelancer-placeholder-specialty": "Uzmanlık alanınızı seçin",
+    "freelancer-placeholder-experience": "3",
+    "freelancer-placeholder-portfolioUrl": "https://ornek-portfolyo.com",
+    "freelancer-placeholder-coverLetter": "Neden serbest çalışan ağımıza katılmak istediğinizi anlatın...",
+
+    "freelancer-specialty-web-dev": "Web Geliştirme",
+    "freelancer-specialty-mobile-dev": "Mobil Geliştirme",
+    "freelancer-specialty-ui-ux": "UI/UX Tasarımı",
+    "freelancer-specialty-digital-marketing": "Dijital Pazarlama",
+    "freelancer-specialty-content-creation": "İçerik Üretimi",
+
+    "freelancer-button-submit": "Başvuruyu Gönder",
+    "freelancer-button-submitting": "Gönderiliyor...",
+
+    "freelancer-success-title": "Başvuru Gönderildi!",
+    "freelancer-success-description": "Başvurunuzu inceledikten sonra sizinle iletişime geçeceğiz.",
+
+    "freelancer-error-title": "Gönderim Başarısız",
+    "freelancer-error-description": "Başvurunuzu gönderirken bir hata oluştu. Lütfen tekrar deneyin.",
+
+
+      "en": "İngilizce",
+      "es": "İspanyolca",
+      "fr": "Fransızca",
+      "de": "Almanca",
+      "it": "İtalyanca",
 
 
     // project request
+
+    "project-urgent": "Acil (1-2 hafta)",
+    "project-standard": "Standart (1-2 ay)",
+    "project-flexible": "Esnek (3+ ay)",
+
+    "project-budge-eco":"₺5.000 - ₺10.000",
+    "project-budge-standard":"₺10.000 - ₺20.000" ,
+    "project-budge-professional":"₺20.000 - ₺35.000",
+    "project-budge-premium":"₺35.000 - ₺60.000",
+    "project-budge-enterprise":"₺60.000 - ₺100.000",
 
     "project-title": "Projenizi Başlatın",
     "project-description": "Bize proje ihtiyaçlarınızı anlatın",
@@ -1052,6 +1241,90 @@ export const translations: TranslationsData = {
     "landing-hero-card-desc": "Развийте бизнеса си с нашите иновативни дигитални решения",
 
 
+    //contact area
+
+    "contact-title": "Свържете се с нас",
+    "contact-description": "Имате проект или искате да научите повече за нашите услуги? Свържете се с нас чрез формуляра по-долу.",
+
+    "contact-location-title": "Нашият адрес",
+    "contact-location-description": "ул. Иновация 123\nТехнологичен район, Сан Франциско\nCA 94103, САЩ",
+
+    "contact-email-title": "Изпратете имейл",
+    "contact-email-description": "info@quantumedge.io\nsupport@quantumedge.io",
+
+    "contact-phone-title": "Обадете ни се",
+    "contact-phone-description": "+1 (555) 123-4567\n+1 (555) 987-6543",
+
+    "contact-hours-title": "Работно време",
+    "contact-hours-weekdays": "Понеделник - Петък:",
+    "contact-hours-saturday": "Събота:",
+    "contact-hours-sunday": "Неделя:",
+    "contact-hours-weekdays-hours": "09:00 - 18:00",
+    "contact-hours-saturday-hours": "10:00 - 16:00",
+    "contact-hours-sunday-hours": "Почивен ден",
+
+    "contact-form-title": "Изпратете съобщение",
+    "contact-form-field-name": "Вашето име",
+    "contact-form-field-email": "Вашият имейл",
+    "contact-form-field-subject": "Относно",
+    "contact-form-field-message": "Вашето съобщение",
+
+    "contact-form-placeholder-name": "напр. Иван Иванов",
+    "contact-form-placeholder-email": "ivan@primer.bg",
+    "contact-form-placeholder-subject": "С какво можем да помогнем?",
+    "contact-form-placeholder-message": "Разкажете ни за вашия проект...",
+
+    "contact-form-submit": "Изпрати съобщение",
+    "contact-form-submitting": "Изпращане...",
+    "contact-form-success": "Съобщението е изпратено!",
+
+    "contact-toast-success-title": "Съобщението е изпратено!",
+    "contact-toast-success-description": "Получихме вашето съобщение и скоро ще се свържем с вас.",
+    "contact-toast-error-title": "Грешка",
+    "contact-toast-error-description": "Неуспешно изпращане на съобщение",
+    //freelancer request
+
+    "freelancer-title": "Присъединете се към нашата мрежа от фрийлансъри",
+    "freelancer-description": "Разкажете ни за вашите умения и опит",
+
+    "freelancer-field-name": "Пълно име",
+    "freelancer-field-email": "Имейл адрес",
+    "freelancer-field-specialty": "Специалност",
+    "freelancer-field-experience": "Години опит",
+    "freelancer-field-portfolioUrl": "URL на портфолиото",
+    "freelancer-field-coverLetter": "Мотивационно писмо",
+    "freelancer-field-languages": "Говорими езици",
+
+    "freelancer-placeholder-name": "напр. Иван Иванов",
+    "freelancer-placeholder-email": "ivan@primer.bg",
+    "freelancer-placeholder-specialty": "Изберете вашата специалност",
+    "freelancer-placeholder-experience": "3",
+    "freelancer-placeholder-portfolioUrl": "https://portfolio.example.com",
+    "freelancer-placeholder-coverLetter": "Разкажете ни защо искате да се присъедините към нашата мрежа...",
+
+    "freelancer-specialty-web-dev": "Уеб разработка",
+    "freelancer-specialty-mobile-dev": "Мобилна разработка",
+    "freelancer-specialty-ui-ux": "UI/UX дизайн",
+    "freelancer-specialty-digital-marketing": "Дигитален маркетинг",
+    "freelancer-specialty-content-creation": "Създаване на съдържание",
+
+    "freelancer-button-submit": "Изпрати кандидатура",
+    "freelancer-button-submitting": "Изпращане...",
+
+    "freelancer-success-title": "Кандидатурата е изпратена!",
+    "freelancer-success-description": "Ще прегледаме кандидатурата ви и ще се свържем с вас скоро.",
+
+    "freelancer-error-title": "Грешка при изпращане",
+    "freelancer-error-description": "Възникна грешка при изпращане на кандидатурата. Моля, опитайте отново.",
+
+
+      "en": "Английски",
+      "es": "Испански",
+      "fr": "Френски",
+      "de": "Немски",
+      "it": "Италиански",
+
+
     //project request
 
     "project-title": "Стартирайте Вашия Проект",
@@ -1065,6 +1338,16 @@ export const translations: TranslationsData = {
     "project-field-client-name": "Вашето Име",
     "project-field-client-email": "Имейл Адрес",
     "project-field-phone": "Телефонен Номер",
+
+    "project-urgent":  "Спешно (1-2 седмици)",
+    "project-standard": "Стандартно (1-2 месеца)",
+    "project-flexible": "Гъвкаво (3+ месеца)",
+
+    "project-budge-eco":"₺5.000 - ₺10.000",
+    "project-budge-standard":"₺10.000 - ₺20.000" ,
+    "project-budge-professional":"₺20.000 - ₺35.000",
+    "project-budge-premium":"₺35.000 - ₺60.000",
+    "project-budge-enterprise":"₺60.000 - ₺100.000",
 
     "project-placeholder-name": "напр. Онлайн магазин",
     "project-placeholder-type": "Изберете тип на проекта",

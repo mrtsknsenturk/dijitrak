@@ -65,9 +65,9 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
       setIsSubmitted(true);
     } catch (error) {
       toast({
-        title: "Submission Failed",
+        title: t("project-error-title"),
         description:
-          "There was an error submitting your project request. Please try again.",
+          t("project-error-description"),
         variant: "destructive",
       });
     } finally {
@@ -234,13 +234,13 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         </SelectTrigger>
                         <SelectContent className="glassmorphism border border-white/10">
                           <SelectItem value="urgent">
-                            Urgent (1-2 weeks)
+                            {t("project-urgent")}
                           </SelectItem>
                           <SelectItem value="standard">
-                            Standard (1-2 months)
+                            {t("project-standard")}
                           </SelectItem>
                           <SelectItem value="flexible">
-                            Flexible (3+ months)
+                            {t("project-flexible")}
                           </SelectItem>
                         </SelectContent>
                       </Select>
@@ -252,7 +252,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         onClick={nextStep}
                         className="w-full btn-primary bg-gradient-to-r from-secondary to-primary py-3 px-4 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg"
                       >
-                        Next Step
+                        {t("project-button-next")}
                       </Button>
                     </div>
                   </div>
@@ -268,7 +268,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         htmlFor="budget"
                         className="text-white/70 text-sm font-medium mb-1"
                       >
-                        Budget Range
+                        {t("project-field-budget")}
                       </Label>
                       <Select
                         value={formData.budget}
@@ -277,17 +277,18 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         }
                       >
                         <SelectTrigger className="bg-muted border border-white/10 text-white focus:border-secondary">
-                          <SelectValue placeholder="Select budget range" />
+                          <SelectValue placeholder={t("project-placeholder-budget")} />
                         </SelectTrigger>
                         <SelectContent className="glassmorphism border border-white/10">
-                          <SelectItem value="small">$1,000 - $5,000</SelectItem>
-                          <SelectItem value="medium">
-                            $5,000 - $15,000
+                          <SelectItem value="eco">{t("project-budge-eco")}</SelectItem>
+                          <SelectItem value="standard">
+                            {t("project-budge-standard")}
                           </SelectItem>
-                          <SelectItem value="large">
-                            $15,000 - $50,000
+                          <SelectItem value="professional">
+                            {t("project-budge-professional")}
                           </SelectItem>
-                          <SelectItem value="enterprise">$50,000+</SelectItem>
+                          <SelectItem value="premium">{t("project-budge-premium")}</SelectItem>
+                          <SelectItem value="enterprise">{t("project-budge-enterprise")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -297,7 +298,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         htmlFor="description"
                         className="text-white/70 text-sm font-medium mb-1"
                       >
-                        Project Description
+                        {t("project-field-description")}
                       </Label>
                       <Textarea
                         id="description"
@@ -305,7 +306,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         onChange={handleChange}
                         rows={4}
                         className="bg-muted border border-white/10 text-white focus:border-secondary"
-                        placeholder="Describe your project in detail..."
+                        placeholder={t("project-placeholder-description")}
                         required
                       />
                     </div>
@@ -317,14 +318,14 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         variant="outline"
                         className="w-1/2 py-3 px-4 rounded-lg text-white font-medium border border-white/20 hover:bg-muted"
                       >
-                        Previous
+                        {t("project-button-prev")}
                       </Button>
                       <Button
                         type="button"
                         onClick={nextStep}
                         className="w-1/2 btn-primary bg-gradient-to-r from-secondary to-primary py-3 px-4 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg"
                       >
-                        Next Step
+                        {t("project-button-next")}
                       </Button>
                     </div>
                   </div>
@@ -340,7 +341,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         htmlFor="clientName"
                         className="text-white/70 text-sm font-medium mb-1"
                       >
-                        Your Name
+                        {t("project-field-client-name")}
                       </Label>
                       <Input
                         id="clientName"
@@ -357,7 +358,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         htmlFor="clientEmail"
                         className="text-white/70 text-sm font-medium mb-1"
                       >
-                        Email Address
+                        {t("project-field-client-email")}
                       </Label>
                       <Input
                         type="email"
@@ -375,7 +376,7 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         htmlFor="phone"
                         className="text-white/70 text-sm font-medium mb-1"
                       >
-                        Phone Number (Optional)
+                        {t("project-field-phone")}
                       </Label>
                       <Input
                         type="tel"
@@ -394,14 +395,14 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                         variant="outline"
                         className="w-1/2 py-3 px-4 rounded-lg text-white font-medium border border-white/20 hover:bg-muted"
                       >
-                        Previous
+                        {t("project-button-prev")}
                       </Button>
                       <Button
                         type="submit"
                         disabled={isSubmitting}
                         className="w-1/2 btn-primary bg-gradient-to-r from-secondary to-primary py-3 px-4 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg"
                       >
-                        {isSubmitting ? "Submitting..." : "Submit Request"}
+                        {isSubmitting ? t("freelancer-button-submitting") : t("project-button-submit")}
                       </Button>
                     </div>
                   </div>
@@ -412,15 +413,15 @@ export default function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                 <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
                   <Check className="h-8 w-8 text-green-500" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Request Submitted!</h3>
+                <h3 className="text-2xl font-bold mb-2">{t("project-success-title")}</h3>
                 <p className="text-white/70 mb-6">
-                  Thanks for submitting your project request. We'll get back to you within 24-48 hours with a response.
+                  {t("project-success-description")}
                 </p>
                 <Button
                   onClick={handleCloseSuccess}
                   className="bg-gradient-to-r from-secondary to-primary py-3 px-6 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg"
                 >
-                  Close
+                  {t("project-button-close")}
                 </Button>
               </div>
             )}
