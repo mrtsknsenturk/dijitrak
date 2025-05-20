@@ -13,330 +13,7 @@ import { MotionDiv, FadeIn, FadeInStagger } from "@/components/ui/motion";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
-interface PricingOption {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  basePrice: number;
-  priceMultiplier: number;
-}
 
-interface TimeFrame {
-  id: string;
-  title: string;
-  multiplier: number;
-}
-
-// Define service options with base pricing
-const webOptions: PricingOption[] = [
-  {
-    id: "landing",
-    title: "Landing Page",
-    description: "A single, impactful page to showcase your product or service",
-    icon: <Globe className="size-5" />,
-    basePrice: 1200,
-    priceMultiplier: 1,
-  },
-  {
-    id: "business",
-    title: "Business Website",
-    description: "Multi-page website for small to medium-sized businesses",
-    icon: <LineChart className="size-5" />,
-    basePrice: 3500,
-    priceMultiplier: 2.5,
-  },
-  {
-    id: "ecommerce",
-    title: "E-commerce Platform",
-    description: "Full-featured online store with product catalog and checkout",
-    icon: <ShoppingCart className="size-5" />,
-    basePrice: 7500,
-    priceMultiplier: 5,
-  },
-  {
-    id: "custom",
-    title: "Custom Web Application",
-    description: "Tailored web application with specific business logic",
-    icon: <Code className="size-5" />,
-    basePrice: 12000,
-    priceMultiplier: 8,
-  },
-];
-
-const mobileOptions: PricingOption[] = [
-  {
-    id: "mvp",
-    title: "MVP Application",
-    description: "Basic functionality to validate your app concept",
-    icon: <Rocket className="size-5" />,
-    basePrice: 8000,
-    priceMultiplier: 1,
-  },
-  {
-    id: "native-ios",
-    title: "Native iOS App",
-    description: "Custom iOS application with Apple design guidelines",
-    icon: <AppleIcon className="size-5" />,
-    basePrice: 15000,
-    priceMultiplier: 1.8,
-  },
-  {
-    id: "native-android",
-    title: "Native Android App",
-    description: "Custom Android application following Material Design",
-    icon: <SmartphoneIcon className="size-5" />,
-    basePrice: 14000,
-    priceMultiplier: 1.7,
-  },
-  {
-    id: "cross-platform",
-    title: "Cross-Platform App",
-    description: "Single codebase for both iOS and Android platforms",
-    icon: <Layers className="size-5" />,
-    basePrice: 18000,
-    priceMultiplier: 2.2,
-  },
-];
-
-const designOptions: PricingOption[] = [
-  {
-    id: "ui-design",
-    title: "UI Design",
-    description: "Visual design for your digital product interfaces",
-    icon: <PaintBucket className="size-5" />,
-    basePrice: 2500,
-    priceMultiplier: 1,
-  },
-  {
-    id: "ux-research",
-    title: "UX Research & Design",
-    description: "User research, wireframing, and interaction design",
-    icon: <BrainCircuit className="size-5" />,
-    basePrice: 4500,
-    priceMultiplier: 1.8,
-  },
-  {
-    id: "branding",
-    title: "Branding & Identity",
-    description: "Logo, visual identity, and brand guidelines",
-    icon: <Palette className="size-5" />,
-    basePrice: 3800,
-    priceMultiplier: 1.5,
-  },
-  {
-    id: "motion-graphics",
-    title: "Motion Graphics",
-    description: "Animated elements and visual effects for your product",
-    icon: <Play className="size-5" />,
-    basePrice: 4000,
-    priceMultiplier: 1.6,
-  },
-];
-
-// Time frames with multipliers
-const timeFrames: TimeFrame[] = [
-  { id: "standard", title: "Standard (10-12 weeks)", multiplier: 1 },
-  { id: "accelerated", title: "Accelerated (6-8 weeks)", multiplier: 1.4 },
-  { id: "express", title: "Express (3-4 weeks)", multiplier: 2 },
-];
-
-// Additional features with prices
-const additionalFeatures = [
-  { id: "analytics", title: "Advanced Analytics", price: 1200, icon: <LineChart className="size-4" /> },
-  { id: "cms", title: "Content Management System", price: 2500, icon: <Database className="size-4" /> },
-  { id: "multilingual", title: "Multilingual Support", price: 1800, icon: <Globe className="size-4" /> },
-  { id: "seo", title: "SEO Optimization", price: 1500, icon: <Search className="size-4" /> },
-  { id: "security", title: "Enhanced Security Features", price: 2000, icon: <Shield className="size-4" /> },
-  { id: "maintenance", title: "1-Year Maintenance Plan", price: 3600, icon: <Wrench className="size-4" /> },
-];
-
-// Import missing icons
-function ShoppingCart(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <circle cx="8" cy="21" r="1" />
-      <circle cx="19" cy="21" r="1" />
-      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-    </svg>
-  );
-}
-
-function Rocket(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-    </svg>
-  );
-}
-
-function AppleIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
-      <path d="M10 2c1 .5 2 2 2 5" />
-    </svg>
-  );
-}
-
-function SmartphoneIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
-      <path d="M12 18h.01" />
-    </svg>
-  );
-}
-
-function Layers(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
-      <path d="m22 6.09-3.08 1.41" />
-      <path d="m2.62 13.73 7.55 3.44a2 2 0 0 0 1.66 0l7.55-3.44" />
-      <path d="m2.62 17.73 7.55 3.44a2 2 0 0 0 1.66 0l7.55-3.44" />
-    </svg>
-  );
-}
-
-function Palette(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <circle cx="13.5" cy="6.5" r=".5" />
-      <circle cx="17.5" cy="10.5" r=".5" />
-      <circle cx="8.5" cy="7.5" r=".5" />
-      <circle cx="6.5" cy="12.5" r=".5" />
-      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
-    </svg>
-  );
-}
-
-function Play(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="m5 3 14 9-14 9V3z" />
-    </svg>
-  );
-}
-
-function Search(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  );
-}
-
-function Wrench(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-    </svg>
-  );
-}
 
 export default function PriceCalculator() {
   const { locale, t } = useLanguage();
@@ -350,6 +27,331 @@ export default function PriceCalculator() {
   const [priceBreakdown, setPriceBreakdown] = useState<any>({});
   const [customFeatures, setCustomFeatures] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  interface PricingOption {
+    id: string;
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+    basePrice: number;
+    priceMultiplier: number;
+  }
+
+  interface TimeFrame {
+    id: string;
+    title: string;
+    multiplier: number;
+  }
+
+// Define service options with base pricing
+  const webOptions: PricingOption[] = [
+    {
+      id: "landing",
+      title: t("webOptions-landing-title"),
+      description: t("webOptions-landing-description"),
+      icon: <Globe className="size-5" />,
+      basePrice: 8500,
+      priceMultiplier: 1,
+    },
+    {
+      id: "business",
+      title: t("webOptions-business-title"),
+      description:  t("webOptions-business-description"),
+      icon: <LineChart className="size-5" />,
+      basePrice: 15000,
+      priceMultiplier: 2.5,
+    },
+    {
+      id: "ecommerce",
+      title:  t("webOptions-ecommerce-title"),
+      description:  t("webOptions-ecommerce-description"),
+      icon: <ShoppingCart className="size-5" />,
+      basePrice: 24000,
+      priceMultiplier: 5,
+    },
+    {
+      id: "custom",
+      title:  t("webOptions-custom-title"),
+      description:  t("webOptions-custom-description"),
+      icon: <Code className="size-5" />,
+      basePrice: 38000,
+      priceMultiplier: 8,
+    },
+  ];
+
+  const mobileOptions: PricingOption[] = [
+    {
+      id: "mvp",
+      title:  t("mobileOptions-mvp-title"),
+      description:  t("mobileOptions-mvp-description"),
+      icon: <Rocket className="size-5" />,
+      basePrice: 26000,
+      priceMultiplier: 1,
+    },
+    {
+      id: "native-ios",
+      title:  t("mobileOptions-native-ios-title"),
+      description:  t("mobileOptions-native-ios-description"),
+      icon: <AppleIcon className="size-5" />,
+      basePrice: 36000,
+      priceMultiplier: 1.8,
+    },
+    {
+      id: "native-android",
+      title:  t("mobileOptions-native-android-title"),
+      description:  t("mobileOptions-native-android-description"),
+      icon: <SmartphoneIcon className="size-5" />,
+      basePrice: 34000,
+      priceMultiplier: 1.7,
+    },
+    {
+      id: "cross-platform",
+      title:  t("mobileOptions-cross-platform-title"),
+      description:  t("mobileOptions-cross-platform-description"),
+      icon: <Layers className="size-5" />,
+      basePrice: 45000,
+      priceMultiplier: 2.2,
+    },
+  ];
+
+  const designOptions: PricingOption[] = [
+    {
+      id: "ui-design",
+      title:  t("designOptions-ui-design-title"),
+      description:  t("designOptions-ui-design-description"),
+      icon: <PaintBucket className="size-5" />,
+      basePrice: 5000,
+      priceMultiplier: 1,
+    },
+    {
+      id: "ux-research",
+      title:  t("designOptions-ux-research-title"),
+      description:  t("designOptions-ux-research-description"),
+      icon: <BrainCircuit className="size-5" />,
+      basePrice: 6500,
+      priceMultiplier: 1.8,
+    },
+    {
+      id: "branding",
+      title:  t("designOptions-branding-title"),
+      description:  t("designOptions-branding-description"),
+      icon: <Palette className="size-5" />,
+      basePrice: 5500,
+      priceMultiplier: 1.5,
+    },
+    {
+      id: "motion-graphics",
+      title: t("designOptions-motion-graphics-title"),
+      description:  t("designOptions-motion-graphics-description"),
+      icon: <Play className="size-5" />,
+      basePrice: 7000,
+      priceMultiplier: 1.6,
+    },
+  ];
+
+// Time frames with multipliers
+  const timeFrames: TimeFrame[] = [
+    { id: "standard", title: t("timeFrames-standard-title"), multiplier: 1 },
+    { id: "accelerated", title: t("timeFrames-accelerated-title"), multiplier: 1.4 },
+    { id: "express", title: t("timeFrames-express-title"), multiplier: 2 },
+  ];
+
+// Additional features with prices
+  const additionalFeatures = [
+    { id: "analytics", title: t("additionalFeatures-analytics-title"), price: 2500, icon: <LineChart className="size-4" /> },
+    { id: "cms", title: t("additionalFeatures-cms-title"), price: 3500, icon: <Database className="size-4" /> },
+    { id: "multilingual", title: t("additionalFeatures-multilingual-title"), price: 3000, icon: <Globe className="size-4" /> },
+    { id: "seo", title: t("additionalFeatures-seo-title"), price: 2500, icon: <Search className="size-4" /> },
+    { id: "security", title: t("additionalFeatures-security-title"), price: 3500, icon: <Shield className="size-4" /> },
+    { id: "maintenance", title: t("additionalFeatures-maintenance-title"), price: 4000, icon: <Wrench className="size-4" /> },
+  ];
+
+// Import missing icons
+  function ShoppingCart(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <circle cx="8" cy="21" r="1" />
+          <circle cx="19" cy="21" r="1" />
+          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+        </svg>
+    );
+  }
+
+  function Rocket(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+        </svg>
+    );
+  }
+
+  function AppleIcon(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
+          <path d="M10 2c1 .5 2 2 2 5" />
+        </svg>
+    );
+  }
+
+  function SmartphoneIcon(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+          <path d="M12 18h.01" />
+        </svg>
+    );
+  }
+
+  function Layers(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+          <path d="m22 6.09-3.08 1.41" />
+          <path d="m2.62 13.73 7.55 3.44a2 2 0 0 0 1.66 0l7.55-3.44" />
+          <path d="m2.62 17.73 7.55 3.44a2 2 0 0 0 1.66 0l7.55-3.44" />
+        </svg>
+    );
+  }
+
+  function Palette(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <circle cx="13.5" cy="6.5" r=".5" />
+          <circle cx="17.5" cy="10.5" r=".5" />
+          <circle cx="8.5" cy="7.5" r=".5" />
+          <circle cx="6.5" cy="12.5" r=".5" />
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+        </svg>
+    );
+  }
+
+  function Play(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <path d="m5 3 14 9-14 9V3z" />
+        </svg>
+    );
+  }
+
+  function Search(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+    );
+  }
+
+  function Wrench(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+        </svg>
+    );
+  }
   
   // Form for user contact information
   const [contactInfo, setContactInfo] = useState({
@@ -432,9 +434,9 @@ export default function PriceCalculator() {
 
   // Format price for display
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat(locale === 'en' ? 'en-US' : 'tr-TR', {
+    return new Intl.NumberFormat('tr-TR', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'TRY',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);

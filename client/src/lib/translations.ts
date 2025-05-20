@@ -13,6 +13,49 @@ export type TranslationsData = {
 export const translations: TranslationsData = {
   en: {
 
+    // Web options
+    "webOptions-landing-title": "Landing Page",
+    "webOptions-landing-description": "A single, impactful page to showcase your product or service",
+    "webOptions-business-title": "Business Website",
+    "webOptions-business-description": "Multi-page website for small to medium-sized businesses",
+    "webOptions-ecommerce-title": "E-commerce Platform",
+    "webOptions-ecommerce-description": "Full-featured online store with product catalog and checkout",
+    "webOptions-custom-title": "Custom Web Application",
+    "webOptions-custom-description": "Tailored web application with specific business logic",
+
+    // Mobile options
+    "mobileOptions-mvp-title": "MVP Application",
+    "mobileOptions-mvp-description": "Basic functionality to validate your app concept",
+    "mobileOptions-native-ios-title": "Native iOS App",
+    "mobileOptions-native-ios-description": "Custom iOS application with Apple design guidelines",
+    "mobileOptions-native-android-title": "Native Android App",
+    "mobileOptions-native-android-description": "Custom Android application following Material Design",
+    "mobileOptions-cross-platform-title": "Cross-Platform App",
+    "mobileOptions-cross-platform-description": "Single codebase for both iOS and Android platforms",
+
+    // Design options
+    "designOptions-ui-design-title": "UI Design",
+    "designOptions-ui-design-description": "Visual design for your digital product interfaces",
+    "designOptions-ux-research-title": "UX Research & Design",
+    "designOptions-ux-research-description": "User research, wireframing, and interaction design",
+    "designOptions-branding-title": "Branding & Identity",
+    "designOptions-branding-description": "Logo, visual identity, and brand guidelines",
+    "designOptions-motion-graphics-title": "Motion Graphics",
+    "designOptions-motion-graphics-description": "Animated elements and visual effects for your product",
+
+    // Time frames
+    "timeFrames-standard-title": "Standard (10-12 weeks)",
+    "timeFrames-accelerated-title": "Accelerated (6-8 weeks)",
+    "timeFrames-express-title": "Express (3-4 weeks)",
+
+    // Additional features
+    "additionalFeatures-analytics-title": "Advanced Analytics",
+    "additionalFeatures-cms-title": "Content Management System",
+    "additionalFeatures-multilingual-title": "Multilingual Support",
+    "additionalFeatures-seo-title": "SEO Optimization",
+    "additionalFeatures-security-title": "Enhanced Security Features",
+    "additionalFeatures-maintenance-title": "1-Year Maintenance Plan",
+
     //contact area
 
     "contact-title": "Get In Touch",
@@ -640,6 +683,49 @@ export const translations: TranslationsData = {
   },
   tr: {
 
+    // Web options
+    "webOptions-landing-title": "Landing Page",
+    "webOptions-landing-description": "Ürününüzü veya hizmetinizi sergilemek için tek sayfalık etkileyici bir sayfa",
+    "webOptions-business-title": "Kurumsal Web Sitesi",
+    "webOptions-business-description": "Küçük ve orta ölçekli işletmeler için çok sayfalı web sitesi",
+    "webOptions-ecommerce-title": "E-ticaret Platformu",
+    "webOptions-ecommerce-description": "Ürün kataloğu ve ödeme işlemi olan tam özellikli online mağaza",
+    "webOptions-custom-title": "Özel Web Uygulaması",
+    "webOptions-custom-description": "Belirli iş mantığına sahip özel web uygulaması",
+
+    // Mobile options
+    "mobileOptions-mvp-title": "MVP Uygulaması",
+    "mobileOptions-mvp-description": "Uygulama konseptinizi doğrulamak için temel işlevsellik",
+    "mobileOptions-native-ios-title": "Native iOS Uygulaması",
+    "mobileOptions-native-ios-description": "Apple tasarım yönergelerine uygun özel iOS uygulaması",
+    "mobileOptions-native-android-title": "Native Android Uygulaması",
+    "mobileOptions-native-android-description": "Material Design'ı takip eden özel Android uygulaması",
+    "mobileOptions-cross-platform-title": "Çapraz Platform Uygulaması",
+    "mobileOptions-cross-platform-description": "Hem iOS hem de Android platformları için tek kod tabanı",
+
+    // Design options
+    "designOptions-ui-design-title": "UI Tasarımı",
+    "designOptions-ui-design-description": "Dijital ürün arayüzleriniz için görsel tasarım",
+    "designOptions-ux-research-title": "UX Araştırması & Tasarımı",
+    "designOptions-ux-research-description": "Kullanıcı araştırması, tel çerçeveleme ve etkileşim tasarımı",
+    "designOptions-branding-title": "Marka ve Kimlik Tasarımı",
+    "designOptions-branding-description": "Logo, görsel kimlik ve marka yönergeleri",
+    "designOptions-motion-graphics-title": "Hareketli Grafikler",
+    "designOptions-motion-graphics-description": "Ürününüz için animasyonlu öğeler ve görsel efektler",
+
+    // Time frames
+    "timeFrames-standard-title": "Standart (10-12 hafta)",
+    "timeFrames-accelerated-title": "Hızlandırılmış (6-8 hafta)",
+    "timeFrames-express-title": "Ekspres (3-4 hafta)",
+
+    // Additional features
+    "additionalFeatures-analytics-title": "Gelişmiş Analitik",
+    "additionalFeatures-cms-title": "İçerik Yönetim Sistemi",
+    "additionalFeatures-multilingual-title": "Çok Dilli Destek",
+    "additionalFeatures-seo-title": "SEO Optimizasyonu",
+    "additionalFeatures-security-title": "Gelişmiş Güvenlik Özellikleri",
+    "additionalFeatures-maintenance-title": "1 Yıllık Bakım Planı",
+
     //contact area
 
     "contact-title": "İletişime Geçin",
@@ -1229,6 +1315,49 @@ export const translations: TranslationsData = {
     "tech_github_desc": "Yazılım iş akışlarını, testleri ve dağıtımı otomatikleştirmek için GitHub ile entegre CI/CD platformu.",
   },
   bg: {
+
+    // Web options
+    "webOptions-landing-title": "Целева страница",
+    "webOptions-landing-description": "Една страница с голямо въздействие за показване на продукта или услугата ви",
+    "webOptions-business-title": "Бизнес уебсайт",
+    "webOptions-business-description": "Многостраничен уебсайт за малки и средни предприятия",
+    "webOptions-ecommerce-title": "Електронна търговска платформа",
+    "webOptions-ecommerce-description": "Цялостен онлайн магазин с продуктов каталог и каса",
+    "webOptions-custom-title": "Персонализирано уеб приложение",
+    "webOptions-custom-description": "Персонализирано уеб приложение със специфична бизнес логика",
+
+    // Mobile options
+    "mobileOptions-mvp-title": "MVP Приложение",
+    "mobileOptions-mvp-description": "Основна функционалност за валидиране на концепцията на приложението ви",
+    "mobileOptions-native-ios-title": "Native iOS Приложение",
+    "mobileOptions-native-ios-description": "Персонализирано iOS приложение с Apple дизайн насоки",
+    "mobileOptions-native-android-title": "Native Android Приложение",
+    "mobileOptions-native-android-description": "Персонализирано Android приложение с Material Design",
+    "mobileOptions-cross-platform-title": "Приложение за Крос-Платформа",
+    "mobileOptions-cross-platform-description": "Един код за iOS и Android платформи",
+
+    // Design options
+    "designOptions-ui-design-title": "UI Дизайн",
+    "designOptions-ui-design-description": "Визуален дизайн за интерфейси на дигитални продукти",
+    "designOptions-ux-research-title": "UX Проучване и Дизайн",
+    "designOptions-ux-research-description": "Проучвания на потребители, wireframing и интеракционен дизайн",
+    "designOptions-branding-title": "Брандинг и Идентичност",
+    "designOptions-branding-description": "Лого, визуална идентичност и бранд насоки",
+    "designOptions-motion-graphics-title": "Движи графики",
+    "designOptions-motion-graphics-description": "Анимирани елементи и визуални ефекти за вашия продукт",
+
+    // Time frames
+    "timeFrames-standard-title": "Стандарт (10-12 седмици)",
+    "timeFrames-accelerated-title": "Ускорен (6-8 седмици)",
+    "timeFrames-express-title": "Изразен (3-4 седмици)",
+
+    // Additional features
+    "additionalFeatures-analytics-title": "Разширена аналитика",
+    "additionalFeatures-cms-title": "Система за управление на съдържанието",
+    "additionalFeatures-multilingual-title": "Многоезична Поддръжка",
+    "additionalFeatures-seo-title": "SEO Оптимизация",
+    "additionalFeatures-security-title": "Разширени характеристики за сигурност",
+    "additionalFeatures-maintenance-title": "1-годишен план за поддръжка",
     //Landing Page
     "landing-title": "Създаваме <span class='gradient-text'>дигитални преживявания</span>, които трансформират бизнеса",
     "landing-sub-title": "Нашият екип от експерти създава иновативни дигитални решения, които помагат на бизнесите да бъдат крачка напред в днешната бързо развиваща се дигитална среда.",
