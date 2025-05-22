@@ -68,7 +68,7 @@ export default function ContactSection() {
       setIsSubmitting(false);
     }
   };
-  const { t } = useLanguage(); // çeviri hook'u
+  const { t,locale } = useLanguage(); // çeviri hook'u
   return (
     <section id="contact" className="py-24 bg-background relative">
       <div className="absolute inset-0 overflow-hidden">
@@ -79,13 +79,24 @@ export default function ContactSection() {
       <div className="container mx-auto px-6 relative z-10">
         <FadeIn className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Get In <span className="gradient-text">Touch</span>
+            {locale === "en"
+                ? "Get In "
+                : locale === "tr"
+                    ? "Bizimle "
+                    : "Свържете се "}
+            <span className="gradient-text">
+    {locale === "en"
+        ? "Touch"
+        : locale === "tr"
+            ? "İletişime Geçin"
+            : "с Нас"}
+  </span>
           </h2>
           <p className="text-white/70">
             {t("contact-description")}
           </p>
         </FadeIn>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2 space-y-8">
             <div className="glassmorphism rounded-xl p-6 border border-white/10">

@@ -12,6 +12,14 @@ export type TranslationsData = {
 
 export const translations: TranslationsData = {
   en: {
+//our numbers
+    "sectionTitle": "Our <span class='gradient-text'>Numbers</span>",
+   " sectionDescription":
+        "We take pride in our achievements and the impact we've made for businesses worldwide.",
+    "happyClients": "Happy Clients",
+    "projectsCompleted": "Projects Completed",
+    "teamMembers": "Team Members",
+    "customerSatisfaction": "Customer Satisfaction",
 
     // Web options
     "webOptions-landing-title": "Landing Page",
@@ -333,11 +341,6 @@ export const translations: TranslationsData = {
     "testimonials.title": "What Our Clients Say",
     "testimonials.subtitle": "Don't just take our word for it — hear from some of our satisfied clients about their experiences working with us.",
 
-    // CTA Section
-    "cta.title": "Ready to Transform Your Business?",
-    "cta.subtitle": "Let's work together to bring your vision to life. Start by telling us about your project.",
-    "cta.button.freelancer": "Join as Freelancer",
-    "cta.button.project": "Start a Project",
 
     // Contact Section
     "contact.title": "Get In Touch",
@@ -500,7 +503,29 @@ export const translations: TranslationsData = {
     "price_calculator.select_service": "Select a service to begin",
     "price_calculator.select_service_desc": "Choose from our service options to see pricing details",
 
-    // Admin Login
+   "price_calculator.toast_title":"Invalid email",
+   "price_calculator.toast_title_description":"Please enter a valid email address",
+   "price_calculator.toast_validate_fields":"Please fill in the required fields",
+   "price_calculator.toast_validate_fields_description":"Name and email required",
+
+   "price_calculator.contact.title": "Contact Information",
+    "price_calculator.contact.desc": "Please provide your contact details to receive a detailed quote.",
+    "price_calculator.contact.name": "Name",
+    "price_calculator.contact.email": "Email",
+    "price_calculator.contact.phone": "Phone (Optional)",
+    "price_calculator.contact.company": "Company (Optional)",
+    "price_calculator.contact.submit": "Submit Request",
+    "price_calculator.contact.submitting": "Submitting...",
+
+   "price_calculator.contact-success-title": "Request Submitted!",
+   "price_calculator.contact-success-description": "Thank you. We'll review your request and get in touch soon.",
+
+   "price_calculator.contact-error-title": "Something went wrong",
+   "price_calculator.contact-error-description": "We couldn't send your request. Please try again.",
+
+
+
+   // Admin Login
     "admin.login.title": "Admin Login",
     "admin.login.description": "Enter your credentials to access the dashboard",
     "admin.login.username": "Username",
@@ -682,6 +707,26 @@ export const translations: TranslationsData = {
     "admin.analytics.period.yearly": "Yearly",
   },
   tr: {
+
+   "cta.title1": "Markanızı",
+   "cta.title2": "dijital dünyada",
+   "cta.title3": "bir adım öne taşıyın",
+   "cta.subtitle": "Dijital mükemmelliğe giden ilk adımı atın. Bizimle nasıl çalışmak istediğinizi seçin.",
+   "cta.joinTeamTitle": "Ekibimize Katıl",
+   "cta.joinTeamDesc": "Freelancer olarak bizimle çalışın ve heyecan verici projelere katkı sağlayın.",
+   "cta.more": "daha fazla",
+   "cta.startProjectTitle": "Projenizi Başlatın",
+   "cta.startProjectDesc": "Bize projenizi anlatın ve size özel çözümler sunalım.",
+   "cta.boxTitle": "Büyümenizi Hızlandırın",
+   "cta.boxDesc": "Bizimle iş ortaklığı yaparak işinizi yeni zirvelere taşıyın.",
+
+    "sectionTitle": "Bizim <span class='gradient-text'>Rakamlarımız</span>",
+    "sectionDescription":
+        "Başarılarımız ve dünya çapındaki işletmelere sağladığımız katkılardan gurur duyuyoruz.",
+    "happyClients": "Mutlu Müşteri",
+    "projectsCompleted": "Tamamlanan Proje",
+    "teamMembers": "Ekip Üyesi",
+    "customerSatisfaction": "Müşteri Memnuniyeti",
 
     // Web options
     "webOptions-landing-title": "Landing Page",
@@ -966,7 +1011,27 @@ export const translations: TranslationsData = {
     "price_calculator.select_service": "Başlamak için bir hizmet seçin",
     "price_calculator.select_service_desc": "Fiyatlandırma detaylarını görmek için hizmet seçeneklerimizden birini seçin",
 
-    // Navbar
+    "price_calculator.toast_title":"Geçersiz e-posta",
+    "price_calculator.toast_title_description":"Lütfen geçerli bir e-posta adresi girin",
+    "price_calculator.toast_validate_fields":"Lütfen gerekli alanları doldurun",
+    "price_calculator.toast_validate_fields_description":"İsim ve e-posta gereklidir",
+
+    "price_calculator.contact.title": "İletişim Bilgileri",
+    "price_calculator.contact.desc": "Detaylı teklif almak için lütfen iletişim bilgilerinizi sağlayın.",
+    "price_calculator.contact.name": "İsim",
+    "price_calculator.contact.email": "E-posta",
+    "price_calculator.contact.phone": "Telefon (İsteğe Bağlı)",
+    "price_calculator.contact.company": "Şirket (İsteğe Bağlı)",
+    "price_calculator.contact.submit": "Talebi Gönder",
+    "price_calculator.contact.submitting": "Gönderiliyor...",
+
+   "price_calculator.contact-success-title": "Talep Gönderildi!",
+   "price_calculator.contact-success-description": "Teşekkürler. Talebinizi inceledikten sonra sizinle iletişime geçeceğiz.",
+
+   "price_calculator.contact-error-title": "Bir hata oluştu",
+   "price_calculator.contact-error-description": "Talebinizi gönderemedik. Lütfen tekrar deneyin.",
+
+   // Navbar
     "nav.home": "Ana Sayfa",
     "nav.services": "Hizmetler",
     "nav.portfolio": "Portföy",
@@ -1025,11 +1090,7 @@ export const translations: TranslationsData = {
     "testimonials.title": "Müşterilerimiz Ne Diyor",
     "testimonials.subtitle": "Sadece bizim sözümüzü dinlemeyin — memnun müşterilerimizden bazılarının bizimle çalışma deneyimleri hakkında bilgi edinin.",
 
-    // CTA Section
-    "cta.title": "İşletmenizi Dönüştürmeye Hazır mısınız?",
-    "cta.subtitle": "Vizyonunuzu hayata geçirmek için birlikte çalışalım. Projenizi anlatarak başlayın.",
-    "cta.button.freelancer": "Freelancer Olarak Katıl",
-    "cta.button.project": "Bir Proje Başlat",
+
 
     // Contact Section
     "contact.title": "Bize Ulaşın",
@@ -1315,6 +1376,25 @@ export const translations: TranslationsData = {
     "tech_github_desc": "Yazılım iş akışlarını, testleri ve dağıtımı otomatikleştirmek için GitHub ile entegre CI/CD platformu.",
   },
   bg: {
+   "cta.title1": "Готови ли сте да",
+   "cta.title2": "преобразите",
+   "cta.title3": "вашето дигитално присъствие?",
+   "cta.subtitle": "Направете първата стъпка към дигитално съвършенство. Изберете как искате да работим заедно.",
+   "cta.joinTeamTitle": "Присъединете се към нашия екип",
+   "cta.joinTeamDesc": "Работете с нас като фрийлансър по вълнуващи проекти.",
+   "cta.more": "още",
+   "cta.startProjectTitle": "Започнете вашия проект",
+   "cta.startProjectDesc": "Разкажете ни за вашия проект и ще ви предложим индивидуално решение.",
+   "cta.boxTitle": "Ускорете своя растеж",
+   "cta.boxDesc": "Станете наш партньор и изведете бизнеса си на ново ниво.",
+
+    "sectionTitle": "Нашите <span class='gradient-text'>Цифри</span>",
+    "sectionDescription":
+        "Гордеем се с нашите постижения и влиянието, което оказахме върху бизнеси по целия свят.",
+    "happyClients": "Доволни Клиенти",
+    "projectsCompleted": "Завършени Проекти",
+    "teamMembers": "Членове на Екипа",
+    "customerSatisfaction": "Удовлетвореност на Клиентите",
 
     // Web options
     "webOptions-landing-title": "Целева страница",
@@ -1587,12 +1667,6 @@ export const translations: TranslationsData = {
     // Testimonial Section
     "testimonials.title": "Какво казват нашите клиенти",
     "testimonials.subtitle": "Не приемайте само нашата дума - чуйте от някои от нашите доволни клиенти за техния опит с нас.",
-
-    // CTA Section
-    "cta.title": "Готови ли сте да трансформирате бизнеса си?",
-    "cta.subtitle": "Нека работим заедно, за да осъществим вашата визия. Започнете, като ни разкажете за вашия проект.",
-    "cta.button.freelancer": "Присъединете се като фрилансър",
-    "cta.button.project": "Започнете проект",
 
 
 
@@ -1917,6 +1991,26 @@ export const translations: TranslationsData = {
     "price_calculator.free_consultation": "Без ангажимент, безплатна консултация",
     "price_calculator.select_service": "Изберете услуга, за да започнете",
     "price_calculator.select_service_desc": "Изберете от нашите опции за услуги, за да видите ценовите детайли",
+
+   "price_calculator.toast_title":"Невалиден имейл",
+   "price_calculator.toast_title_description":"Моля, въведете валиден имейл адрес",
+   "price_calculator.toast_validate_fields":"Моля, попълнете задължителните полета",
+   "price_calculator.toast_validate_fields_description":"Изискват се име и имейл",
+
+    "price_calculator.contact.title": "Информация за контакт",
+    "price_calculator.contact.desc": "Моля, въведете данните си за контакт, за да получите подробна оферта.",
+    "price_calculator.contact.name": "Име",
+    "price_calculator.contact.email": "Имейл",
+    "price_calculator.contact.phone": "Телефон (по избор)",
+    "price_calculator.contact.company": "Компания (по избор)",
+    "price_calculator.contact.submit": "Изпрати заявка",
+    "price_calculator.contact.submitting": "Изпращане...",
+
+   "price_calculator.contact-success-title": "Заявката е изпратена!",
+   "price_calculator.contact-success-description": "Благодарим Ви. Ще прегледаме заявката и ще се свържем с Вас скоро.",
+
+   "price_calculator.contact-error-title": "Възникна грешка",
+   "price_calculator.contact-error-description": "Не успяхме да изпратим заявката Ви. Моля, опитайте отново.",
 
     "admin.analytics.title": "Аналитика",
     "admin.analytics.subtitle": "Преглед на бизнес показателите и метриките",

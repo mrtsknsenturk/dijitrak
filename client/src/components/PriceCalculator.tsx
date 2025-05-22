@@ -455,7 +455,12 @@ export default function PriceCalculator() {
   const handleSubmitRequest = async () => {
     if (!selectedOption) {
       toast({
-        title: locale === "en" ? "Please select a service" : "Lütfen bir hizmet seçin",
+        title:
+            locale === "bg"
+                ? "Моля, изберете услуга"
+                : locale === "en"
+                    ? "Please select a service"
+                    : "Lütfen bir hizmet seçin",
         variant: "destructive"
       });
       return;
@@ -470,8 +475,8 @@ export default function PriceCalculator() {
     // Validate contact form
     if (!contactInfo.name || !contactInfo.email) {
       toast({
-        title: locale === "en" ? "Please fill required fields" : "Lütfen gerekli alanları doldurun",
-        description: locale === "en" ? "Name and email are required" : "İsim ve e-posta gereklidir",
+        title: t("price_calculator.toast_validate_fields"),
+        description:t("price_calculator.toast_validate_fields_description"),
         variant: "destructive"
       });
       return;
@@ -481,8 +486,8 @@ export default function PriceCalculator() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(contactInfo.email)) {
       toast({
-        title: locale === "en" ? "Invalid email" : "Geçersiz e-posta",
-        description: locale === "en" ? "Please enter a valid email address" : "Lütfen geçerli bir e-posta adresi girin",
+        title: t("price_calculator.toast_title"),
+        description: t("price_calculator.toast_title_description"),
         variant: "destructive"
       });
       return;
@@ -518,10 +523,8 @@ export default function PriceCalculator() {
       
       // Show success message
       toast({
-        title: locale === "en" ? "Request submitted successfully" : "Talep başarıyla gönderildi",
-        description: locale === "en" 
-          ? "We'll get back to you shortly with a detailed quote" 
-          : "Detaylı bir fiyat teklifiyle kısa süre içinde size dönüş yapacağız",
+        title: t("price_calculator.contact-success-title"),
+        description: t("price_calculator.contact-success-description"),
       });
       
       // Reset the form
@@ -535,10 +538,8 @@ export default function PriceCalculator() {
       
     } catch (error) {
       toast({
-        title: locale === "en" ? "Submission failed" : "Gönderim başarısız",
-        description: locale === "en" 
-          ? "An error occurred while submitting your request. Please try again." 
-          : "Talebiniz gönderilirken bir hata oluştu. Lütfen tekrar deneyin.",
+        title: t("price_calculator.contact-error-title"),
+        description: t("price_calculator.contact-error-description"),
         variant: "destructive"
       });
     } finally {
@@ -564,19 +565,17 @@ export default function PriceCalculator() {
             </button>
             
             <h3 className="text-xl font-bold mb-4">
-              {locale === "en" ? "Contact Information" : "İletişim Bilgileri"}
+              {t("price_calculator.contact.title")}
             </h3>
             
             <p className="text-sm text-muted-foreground mb-6">
-              {locale === "en" 
-                ? "Please provide your contact details to receive a detailed quote." 
-                : "Detaylı teklif almak için lütfen iletişim bilgilerinizi sağlayın."}
+              {t("price_calculator.contact.desc")}
             </p>
             
             <div className="space-y-4">
               <div>
                 <Label htmlFor="name" className="text-sm font-medium mb-1 block">
-                  {locale === "en" ? "Name" : "İsim"} <span className="text-red-500">*</span>
+                  {t("price_calculator.contact.name")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="name"
@@ -590,7 +589,7 @@ export default function PriceCalculator() {
               
               <div>
                 <Label htmlFor="email" className="text-sm font-medium mb-1 block">
-                  {locale === "en" ? "Email" : "E-posta"} <span className="text-red-500">*</span>
+                  {t("price_calculator.contact.email")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="email"
@@ -605,7 +604,7 @@ export default function PriceCalculator() {
               
               <div>
                 <Label htmlFor="phone" className="text-sm font-medium mb-1 block">
-                  {locale === "en" ? "Phone (Optional)" : "Telefon (İsteğe Bağlı)"}
+                  {t("price_calculator.contact.phone")}
                 </Label>
                 <Input
                   id="phone"
@@ -618,7 +617,7 @@ export default function PriceCalculator() {
               
               <div>
                 <Label htmlFor="company" className="text-sm font-medium mb-1 block">
-                  {locale === "en" ? "Company (Optional)" : "Şirket (İsteğe Bağlı)"}
+                  {t("price_calculator.contact.company")}
                 </Label>
                 <Input
                   id="company"
@@ -635,23 +634,33 @@ export default function PriceCalculator() {
                 disabled={isSubmitting}
               >
                 {isSubmitting 
-                  ? (locale === "en" ? "Submitting..." : "Gönderiliyor...") 
-                  : (locale === "en" ? "Submit Request" : "Talebi Gönder")}
+                  ? t("price_calculator.contact.submitting")
+                  : t("price_calculator.contact.submit")}
               </Button>
             </div>
           </div>
         </div>
       )}
-      
+
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          {locale === "en" ? "Interactive " : "İnteraktif "}
-          <span className="text-primary">{locale === "en" ? "Pricing Calculator" : "Fiyat Hesaplayıcı"}</span>
+          {locale === "en"
+              ? "Interactive "
+              : locale === "tr"
+                  ? "İnteraktif "
+                  : "Интерактивен "}
+          <span className="text-primary">
+    {locale === "en"
+        ? "Pricing Calculator"
+        : locale === "tr"
+            ? "Fiyat Hesaplayıcı"
+            : "Калкулатор за Цени"}
+  </span>
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          {locale === "en" 
-            ? "Estimate the cost of your project based on your specific needs and requirements. Adjust the parameters below to get a custom quote." 
-            : "Özel ihtiyaçlarınıza ve gereksinimlerinize göre projenizin maliyetini tahmin edin. Özel bir teklif almak için aşağıdaki parametreleri ayarlayın."}
+          {locale === "en"
+              ? "Estimate the cost of your project based on your specific needs and requirements. Adjust the parameters below to get a custom quote."
+              : "Özel ihtiyaçlarınıza ve gereksinimlerinize göre projenizin maliyetini tahmin edin. Özel bir teklif almak için aşağıdaki parametreleri ayarlayın."}
         </p>
       </div>
 
@@ -660,9 +669,9 @@ export default function PriceCalculator() {
         <div className="lg:col-span-3 space-y-8">
           <Card>
             <CardHeader>
-              <CardTitle>{locale === "en" ? "Project Type" : "Proje Tipi"}</CardTitle>
+              <CardTitle>{t("price_calculator.title")}</CardTitle>
               <CardDescription>
-                {locale === "en" ? "Select the type of project you need" : "İhtiyacınız olan proje türünü seçin"}
+                {t("price_calculator.subtitle")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -677,9 +686,9 @@ export default function PriceCalculator() {
                 className="w-full"
               >
                 <TabsList className="grid grid-cols-3 mb-4">
-                  <TabsTrigger value="web">{locale === "en" ? "Website" : "Web Sitesi"}</TabsTrigger>
-                  <TabsTrigger value="mobile">{locale === "en" ? "Mobile App" : "Mobil Uygulama"}</TabsTrigger>
-                  <TabsTrigger value="design">{locale === "en" ? "Design" : "Tasarım"}</TabsTrigger>
+                  <TabsTrigger value="web">{t("price_calculator.website")}</TabsTrigger>
+                  <TabsTrigger value="mobile">{t("price_calculator.mobile_app")}</TabsTrigger>
+                  <TabsTrigger value="design">{t("price_calculator.design")}</TabsTrigger>
                 </TabsList>
                 <TabsContent value="web" className="space-y-4">
                   <FadeInStagger>
@@ -753,19 +762,17 @@ export default function PriceCalculator() {
               <FadeIn>
                 <Card>
                   <CardHeader>
-                    <CardTitle>{locale === "en" ? "Project Complexity" : "Proje Karmaşıklığı"}</CardTitle>
+                    <CardTitle>{t("price_calculator.complexity")}</CardTitle>
                     <CardDescription>
-                      {locale === "en" 
-                        ? "Adjust the complexity based on your project requirements" 
-                        : "Proje gereksinimlerinize göre karmaşıklığı ayarlayın"}
+                      {t("price_calculator.complexity_desc")}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
                       <div className="flex justify-between text-sm">
-                        <span>{locale === "en" ? "Basic" : "Temel"}</span>
+                        <span>{t("price_calculator.basic")}</span>
                         <span>{complexity[0]}%</span>
-                        <span>{locale === "en" ? "Complex" : "Karmaşık"}</span>
+                        <span>{t("price_calculator.complex")}</span>
                       </div>
                       <Slider
                         value={complexity}
@@ -782,11 +789,9 @@ export default function PriceCalculator() {
               <FadeIn>
                 <Card>
                   <CardHeader>
-                    <CardTitle>{locale === "en" ? "Time Frame" : "Zaman Çerçevesi"}</CardTitle>
+                    <CardTitle>{t("price_calculator.timeframe")}</CardTitle>
                     <CardDescription>
-                      {locale === "en" 
-                        ? "Select your preferred delivery timeline" 
-                        : "Tercih ettiğiniz teslimat zaman çizelgesini seçin"}
+                      {t("price_calculator.timeframe_desc")}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -815,11 +820,9 @@ export default function PriceCalculator() {
               <FadeIn>
                 <Card>
                   <CardHeader>
-                    <CardTitle>{locale === "en" ? "Additional Features" : "Ek Özellikler"}</CardTitle>
+                    <CardTitle>{t("price_calculator.additional")}</CardTitle>
                     <CardDescription>
-                      {locale === "en" 
-                        ? "Select any additional features you need" 
-                        : "İhtiyacınız olan ek özellikleri seçin"}
+                      {t("price_calculator.additional_desc")}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -852,11 +855,11 @@ export default function PriceCalculator() {
 
                     <div className="mt-6">
                       <Label htmlFor="custom-features" className="mb-2 block">
-                        {locale === "en" ? "Custom requirements (optional)" : "Özel gereksinimler (isteğe bağlı)"}
+                        {t("price_calculator.custom_requirements")}
                       </Label>
                       <Input
                         id="custom-features"
-                        placeholder={locale === "en" ? "Describe any custom features you need" : "İhtiyacınız olan özel özellikleri açıklayın"}
+                        placeholder={t("price_calculator.custom_requirements_placeholder")}
                         value={customFeatures}
                         onChange={(e) => setCustomFeatures(e.target.value)}
                       />
@@ -873,18 +876,16 @@ export default function PriceCalculator() {
           <div className="sticky top-24">
             <Card className="border-primary/20">
               <CardHeader className="bg-primary-foreground border-b">
-                <CardTitle>{locale === "en" ? "Project Estimate" : "Proje Tahmini"}</CardTitle>
+                <CardTitle>{t("price_calculator.estimate")}</CardTitle>
                 <CardDescription>
-                  {locale === "en" 
-                    ? "Summary of your estimated project cost" 
-                    : "Tahmini proje maliyetinizin özeti"}
+                  {t("price_calculator.estimate_desc")}
                 </CardDescription>
               </CardHeader>
               <CardContent className="pt-6">
                 {selectedOption ? (
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <h3 className="font-medium">{locale === "en" ? "Selected Service" : "Seçilen Hizmet"}</h3>
+                      <h3 className="font-medium">{t("price_calculator.selected")}</h3>
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">
                           {getOptions().find((opt) => opt.id === selectedOption)?.title}
@@ -895,7 +896,7 @@ export default function PriceCalculator() {
 
                     {priceBreakdown.timeFrame > 0 && (
                       <div className="space-y-2">
-                        <h3 className="font-medium">{locale === "en" ? "Time Frame" : "Zaman Çerçevesi"}</h3>
+                        <h3 className="font-medium">{t("price_calculator.timeframe")}</h3>
                         <div className="flex justify-between text-sm">
                           <span className="text-muted-foreground">
                             {timeFrames.find((tf) => tf.id === timeFrame)?.title}
@@ -907,7 +908,7 @@ export default function PriceCalculator() {
 
                     {selectedFeatures.length > 0 && (
                       <div className="space-y-2">
-                        <h3 className="font-medium">{locale === "en" ? "Additional Features" : "Ek Özellikler"}</h3>
+                        <h3 className="font-medium">{t("price_calculator.additional")}</h3>
                         {selectedFeatures.map((featureId) => {
                           const feature = additionalFeatures.find((f) => f.id === featureId);
                           return (
@@ -924,13 +925,11 @@ export default function PriceCalculator() {
 
                     <div className="pt-4 border-t">
                       <div className="flex justify-between font-medium">
-                        <span>{locale === "en" ? "Estimated Total" : "Tahmini Toplam"}</span>
+                        <span>{t("price_calculator.estimated_total")}</span>
                         <span className="text-lg">{formatPrice(totalPrice)}</span>
                       </div>
                       <p className="text-xs text-muted-foreground mt-1">
-                        {locale === "en" 
-                          ? "This is an estimate based on the information provided. Final pricing may vary based on detailed requirements." 
-                          : "Bu, sağlanan bilgilere dayalı bir tahmindir. Nihai fiyatlandırma, detaylı gereksinimlere göre değişebilir."}
+                        {t("price_calculator.disclaimer")}
                       </p>
                     </div>
 
@@ -942,15 +941,13 @@ export default function PriceCalculator() {
                         disabled={isSubmitting}
                       >
                         {isSubmitting
-                          ? (locale === "en" ? "Submitting..." : "Gönderiliyor...")
-                          : (locale === "en" ? "Request Detailed Quote" : "Detaylı Teklif İste")}
+                          ? t("price_calculator.contact.submitting")
+                          : t("price_calculator.request_quote")}
                       </Button>
                       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="size-4" />
                         <span>
-                          {locale === "en" 
-                            ? "No commitment, free consultation" 
-                            : "Taahhüt yok, ücretsiz danışma"}
+                          {t("price_calculator.free_consultation")}
                         </span>
                       </div>
                     </div>
@@ -961,12 +958,10 @@ export default function PriceCalculator() {
                       <Cpu className="size-8 text-muted-foreground" />
                     </div>
                     <h3 className="font-medium text-lg mb-2">
-                      {locale === "en" ? "Select a service to begin" : "Başlamak için bir hizmet seçin"}
+                      {t("price_calculator.select_service")}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {locale === "en" 
-                        ? "Choose from our service options to see pricing details" 
-                        : "Fiyatlandırma detaylarını görmek için hizmet seçeneklerimizden birini seçin"}
+                      {t("price_calculator.select_service_desc")}
                     </p>
                   </div>
                 )}
