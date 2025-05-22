@@ -12,6 +12,26 @@ export type TranslationsData = {
 
 export const translations: TranslationsData = {
   en: {
+
+
+   "footer.description": "Transforming businesses through innovative digital solutions. Your partner in digital excellence.",
+   "footer.quick_links": "Quick Links",
+   "footer.home": "Home",
+   "footer.services": "Services",
+   "footer.our_work": "Our Work",
+   "footer.about_us": "About Us",
+   "footer.contact": "Contact",
+   "footer.our_services": "Services",
+   "footer.web_dev": "Web Development",
+   "footer.mobile_apps": "Mobile Apps",
+   "footer.ui_ux": "UI/UX Design",
+   "footer.ecommerce": "E-commerce",
+   "footer.marketing": "Digital Marketing",
+   "footer.contact_us": "Contact Us",
+   "footer.rights_reserved": "All rights reserved.",
+   "footer.privacy_policy": "Privacy Policy",
+   "footer.terms": "Terms of Service",
+   "footer.cookies": "Cookies",
 //our numbers
     "sectionTitle": "Our <span class='gradient-text'>Numbers</span>",
    " sectionDescription":
@@ -70,13 +90,13 @@ export const translations: TranslationsData = {
     "contact-description": "Have a project in mind or want to learn more about our services? Reach out to us directly using the form below.",
 
     "contact-location-title": "Our Location",
-    "contact-location-description": "123 Innovation Street\nTech District, San Francisco\nCA 94103, USA",
+    "contact-location-description": "Dijitrak Bilişim Ofisi, İstanbul / TR",
 
     "contact-email-title": "Email Us",
-    "contact-email-description": "info@quantumedge.io\nsupport@quantumedge.io",
+    "contact-email-description": "info@dijitrak.net\n destek@dijitrak.net",
 
     "contact-phone-title": "Call Us",
-    "contact-phone-description": "+1 (555) 123-4567\n+1 (555) 987-6543",
+    "contact-phone-description": "+90 545 671 87 46",
 
     "contact-hours-title": "Working Hours",
     "contact-hours-weekdays": "Monday - Friday:",
@@ -361,10 +381,6 @@ export const translations: TranslationsData = {
     "contact.form.button.sending": "Sending...",
     "contact.form.button.sent": "Message Sent!",
 
-    // Footer
-    "footer.rights": "All Rights Reserved",
-    "footer.privacy": "Privacy Policy",
-    "footer.terms": "Terms of Service",
 
     // Project Modal
     "project.form.title": "Start Your Project",
@@ -708,6 +724,25 @@ export const translations: TranslationsData = {
   },
   tr: {
 
+   "footer.description": "İşletmeleri yenilikçi dijital çözümlerle dönüştürüyoruz. Dijital mükemmellikteki ortağınız.",
+   "footer.quick_links": "Hızlı Bağlantılar",
+   "footer.home": "Anasayfa",
+   "footer.services": "Hizmetler",
+   "footer.our_work": "Projelerimiz",
+   "footer.about_us": "Hakkımızda",
+   "footer.contact": "İletişim",
+   "footer.our_services": "Hizmetler",
+   "footer.web_dev": "Web Geliştirme",
+   "footer.mobile_apps": "Mobil Uygulamalar",
+   "footer.ui_ux": "UI/UX Tasarım",
+   "footer.ecommerce": "E-ticaret",
+   "footer.marketing": "Dijital Pazarlama",
+   "footer.contact_us": "Bize Ulaşın",
+   "footer.rights_reserved": "Tüm hakları saklıdır.",
+   "footer.privacy_policy": "Gizlilik Politikası",
+   "footer.terms": "Hizmet Şartları",
+   "footer.cookies": "Çerezler",
+
    "cta.title1": "Markanızı",
    "cta.title2": "dijital dünyada",
    "cta.title3": "bir adım öne taşıyın",
@@ -777,13 +812,13 @@ export const translations: TranslationsData = {
     "contact-description": "Bir projeniz mi var ya da hizmetlerimiz hakkında daha fazla mı bilgi almak istiyorsunuz? Aşağıdaki formu kullanarak bize ulaşın.",
 
     "contact-location-title": "Adresimiz",
-    "contact-location-description": "123 İnovasyon Caddesi\nTeknoloji Bölgesi, San Francisco\nCA 94103, ABD",
+    "contact-location-description": "Dijitrak Bilişim Ofisi, İstanbul / TR",
 
     "contact-email-title": "Bize E-posta Gönderin",
-    "contact-email-description": "info@quantumedge.io\nsupport@quantumedge.io",
+    "contact-email-description": "info@dijitrak.net\n destek@dijitrak.net",
 
     "contact-phone-title": "Bizi Arayın",
-    "contact-phone-description": "+1 (555) 123-4567\n+1 (555) 987-6543",
+    "contact-phone-description": "+90 545 671 87 46",
 
     "contact-hours-title": "Çalışma Saatleri",
     "contact-hours-weekdays": "Pazartesi - Cuma:",
@@ -1111,10 +1146,7 @@ export const translations: TranslationsData = {
     "contact.form.button.sending": "Gönderiliyor...",
     "contact.form.button.sent": "Mesaj Gönderildi!",
 
-    // Footer
-    "footer.rights": "Tüm Hakları Saklıdır",
-    "footer.privacy": "Gizlilik Politikası",
-    "footer.terms": "Kullanım Koşulları",
+
 
     // Project Modal
     "project.form.title": "Projenizi Başlatın",
@@ -1376,6 +1408,24 @@ export const translations: TranslationsData = {
     "tech_github_desc": "Yazılım iş akışlarını, testleri ve dağıtımı otomatikleştirmek için GitHub ile entegre CI/CD platformu.",
   },
   bg: {
+   "footer.description": "Трансформираме бизнеси чрез иновативни дигитални решения. Вашият партньор в дигиталното съвършенство.",
+   "footer.quick_links": "Бързи връзки",
+   "footer.home": "Начало",
+   "footer.services": "Услуги",
+   "footer.our_work": "Нашата работа",
+   "footer.about_us": "За нас",
+   "footer.contact": "Контакт",
+   "footer.our_services": "Услуги",
+   "footer.web_dev": "Уеб разработка",
+   "footer.mobile_apps": "Мобилни приложения",
+   "footer.ui_ux": "UI/UX дизайн",
+   "footer.ecommerce": "Електронна търговия",
+   "footer.marketing": "Дигитален маркетинг",
+   "footer.contact_us": "Свържете се с нас",
+   "footer.rights_reserved": "Всички права запазени.",
+   "footer.privacy_policy": "Политика за поверителност",
+   "footer.terms": "Условия за ползване",
+   "footer.cookies": "Бисквитки",
    "cta.title1": "Готови ли сте да",
    "cta.title2": "преобразите",
    "cta.title3": "вашето дигитално присъствие?",
@@ -1456,13 +1506,13 @@ export const translations: TranslationsData = {
     "contact-description": "Имате проект или искате да научите повече за нашите услуги? Свържете се с нас чрез формуляра по-долу.",
 
     "contact-location-title": "Нашият адрес",
-    "contact-location-description": "ул. Иновация 123\nТехнологичен район, Сан Франциско\nCA 94103, САЩ",
+    "contact-location-description": "Dijitrak Bilişim Ofisi, İstanbul / TR",
 
     "contact-email-title": "Изпратете имейл",
-    "contact-email-description": "info@quantumedge.io\nsupport@quantumedge.io",
+    "contact-email-description": "info@dijitrak.net\n destek@dijitrak.net",
 
     "contact-phone-title": "Обадете ни се",
-    "contact-phone-description": "+1 (555) 123-4567\n+1 (555) 987-6543",
+    "contact-phone-description": "+90 545 671 87 46",
 
     "contact-hours-title": "Работно време",
     "contact-hours-weekdays": "Понеделник - Петък:",
@@ -1719,10 +1769,7 @@ export const translations: TranslationsData = {
     "contact.form.button.sending": "Изпращане...",
     "contact.form.button.sent": "Съобщението е изпратено!",
 
-    // Footer
-    "footer.rights": "Всички права запазени",
-    "footer.privacy": "Политика за поверителност",
-    "footer.terms": "Условия за ползване",
+
 
     // Project Modal
     "project.form.title": "Започнете вашия проект",
